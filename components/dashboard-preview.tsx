@@ -18,12 +18,19 @@ interface PortfolioData {
   return: number
 }
 
-export default function DashboardPreview() {
+interface DashboardPreviewProps {
+  selectedPortfolio: string
+  onPortfolioChange?: (portfolio: string) => void
+}
+
+export default function DashboardPreview({ 
+  selectedPortfolio = "us",
+  onPortfolioChange
+}: DashboardPreviewProps) {
   const controls = useAnimation()
   const containerRef = useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = useState(false)
   const [portfolioData, setPortfolioData] = useState<PortfolioData[]>([])
-  const [selectedPortfolio, setSelectedPortfolio] = useState<string>("us")
   
   // Get base path for assets to work with GitHub Pages
   const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
@@ -121,26 +128,26 @@ export default function DashboardPreview() {
         <div className="bg-[#0A0A0A] p-4 rounded-t-xl border-b border-mint/10">
           <div className="flex items-center justify-between mb-4">
             <div className="text-mint font-medium">Portfolio Dashboard</div>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-3">
+              <select 
+                className="bg-black/50 border border-mint/30 rounded-md px-3 py-1.5 text-white text-xs focus:outline-none focus:ring-1 focus:ring-mint"
+                value={selectedPortfolio}
+                onChange={(e) => {
+                  // Call the parent's callback if provided
+                  if (onPortfolioChange) {
+                    onPortfolioChange(e.target.value);
+                  }
+                }}
+              >
+                <option value="us">US Leaders</option>
+                <option value="au">AU Leaders</option>
+              </select>
               <div className="w-3 h-3 rounded-full bg-mint"></div>
             </div>
           </div>
         </div>
 
         <div className="bg-[#0A0A0A] p-6">
-          {/* Portfolio Selection Dropdown */}
-          <div className="flex justify-between items-center mb-4">
-            <h3 className="text-2xl font-bold">Portfolio Performance</h3>
-            <select 
-              className="bg-black/50 border border-mint/30 rounded-md px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-mint"
-              value={selectedPortfolio}
-              onChange={(e) => setSelectedPortfolio(e.target.value)}
-            >
-              <option value="us">US Leaders</option>
-              <option value="au">AU Leaders</option>
-            </select>
-          </div>
-          
           {/* Chart Area */}
           <div className="mb-6">
             <div className="h-[200px] w-full bg-black/50 rounded-lg overflow-hidden relative">

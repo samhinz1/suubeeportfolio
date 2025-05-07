@@ -1,3 +1,5 @@
+"use client"
+
 import Link from "next/link"
 import { ArrowRight, Plus } from "lucide-react"
 import CustomCursor from "@/components/custom-cursor"
@@ -5,10 +7,12 @@ import PortfolioCard from "@/components/portfolio-card"
 import { Button } from "@/components/ui/button"
 import DashboardPreview from "@/components/dashboard-preview"
 import Image from "next/image"
+import { useState } from "react"
 
 export default function Home() {
   // Get base path for assets to work with GitHub Pages
   const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
+  const [selectedPortfolio, setSelectedPortfolio] = useState<string>("us")
   
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
@@ -105,14 +109,13 @@ export default function Home() {
                 <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-mint">Suubee Portfolios</span>
               </div>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-                A Future Of{" "}
+                The Future Of{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-mint to-orange">
-                  Financial Freedom
+                  Leadership
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-gray-300 mb-8 max-w-xl">
-                Expertly managed investment portfolios designed to help you achieve your financial goals with confidence
-                and clarity.
+                Expertly managed investment portfolios designed to provide exposure to leading stocks and themes, locally and abroad.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 items-start">
                 <Button className="group flex items-center gap-2 text-base px-6 py-6 bg-mint text-black hover:bg-mint/90 rounded-full transition-all">
@@ -199,7 +202,6 @@ export default function Home() {
               subtitle="Option One"
               description="A strategic portfolio focused on leading US companies, offering exposure to innovative and high-growth sectors of the American market."
               iconSrc={`${basePath}/icons/conservative.svg`}
-              featured={true}
               color="orange"
             />
 
@@ -208,7 +210,7 @@ export default function Home() {
               subtitle="Option Two"
               description="A carefully curated portfolio of top Australian companies, providing strong exposure to the local market with a focus on stability and growth."
               iconSrc={`${basePath}/icons/balanced.svg`}
-              color="mint"
+              color="orange"
             />
           </div>
         </div>
@@ -313,7 +315,10 @@ export default function Home() {
             </div>
 
             <div className="order-1 md:order-2">
-              <DashboardPreview />
+              <DashboardPreview 
+                selectedPortfolio={selectedPortfolio} 
+                onPortfolioChange={(portfolio) => setSelectedPortfolio(portfolio)}
+              />
             </div>
           </div>
         </div>
