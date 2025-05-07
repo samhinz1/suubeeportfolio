@@ -1,0 +1,82 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 0%;
+  --foreground: 0 0% 100%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 157 98% 61%;
+  --primary-foreground: 0 0% 0%;
+  --secondary: 30 88% 53%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --accent: 240 3.7% 15.9%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --ring: 157 98% 61%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@keyframes scroll-down {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.animate-scroll-down {
+  animation: scroll-down 1.5s ease-in-out infinite;
+}
+
+@keyframes blob {
+  0% {
+    border-radius: 70% 30% 20% 80% / 60% 30% 70% 40%;
+    transform: translate(-4%) rotate(-8deg) scale(0.95);
+  }
+  33% {
+    border-radius: 80% 20% 45% 55% / 25% 25% 75% 75%;
+    transform: translate(4%) rotate(10deg) scale(1.1);
+  }
+  66% {
+    border-radius: 30% 70% 80% 20% / 30% 40% 60% 70%;
+    transform: translate(-3%) rotate(-12deg) scale(0.9);
+  }
+  100% {
+    border-radius: 70% 30% 20% 80% / 60% 30% 70% 40%;
+    transform: translate(-4%) rotate(-8deg) scale(0.95);
+  }
+}
+
+.animate-blob {
+  animation: blob 8s infinite linear;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 30px rgba(57, 253, 173, 0.6);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 50px rgba(241, 140, 31, 0.7);
+  }
+}
