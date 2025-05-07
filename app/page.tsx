@@ -4,8 +4,12 @@ import CustomCursor from "@/components/custom-cursor"
 import PortfolioCard from "@/components/portfolio-card"
 import { Button } from "@/components/ui/button"
 import DashboardPreview from "@/components/dashboard-preview"
+import Image from "next/image"
 
 export default function Home() {
+  // Get base path for assets to work with GitHub Pages
+  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
+  
   return (
     <div className="relative min-h-screen bg-black text-white overflow-hidden">
       <CustomCursor />
@@ -15,14 +19,12 @@ export default function Home() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <img
-              src="/suubee-circle.png"
+              src={`${basePath}/suubee-circle.png`}
               alt="Suubee Portfolios Logo"
               className="w-10 h-10 object-contain"
             />
             <span className="font-bold text-xl tracking-tight">Suubee Portfolios</span>
           </Link>
-
-
 
           <div className="flex items-center gap-4">
             
@@ -196,7 +198,7 @@ export default function Home() {
               title="US Leaders Portfolio"
               subtitle="Option One"
               description="A strategic portfolio focused on leading US companies, offering exposure to innovative and high-growth sectors of the American market."
-              iconSrc="/icons/conservative.svg"
+              iconSrc={`${basePath}/icons/conservative.svg`}
               featured={true}
               color="orange"
             />
@@ -205,7 +207,7 @@ export default function Home() {
               title="AU Leaders Portfolio"
               subtitle="Option Two"
               description="A carefully curated portfolio of top Australian companies, providing strong exposure to the local market with a focus on stability and growth."
-              iconSrc="/icons/balanced.svg"
+              iconSrc={`${basePath}/icons/balanced.svg`}
               color="mint"
             />
           </div>
@@ -370,7 +372,7 @@ export default function Home() {
             <div className="md:col-span-1">
               <Link href="/" className="flex items-center gap-2 mb-4">
                 <img
-                  src="/suubee-circle.png"
+                  src={`${basePath}/suubee-circle.png`}
                   alt="Suubee Portfolios Logo"
                   className="w-8 h-8 object-contain"
                 />

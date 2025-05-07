@@ -24,12 +24,15 @@ export default function DashboardPreview() {
   const [isHovered, setIsHovered] = useState(false)
   const [portfolioData, setPortfolioData] = useState<PortfolioData[]>([])
   const [selectedPortfolio, setSelectedPortfolio] = useState<string>("us")
+  
+  // Get base path for assets to work with GitHub Pages
+  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
 
   useEffect(() => {
     // Load and parse CSV data based on selected portfolio
     const dataFile = selectedPortfolio === "us" 
-      ? '/data/suubee performance data.csv'
-      : '/data/suubee performance data.csv' // Replace with AU data file when available
+      ? `${basePath}/data/suubee performance data.csv`
+      : `${basePath}/data/suubee performance data.csv` // Replace with AU data file when available
     
     fetch(dataFile)
       .then(response => response.text())
@@ -51,7 +54,20 @@ export default function DashboardPreview() {
         
         setPortfolioData(parsedData)
       })
-  }, [selectedPortfolio]) // Re-fetch when selected portfolio changes
+      .catch(error => {
+        console.error("Error loading portfolio data:", error);
+        // Provide fallback data in case the CSV loading fails
+        const fallbackData = [
+          { date: "1/1/2023", value: 100000, return: 0 },
+          { date: "1/2/2023", value: 105000, return: 5 },
+          { date: "1/3/2023", value: 110000, return: 10 },
+          { date: "1/4/2023", value: 108000, return: 8 },
+          { date: "1/5/2023", value: 112000, return: 12 },
+          { date: "1/6/2023", value: 115000, return: 15 },
+        ];
+        setPortfolioData(fallbackData);
+      })
+  }, [selectedPortfolio, basePath]) // Re-fetch when selected portfolio changes
 
   useEffect(() => {
     controls.start({

@@ -20,6 +20,9 @@ export default function PortfolioCard({
   featured = false,
   color = "mint",
 }: PortfolioCardProps) {
+  // Get base path for assets to work with GitHub Pages
+  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
+  
   const colorClasses = {
     mint: {
       bg: "bg-mint",
@@ -71,7 +74,12 @@ export default function PortfolioCard({
             featured ? currentColor.iconBg : "bg-gray-800/50",
           )}
         >
-          <Image src={iconSrc || "/placeholder.svg"} alt={title} width={24} height={24} />
+          <Image 
+            src={iconSrc || `${basePath}/placeholder.svg`} 
+            alt={title} 
+            width={24} 
+            height={24} 
+          />
         </div>
       </div>
 
