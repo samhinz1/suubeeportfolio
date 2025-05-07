@@ -109,7 +109,7 @@ export default function Home() {
                 <span className="text-xl md:text-2xl lg:text-3xl font-semibold text-mint">Suubee Portfolios</span>
               </div>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold leading-tight tracking-tight mb-6">
-                The Future Of{" "}
+                Invest in{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-mint to-orange">
                   Leadership
                 </span>
@@ -199,19 +199,152 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-6 lg:gap-10">
             <PortfolioCard
               title="US Leaders Portfolio"
-              subtitle="Option One"
+              subtitle="Portfolio One"
               description="A strategic portfolio focused on leading US companies, offering exposure to innovative and high-growth sectors of the American market."
-              iconSrc={`${basePath}/icons/conservative.svg`}
+              iconSrc="https://upload.wikimedia.org/wikipedia/commons/5/51/Flag_of_the_United_States_%28black_and_white%3B_variant_1%29.svg"
               color="orange"
-            />
+            >
+              <div className="space-y-3 my-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20 6L9 17L4 12" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Access to some of the world's largest, highest-quality companies</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 17L12 22L22 17" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 12L12 17L22 12" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Deep capital markets featuring diverse multinational corporations</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8Z" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Curated portfolio of market-leading companies across sectors</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="12" cy="8" r="5" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M20 21C20 16.5817 16.4183 13 12 13C7.58172 13 4 16.5817 4 21" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Dedicated US portfolio manager with specialized expertise</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Direct US equity exposure (no repackaged ETFs)</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2V6" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M12 18V22" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M4.93 4.93L7.76 7.76" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M16.24 16.24L19.07 19.07" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 12H6" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M18 12H22" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M4.93 19.07L7.76 16.24" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M16.24 7.76L19.07 4.93" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Targeting 10%+ annual returns after fees</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 1V23" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Straightforward 2% management fee structure</span>
+                </div>
+              </div>
+            </PortfolioCard>
 
             <PortfolioCard
               title="AU Leaders Portfolio"
-              subtitle="Option Two"
+              subtitle="Portfolio Two"
               description="A carefully curated portfolio of top Australian companies, providing strong exposure to the local market with a focus on stability and growth."
-              iconSrc={`${basePath}/icons/balanced.svg`}
+              iconSrc="https://upload.wikimedia.org/wikipedia/commons/4/4f/Flag_of_Australia_%28black_and_white%29.svg"
               color="orange"
-            />
+            >
+              <div className="space-y-3 my-4">
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20 6L9 17L4 12" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Get access to some of the best domestic emerging companies</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 17L12 22L22 17" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 12L12 17L22 12" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Active portfolio management to ensure optimal asset allocations</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8Z" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Diverse portfolio across size, sector and geography</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 2V6" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M12 18V22" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M4.93 4.93L7.76 7.76" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M16.24 16.24L19.07 19.07" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 12H6" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M18 12H22" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M4.93 19.07L7.76 16.24" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M16.24 7.76L19.07 4.93" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Targeting 10%+ annual returns after fees</span>
+                </div>
+                
+                <div className="flex items-center gap-2">
+                  <div className="w-6 h-6 rounded-full bg-orange/20 flex items-center justify-center flex-shrink-0">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 1V23" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M17 5H9.5C8.57174 5 7.6815 5.36875 7.02513 6.02513C6.36875 6.6815 6 7.57174 6 8.5C6 9.42826 6.36875 10.3185 7.02513 10.9749C7.6815 11.6313 8.57174 12 9.5 12H14.5C15.4283 12 16.3185 12.3687 16.9749 13.0251C17.6313 13.6815 18 14.5717 18 15.5C18 16.4283 17.6313 17.3185 16.9749 17.9749C16.3185 18.6313 15.4283 19 14.5 19H6" stroke="#F18C1F" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </div>
+                  <span className="text-sm text-gray-300">Straightforward 2% management fee structure</span>
+                </div>
+              </div>
+            </PortfolioCard>
           </div>
         </div>
       </section>
@@ -221,100 +354,8 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(241,140,31,0.1),transparent_70%)]"></div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div className="order-2 md:order-1">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Active Momentum-Driven Investment Strategy</h2>
-              <p className="text-gray-300 mb-8">
-                Our investment portfolios are designed to gain exposure to a list of our leading names and themes. This list is actively managed and monitored, focusing on high growth opportunities while maintaining active risk management for optimal performance.
-              </p>
-
-              <div className="space-y-6">
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-mint/10 flex items-center justify-center flex-shrink-0">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M8 9L12 5L16 9"
-                        stroke="#39FDAD"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M12 5V15"
-                        stroke="#39FDAD"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M20 19H4"
-                        stroke="#39FDAD"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Actively Managed</h3>
-                    <p className="text-gray-400">
-                      Dedicated professionals with years of experience to ensure you are getting exposure to the right names, at the right times.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-orange/10 flex items-center justify-center flex-shrink-0">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path
-                        d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                        stroke="#F18C1F"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M12 6V12L16 14"
-                        stroke="#F18C1F"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Managed Account</h3>
-                    <p className="text-gray-400">
-                      An individually managed account means your investments are always held in your name.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="w-12 h-12 rounded-lg bg-mint/10 flex items-center justify-center flex-shrink-0">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <rect x="5" y="2" width="14" height="20" rx="2" ry="2" stroke="#39FDAD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                      <line x1="12" y1="18" x2="12" y2="18" stroke="#39FDAD" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">Mobile App</h3>
-                    <p className="text-gray-400">
-                      Stay connected and updated with our mobile app available on IOS & Play Store.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-8">
-                <Button className="bg-orange text-black hover:bg-orange/90 flex items-center gap-2">
-                  View Demo
-                  <ArrowRight className="w-4 h-4" />
-                </Button>
-              </div>
-            </div>
-
-            <div className="order-1 md:order-2">
+          <div className="grid gap-12 items-center">
+            <div>
               <DashboardPreview 
                 selectedPortfolio={selectedPortfolio} 
                 onPortfolioChange={(portfolio) => setSelectedPortfolio(portfolio)}
