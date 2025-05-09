@@ -108,9 +108,11 @@ export default function AboutPage() {
             </div>
 
             <div className="flex justify-center">
-              <Button className="bg-mint hover:bg-mint/90 text-black px-6 py-6 rounded-full">
-                Open an Account
-              </Button>
+              <Link href="/register">
+                <Button className="bg-mint hover:bg-mint/90 text-black px-6 py-6 rounded-full">
+                  Open an Account
+                </Button>
+              </Link>
             </div>
           </div>
         </div>

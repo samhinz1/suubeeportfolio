@@ -17,7 +17,7 @@ export default function Header() {
           <span className="font-bold text-xl tracking-tight">Suubee Portfolios</span>
         </Link>
 
-        {/* Main Navigation */}
+        {/* Main Navigation
         <nav className="hidden md:flex items-center gap-6">
           <Link
             href="/"
@@ -43,7 +43,7 @@ export default function Header() {
           >
             Contact
           </Link>
-        </nav>
+        </nav> */}
 
         <div className="flex items-center gap-4">
           
@@ -68,25 +68,27 @@ export default function Header() {
             </svg>
             Login
           </Link>
-          <Button className="hidden md:flex items-center gap-2 bg-gradient-to-r from-mint to-mint/80 text-black hover:from-mint/90 hover:to-mint/70 rounded-full">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-              <circle cx="8.5" cy="7" r="4"></circle>
-              <line x1="20" y1="8" x2="20" y2="14"></line>
-              <line x1="23" y1="11" x2="17" y2="11"></line>
-            </svg>
-            Sign Up
-          </Button>
+          <Link href="/register">
+            <Button className="hidden md:flex items-center gap-2 bg-gradient-to-r from-mint to-mint/80 text-black hover:from-mint/90 hover:to-mint/70 rounded-full">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="8.5" cy="7" r="4"></circle>
+                <line x1="20" y1="8" x2="20" y2="14"></line>
+                <line x1="23" y1="11" x2="17" y2="11"></line>
+              </svg>
+              Sign Up
+            </Button>
+          </Link>
 
           {/* Mobile Menu Button */}
           <button className="md:hidden text-white">

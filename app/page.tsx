@@ -86,10 +86,12 @@ export default function Home() {
                 Expertly managed investment portfolios designed to provide exposure to leading stocks and themes, locally and abroad.
               </motion.p>
               <motion.div className="flex flex-col sm:flex-row gap-4 items-start" variants={itemVariants}>
-                <Button className="group flex items-center gap-2 text-base px-6 py-6 bg-mint text-black hover:bg-mint/90 rounded-full transition-all">
-                  Open an Account
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </Button>
+                <Link href="/register">
+                  <Button className="group flex items-center gap-2 text-base px-6 py-6 bg-mint text-black hover:bg-mint/90 rounded-full transition-all">
+                    Open an Account
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </Link>
                 <Button
                   variant="outline"
                   className="text-base px-6 py-6 bg-transparent border border-orange/50 text-white hover:bg-orange/10 rounded-full transition-all"
@@ -337,10 +339,12 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <Button className="group flex items-center gap-2 text-base px-8 py-6 bg-orange hover:bg-orange/90 text-black rounded-full transition-all">
-                Open an Account
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </Button>
+              <Link href="/register">
+                <Button className="group flex items-center gap-2 text-base px-8 py-6 bg-orange hover:bg-orange/90 text-black rounded-full transition-all">
+                  Open an Account
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
             </motion.div>
 
             <motion.div 

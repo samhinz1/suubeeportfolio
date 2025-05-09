@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -79,7 +80,7 @@ export default function PortfolioCard({
                 alt={title} 
                 width={120} 
                 height={90}
-                className="object-contain filter grayscale transition-all duration-800 group-hover:grayscale-[20%] group-hover:brightness-[80%]"
+                className="object-contain grayscale-[100%] brightness-[50%] transition-[filter] duration-1000 ease-in-out group-hover:grayscale-[20%] group-hover:brightness-[100%]"
               />
             </div>
           ) : (
@@ -108,6 +109,7 @@ export default function PortfolioCard({
 
       <div className="mt-8 pt-6">
         <Button
+          asChild
           variant={featured ? "default" : "outline"}
           className={cn(
             "w-full justify-between group/btn",
@@ -116,8 +118,10 @@ export default function PortfolioCard({
               : `bg-transparent border-gray-700 ${currentColor.hoverBg} ${currentColor.hoverBorder}`,
           )}
         >
-          <span>View Portfolio</span>
-          <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+          <Link href="/strategy">
+            <span>Our Strategy</span>
+            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+          </Link>
         </Button>
       </div>
 
