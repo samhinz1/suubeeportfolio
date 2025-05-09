@@ -99,6 +99,18 @@ export default function Home() {
                   Explore Portfolios
                 </Button>
               </motion.div>
+              
+              {/* App Store and Play Store links */}
+              <motion.div className="flex flex-col gap-3 mt-12" variants={itemVariants}>
+                <div className="flex flex-row gap-4">
+                  <a href="#" className="w-32 transition-opacity hover:opacity-80">
+                    <img src={`${basePath}/appstore.svg`} alt="Download on the App Store" className="w-full" />
+                  </a>
+                  <a href="#" className="w-36 transition-opacity hover:opacity-80">
+                    <img src={`${basePath}/playstore.svg`} alt="Get it on Google Play" className="w-full" />
+                  </a>
+                </div>
+              </motion.div>
             </motion.div>
 
             <motion.div 
