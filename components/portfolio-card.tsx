@@ -52,7 +52,7 @@ export default function PortfolioCard({
   return (
     <div
       className={cn(
-        "group relative rounded-2xl p-6 md:p-8 transition-all duration-300 hover:translate-y-[-8px] flex flex-col",
+        "group relative rounded-2xl p-6 md:p-8 transition-all duration-300 hover:translate-y-[-8px] flex flex-col h-full min-h-[700px]",
         featured
           ? `bg-gradient-to-b from-${color}/20 to-${color}/5 border border-${color}/30`
           : `bg-gradient-to-b from-gray-900/50 to-black border border-gray-800/50 ${currentColor.hoverBorder}`,
@@ -72,14 +72,14 @@ export default function PortfolioCard({
           <h3 className="text-2xl font-bold">{title}</h3>
         </div>
         {iconSrc && (
-          iconSrc.includes("Flag_of_the_United_States") || iconSrc.includes("Flag_of_Australia") ? (
+          iconSrc.endsWith('.svg') || iconSrc.endsWith('.png') ? (
             <div className="w-36 h-24">
               <Image 
                 src={iconSrc} 
                 alt={title} 
                 width={120} 
                 height={90}
-                className="object-contain"
+                className="object-contain filter grayscale transition-all duration-800 group-hover:grayscale-[20%] group-hover:brightness-[80%]"
               />
             </div>
           ) : (
@@ -102,9 +102,11 @@ export default function PortfolioCard({
 
       <p className="text-gray-400 mb-6">{description}</p>
 
-      {children}
+      <div className="flex-grow">
+        {children}
+      </div>
 
-      <div className="mt-auto pt-6">
+      <div className="mt-8 pt-6">
         <Button
           variant={featured ? "default" : "outline"}
           className={cn(

@@ -11,6 +11,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts"
+import { cn } from "@/lib/utils"
 
 interface PortfolioData {
   date: string
@@ -74,16 +75,7 @@ export default function DashboardPreview({
       })
       .catch(error => {
         console.error("Error loading portfolio data:", error);
-        // Provide fallback data in case the CSV loading fails
-        const fallbackData = [
-          { date: "1/1/2023", value: 100000, return: 0, dateParts: { day: 1, month: 1, year: 2023 } },
-          { date: "1/2/2023", value: 105000, return: 5, dateParts: { day: 1, month: 2, year: 2023 } },
-          { date: "1/3/2023", value: 110000, return: 10, dateParts: { day: 1, month: 3, year: 2023 } },
-          { date: "1/4/2023", value: 108000, return: 8, dateParts: { day: 1, month: 4, year: 2023 } },
-          { date: "1/5/2023", value: 112000, return: 12, dateParts: { day: 1, month: 5, year: 2023 } },
-          { date: "1/6/2023", value: 115000, return: 15, dateParts: { day: 1, month: 6, year: 2023 } },
-        ];
-        setPortfolioData(fallbackData);
+        setPortfolioData([]);
       })
   }, [selectedPortfolio, basePath]) // Re-fetch when selected portfolio changes
 
@@ -112,7 +104,9 @@ export default function DashboardPreview({
   }
 
   if (portfolioData.length === 0) {
-    return <div>Loading...</div>
+    return <div className="p-6 text-center text-white bg-[#0A0A0A] rounded-xl border border-mint/20">
+      Error loading portfolio data. Please try again later.
+    </div>
   }
 
   const lastDataPoint = portfolioData[portfolioData.length - 1]
@@ -234,7 +228,7 @@ export default function DashboardPreview({
   return (
     <div
       ref={containerRef}
-      className="relative rounded-xl overflow-hidden border border-mint/20 shadow-lg"
+      className="group relative rounded-xl overflow-hidden border border-mint/20 shadow-lg transition-all duration-300 hover:translate-y-[-8px] hover:border-mint/30"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -339,6 +333,14 @@ export default function DashboardPreview({
               <div className="text-xs text-orange">Growth Focused</div>
             </div>
           </div>
+          
+          {/* Disclaimer */}
+          <div className="text-xs text-gray-400 bg-black/30 border border-mint/10 rounded-lg p-3 mt-2">
+            <p className="font-medium text-xs mb-1"><strong>Disclaimer:</strong> Performance data shown is based on hypothetical model portfolios tracked and updated daily on Suubeepremium.com. The results assume no fees of any kind (including management, performance, transaction, or other costs). The model portfolios are fully invested (100% long) at all times and rebalanced daily to reflect additions and removals. Real-world portfolios may differ and typically hold only a subset of the model constituents to reduce turnover and transaction costs.</p>
+            <p className="text-xs leading-tight">
+              <strong>Important:</strong> Past performance is not indicative of future results. Hypothetical or simulated performance has inherent limitations and does not reflect actual trading results.
+            </p>
+          </div>
         </div>
       </motion.div>
 
@@ -349,6 +351,14 @@ export default function DashboardPreview({
       {isHovered && (
         <div className="absolute inset-0 bg-gradient-to-r from-mint/5 to-mint/5 opacity-30 pointer-events-none"></div>
       )}
+      
+      {/* Bottom gradient bar - same as portfolio cards */}
+      <div
+        className={cn(
+          "absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-mint to-mint/80 transition-all duration-300 rounded-b-lg",
+          "group-hover:w-full",
+        )}
+      ></div>
     </div>
   )
 }
