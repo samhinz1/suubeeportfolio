@@ -190,7 +190,7 @@ export default function Home() {
                 title="US Leaders Portfolio"
                 subtitle="Portfolio One"
                 description="A strategic portfolio focused on leading US companies, offering exposure to innovative and high-growth sectors of the American market."
-                iconSrc="/usflag.png"
+                iconSrc={`${basePath}/usflag.png`}
                 color="orange"
               >
                 <div className="space-y-3 my-4">
@@ -240,7 +240,7 @@ export default function Home() {
                 title="AU Leaders Portfolio"
                 subtitle="Portfolio Two"
                 description="A carefully curated portfolio of top Australian companies, providing strong exposure to the local market with a focus on stability and growth."
-                iconSrc="/australiaflag.svg"
+                iconSrc={`${basePath}/australiaflag.svg`}
                 color="orange"
               >
                 <div className="space-y-3 my-4">
