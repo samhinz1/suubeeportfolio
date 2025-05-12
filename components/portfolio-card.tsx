@@ -3,7 +3,9 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
-import { ReactNode } from "react"
+import { ReactNode, useState, useEffect } from "react"
+import { useInView } from "framer-motion"
+import { useRef } from "react"
 
 interface PortfolioCardProps {
   title: string
@@ -27,6 +29,29 @@ export default function PortfolioCard({
   // Get base path for assets to work with GitHub Pages
   const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
   
+  // Ref for intersection observer to detect when card is in view
+  const cardRef = useRef(null);
+  const isInView = useInView(cardRef, { once: false, amount: 0.3 });
+  
+  // State to track if this is a mobile device
+  const [isMobile, setIsMobile] = useState(false);
+  
+  // Check if device is mobile on component mount
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    // Initial check
+    checkMobile();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkMobile);
+    
+    // Cleanup event listener
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+  
   const colorClasses = {
     mint: {
       bg: "bg-mint",
@@ -49,14 +74,22 @@ export default function PortfolioCard({
   }
 
   const currentColor = colorClasses[color]
+  
+  // Apply hover effect if card is in view on mobile or on hover for desktop
+  const applyHoverEffect = isMobile && isInView;
 
   return (
     <div
+      ref={cardRef}
       className={cn(
-        "group relative rounded-2xl p-6 md:p-8 transition-all duration-300 hover:translate-y-[-8px] flex flex-col h-full min-h-[700px]",
+        "group relative rounded-2xl p-6 md:p-8 transition-all duration-300 flex flex-col h-full min-h-[700px]",
         featured
           ? `bg-gradient-to-b from-${color}/20 to-${color}/5 border border-${color}/30`
           : `bg-gradient-to-b from-gray-900/50 to-black border border-gray-800/50 ${currentColor.hoverBorder}`,
+        {
+          "translate-y-[-8px]": applyHoverEffect,
+          "hover:translate-y-[-8px]": !isMobile
+        }
       )}
     >
       {featured && (
@@ -80,7 +113,13 @@ export default function PortfolioCard({
                 alt={title} 
                 width={120} 
                 height={90}
-                className="object-contain grayscale-[100%] brightness-[50%] transition-[filter] duration-1000 ease-in-out group-hover:grayscale-[20%] group-hover:brightness-[100%]"
+                className={cn(
+                  "object-contain grayscale-[100%] brightness-[50%] transition-[filter] duration-1000 ease-in-out",
+                  {
+                    "grayscale-[20%] brightness-[100%]": applyHoverEffect,
+                    "group-hover:grayscale-[20%] group-hover:brightness-[100%]": !isMobile
+                  }
+                )}
               />
             </div>
           ) : (
@@ -120,15 +159,24 @@ export default function PortfolioCard({
         >
           <Link href="/strategy">
             <span>Our Strategy</span>
-            <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+            <ArrowRight className={cn(
+              "w-4 h-4 transition-transform", 
+              {
+                "translate-x-1": applyHoverEffect,
+                "group-hover/btn:translate-x-1": !isMobile
+              }
+            )} />
           </Link>
         </Button>
       </div>
 
       <div
         className={cn(
-          `absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r ${currentColor.gradient} transition-all duration-300 rounded-b-lg`,
-          "group-hover:w-full",
+          `absolute bottom-0 left-1/2 -translate-x-1/2 h-1 bg-gradient-to-r ${currentColor.gradient} transition-all duration-300 rounded-b-lg`,
+          {
+            "w-full": applyHoverEffect,
+            "w-0 group-hover:w-full": !isMobile
+          }
         )}
       ></div>
     </div>
