@@ -403,9 +403,10 @@ export default function DashboardPreview({
           
           {/* Disclaimer */}
           <div className="text-xs text-gray-400 bg-black/30 border border-mint/10 rounded-lg p-3 mt-2">
-            <p className="font-medium text-xs mb-1"><strong>Disclaimer:</strong> Performance data shown is based on hypothetical model portfolios tracked and updated daily on Suubeepremium.com. The results assume no fees of any kind (including management, performance, transaction, or other costs). The model portfolios are fully invested (100% long) at all times and rebalanced daily to reflect additions and removals. Real-world portfolios may differ and typically hold only a subset of the model constituents to reduce turnover and transaction costs.</p>
-            <p className="text-xs leading-tight">
-              <strong>Important:</strong> Past performance is not indicative of future results. Hypothetical or simulated performance has inherent limitations and does not reflect actual trading results.
+            <p className="font-medium text-xs mb-1"><strong>Disclaimer:</strong> Performance data shown is based on hypothetical model portfolios tracked and updated daily on Suubeepremium.com. 
+            The results assume no fees of any kind (including management, performance, transaction, or other costs). The model portfolios are fully invested (100% long) at all times and rebalanced daily to reflect additions and removals. 
+            Real-world portfolios may differ and typically hold only a subset of the model constituents to reduce turnover and transaction costs.
+            Past performance is not indicative of future results. Hypothetical or simulated performance has inherent limitations and does not reflect actual trading results.
             </p>
           </div>
         </div>
