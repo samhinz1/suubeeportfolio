@@ -98,7 +98,7 @@ export default function Footer() {
                   <circle cx="4" cy="4" r="2"></circle>
                 </svg>
               </Link>
-              <Link href="https://waimak.substack.com/" className="text-gray-400 hover:text-mint" target="_blank" rel="noopener noreferrer">
+              <Link href="https://suubee.substack.com/" className="text-gray-400 hover:text-mint" target="_blank" rel="noopener noreferrer">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" strokeWidth="2" stroke="currentColor">
                   <path d="M22.539 8.242H1.46V5.406H22.539V8.242zM1.46 10.812H22.539V24H1.46V10.812zM22.539 0H1.46v2.836H22.539V0z" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
