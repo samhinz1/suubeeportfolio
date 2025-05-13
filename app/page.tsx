@@ -230,6 +230,7 @@ export default function Home() {
                 description="A strategic portfolio focused on leading US companies, offering exposure to innovative and high-growth sectors of the American market."
                 iconSrc={`${basePath}/usflag.png`}
                 color="orange"
+                portfolioType="us"
               >
                 <div className="space-y-3 my-4">
                   <motion.div 
@@ -280,6 +281,7 @@ export default function Home() {
                 description="A carefully curated portfolio of top Australian companies, providing strong exposure to the local market with a focus on stability and growth."
                 iconSrc={`${basePath}/australiaflag.svg`}
                 color="orange"
+                portfolioType="au"
               >
                 <div className="space-y-3 my-4">
                   <motion.div 

@@ -133,12 +133,6 @@ export default function Header() {
               Our Strategy
             </Link>
             <Link
-              href="#portfolios"
-              className="text-sm font-medium py-2 hover:text-mint transition-colors"
-            >
-              Portfolios
-            </Link>
-            <Link
               href="/contact"
               className="text-sm font-medium py-2 hover:text-mint transition-colors"
             >

@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
 } from "recharts"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 interface PortfolioData {
   date: string
@@ -45,7 +46,7 @@ export default function DashboardPreview({
     // Load and parse CSV data based on selected portfolio
     const dataFile = selectedPortfolio === "us" 
       ? `${basePath}/data/suubee performance data.csv`
-      : `${basePath}/data/suubee performance data.csv` // Replace with AU data file when available
+      : `${basePath}/data/AUleaders.csv` // Now using the AU leaders data file
     
     fetch(dataFile)
       .then(response => response.text())
@@ -58,10 +59,15 @@ export default function DashboardPreview({
           .filter(line => line.trim() !== '') // Remove empty lines
           .map(line => {
             const [date, dailyChange, cumulativeChange] = line.split(',')
+            // Handle cases where cumulativeChange might be empty or not a valid number
+            const parsedCumulativeChange = cumulativeChange && !isNaN(parseFloat(cumulativeChange)) 
+              ? parseFloat(cumulativeChange) 
+              : 0
+            
             return {
               date: date,
-              value: parseFloat(cumulativeChange) + 100, // Convert percentage to actual value
-              return: parseFloat(cumulativeChange), // Store cumulative change instead of daily change
+              value: parsedCumulativeChange + 100, // Convert percentage to actual value
+              return: parsedCumulativeChange, // Store cumulative change instead of daily change
               // Store the date parts for easier access
               dateParts: {
                 day: parseInt(date.split('/')[0]),
@@ -91,6 +97,24 @@ export default function DashboardPreview({
     })
   }, [controls])
 
+  // Listen for custom setPortfolio event
+  useEffect(() => {
+    // Event handler to change the portfolio when triggered from external components
+    const handleSetPortfolio = (event: CustomEvent) => {
+      if (event.detail?.portfolio && onPortfolioChange) {
+        onPortfolioChange(event.detail.portfolio);
+      }
+    };
+
+    // Add event listener
+    window.addEventListener('setPortfolio', handleSetPortfolio as EventListener);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener('setPortfolio', handleSetPortfolio as EventListener);
+    };
+  }, [onPortfolioChange]);
+
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -118,6 +142,18 @@ export default function DashboardPreview({
     month: 'long',
     year: 'numeric'
   })
+
+  // Parse first data point date for inception date
+  const [firstDay, firstMonth, firstYear] = firstDataPoint.date.split('/')
+  const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+  const dayWithSuffix = (day: string): string => {
+    const suffix = ['th', 'st', 'nd', 'rd']
+    const relevantDigits = (parseInt(day) < 30) ? parseInt(day) % 20 : parseInt(day) % 30
+    const suffixIndex = (relevantDigits <= 3) ? relevantDigits : 0
+    return `${parseInt(day)}${suffix[suffixIndex]}`
+  }
+  const inceptionDateStr = `${monthNames[parseInt(firstMonth) - 1]} ${dayWithSuffix(firstDay)} ${firstYear}`
+  
   // Calculate cumulative return as a percentage
   const cumulativeReturn = ((lastDataPoint.value - firstDataPoint.value) / firstDataPoint.value) * 100
   
@@ -138,7 +174,9 @@ export default function DashboardPreview({
     }
   }
   
-  const ytdReturn = ((lastDataPoint.value - firstDataPointOfYear.value) / firstDataPointOfYear.value) * 100
+  // Ensure we have valid values to calculate YTD return
+  const ytdReturn = firstDataPointOfYear.value !== 0 ? 
+    ((lastDataPoint.value - firstDataPointOfYear.value) / firstDataPointOfYear.value) * 100 : 0
   
   // Generate an array of unique month labels, filling in any gaps
   const getUniqueMonthLabels = () => {
@@ -233,25 +271,52 @@ export default function DashboardPreview({
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div animate={controls} className="relative">
-        {/* Dashboard UI */}
-        <div className="bg-[#0A0A0A] p-4 rounded-t-xl border-b border-mint/10">
-          <div className="flex items-center justify-between mb-4">
-            <div className="text-white font-medium">US Leaders Performance</div>
-            <div className="flex items-center gap-3">
-              <select 
-                className="bg-black/50 border border-mint/30 rounded-md px-3 py-1.5 text-white text-xs focus:outline-none focus:ring-1 focus:ring-mint"
-                value={selectedPortfolio}
-                onChange={(e) => {
-                  // Call the parent's callback if provided
-                  if (onPortfolioChange) {
-                    onPortfolioChange(e.target.value);
-                  }
-                }}
+        {/* Toggle button portfolio selector */}
+        <div className="bg-[#0A0A0A] px-4 pt-4 pb-2">
+          <div className="flex justify-center">
+            <div className="inline-flex items-stretch bg-black/50 border border-mint/30 rounded-full overflow-hidden p-1.5">
+              <button
+                className={`px-4 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
+                  selectedPortfolio === "us" 
+                    ? "bg-mint text-black font-medium" 
+                    : "text-gray-400 hover:bg-black/70"
+                }`}
+                onClick={() => onPortfolioChange && onPortfolioChange("us")}
               >
-                <option value="us">US Leaders</option>
-                <option value="au">AU Leaders</option>
-              </select>
-              <div className="w-3 h-3 rounded-full bg-mint"></div>
+                <Image 
+                  src={`${basePath}/usflag.png`} 
+                  alt="US" 
+                  width={16} 
+                  height={12}
+                  className="rounded-sm"
+                />
+                <span>US Leaders</span>
+              </button>
+              <button
+                className={`px-4 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
+                  selectedPortfolio === "au" 
+                    ? "bg-mint text-black font-medium" 
+                    : "text-gray-400 hover:bg-black/70"
+                }`}
+                onClick={() => onPortfolioChange && onPortfolioChange("au")}
+              >
+                <Image 
+                  src={`${basePath}/australiaflag.svg`} 
+                  alt="AU" 
+                  width={16} 
+                  height={12}
+                  className="rounded-sm"
+                />
+                <span>AU Leaders</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        {/* Dashboard UI */}
+        <div className="bg-[#0A0A0A] p-4 border-b border-mint/10">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
             </div>
           </div>
         </div>
@@ -261,7 +326,7 @@ export default function DashboardPreview({
           <div className="mb-6">
             <div className="h-[200px] w-full bg-black/50 rounded-lg overflow-hidden relative">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={portfolioData} margin={{ top: 5, right: 5, left: 5, bottom: 5 }}>
+                <LineChart data={portfolioData} margin={{ top: 20, right: 5, left: 5, bottom: 5 }}>
                   <defs>
                     <linearGradient id="valueGradient" x1="0" y1="0" x2="0" y2="1">
                       <stop offset="5%" stopColor="#39FDAD" stopOpacity={0.8}/>
@@ -319,13 +384,15 @@ export default function DashboardPreview({
           <div className="grid grid-cols-3 gap-4 mb-6">
             <div className="bg-black/30 p-3 rounded-lg border border-mint/10">
               <div className="text-xs text-gray-400 mb-1">Current YTD Performance</div>
-              <div className="text-lg font-bold">+{ytdReturn.toFixed(1)}%</div>
-              <div className="text-xs text-mint">Since January 1st 2025</div>
+              <div className="text-lg font-bold">{ytdReturn >= 0 ? '+' : ''}{ytdReturn.toFixed(1)}%</div>
+              <div className="text-xs text-mint">Since January 1st {currentYear}</div>
             </div>
             <div className="bg-black/30 p-3 rounded-lg border border-mint/10">
-              <div className="text-xs text-gray-400 mb-1">Performance Since Inception (January 1st 2023)</div>
-              <div className="text-lg font-bold">{cumulativeReturn >= 0 ? '+' : ''}{cumulativeReturn.toFixed(1)}%</div>
-              <div className="text-xs text-mint">Total Return</div>
+              <div className="text-xs text-gray-400 mb-1">Performance Since Inception</div>
+              <div className="text-lg font-bold">{isNaN(cumulativeReturn) ? '0.0' : (cumulativeReturn >= 0 ? '+' : '') + cumulativeReturn.toFixed(1)}%</div>
+              <div className="text-xs text-mint">
+                Since {inceptionDateStr}
+              </div>
             </div>
             <div className="bg-black/30 p-3 rounded-lg border border-mint/10">
               <div className="text-xs text-gray-400 mb-1">Risk Level</div>

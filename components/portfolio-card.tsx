@@ -15,6 +15,7 @@ interface PortfolioCardProps {
   featured?: boolean
   color?: "mint" | "orange"
   children?: ReactNode
+  portfolioType?: "us" | "au"
 }
 
 export default function PortfolioCard({
@@ -25,6 +26,7 @@ export default function PortfolioCard({
   featured = false,
   color = "mint",
   children,
+  portfolioType = "us",
 }: PortfolioCardProps) {
   // Get base path for assets to work with GitHub Pages
   const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
@@ -78,11 +80,47 @@ export default function PortfolioCard({
   // Apply hover effect if card is in view on mobile or on hover for desktop
   const applyHoverEffect = isMobile && isInView;
 
+  // Function to scroll to performance section and set the correct portfolio
+  const scrollToPerformance = () => {
+    // Scroll to performance section by finding it in the DOM
+    const performanceSections = Array.from(document.querySelectorAll('section'));
+    let performanceSection = null;
+    
+    // Find section with Performance heading
+    for (const section of performanceSections) {
+      const heading = section.querySelector('h2');
+      if (heading && heading.textContent?.includes('Performance')) {
+        performanceSection = section;
+        break;
+      }
+    }
+    
+    if (performanceSection) {
+      // Smooth scroll to the performance section
+      window.scrollTo({
+        top: performanceSection.offsetTop,
+        behavior: 'smooth'
+      });
+      
+      // Set the correct portfolio toggle
+      if (typeof window !== 'undefined') {
+        // We need to wait a bit for the scroll to complete
+        setTimeout(() => {
+          // Dispatch a custom event that DashboardPreview can listen for
+          const event = new CustomEvent('setPortfolio', { 
+            detail: { portfolio: portfolioType } 
+          });
+          window.dispatchEvent(event);
+        }, 800);
+      }
+    }
+  };
+
   return (
     <div
       ref={cardRef}
       className={cn(
-        "group relative rounded-2xl p-6 md:p-8 transition-all duration-300 flex flex-col h-full min-h-[700px]",
+        "group relative rounded-3xl p-6 md:p-8 transition-all duration-300 flex flex-col h-full min-h-[700px]",
         featured
           ? `bg-gradient-to-b from-${color}/20 to-${color}/5 border border-${color}/30`
           : `bg-gradient-to-b from-gray-900/50 to-black border border-gray-800/50 ${currentColor.hoverBorder}`,
@@ -147,18 +185,40 @@ export default function PortfolioCard({
       </div>
 
       <div className="mt-8 pt-6">
-        <Button
-          asChild
-          variant={featured ? "default" : "outline"}
-          className={cn(
-            "w-full justify-between group/btn",
-            featured
-              ? `bg-gradient-to-r ${currentColor.gradient} text-black hover:from-${color}/90 hover:to-${color}/70`
-              : `bg-transparent border-gray-700 ${currentColor.hoverBg} ${currentColor.hoverBorder}`,
-          )}
-        >
-          <Link href="/strategy">
-            <span>Our Strategy</span>
+        <div className="flex gap-3">
+          <Button
+            asChild
+            variant={featured ? "default" : "outline"}
+            className={cn(
+              "flex-1 justify-between group/btn rounded-xl",
+              featured
+                ? `bg-gradient-to-r ${currentColor.gradient} text-black hover:from-${color}/90 hover:to-${color}/70`
+                : `bg-transparent border-gray-700 ${currentColor.hoverBg} ${currentColor.hoverBorder}`,
+            )}
+          >
+            <Link href="/strategy">
+              <span>Our Strategy</span>
+              <ArrowRight className={cn(
+                "w-4 h-4 transition-transform", 
+                {
+                  "translate-x-1": applyHoverEffect,
+                  "group-hover/btn:translate-x-1": !isMobile
+                }
+              )} />
+            </Link>
+          </Button>
+          
+          <Button
+            onClick={scrollToPerformance}
+            variant={featured ? "outline" : "outline"}
+            className={cn(
+              "flex-1 justify-between group/btn rounded-xl",
+              featured
+                ? `bg-transparent border border-${color}/70 text-white hover:bg-${color}/10`
+                : `bg-transparent border-gray-700 ${currentColor.hoverBg} ${currentColor.hoverBorder}`,
+            )}
+          >
+            <span>View Performance</span>
             <ArrowRight className={cn(
               "w-4 h-4 transition-transform", 
               {
@@ -166,13 +226,13 @@ export default function PortfolioCard({
                 "group-hover/btn:translate-x-1": !isMobile
               }
             )} />
-          </Link>
-        </Button>
+          </Button>
+        </div>
       </div>
 
       <div
         className={cn(
-          `absolute bottom-0 left-1/2 -translate-x-1/2 h-1 bg-gradient-to-r ${currentColor.gradient} transition-all duration-300 rounded-b-lg`,
+          `absolute bottom-0 left-1/2 -translate-x-1/2 h-1 bg-gradient-to-r ${currentColor.gradient} transition-all duration-300 rounded-b-xl`,
           {
             "w-full": applyHoverEffect,
             "w-0 group-hover:w-full": !isMobile
