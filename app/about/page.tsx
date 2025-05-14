@@ -43,8 +43,6 @@ export default function AboutPage() {
                 </p>
                 <div className="flex justify-end">
                   <Link href="#" className="text-mint hover:text-mint/80 flex items-center gap-2 group">
-                    <span>Full Profile</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>
@@ -68,8 +66,6 @@ export default function AboutPage() {
                 </p>
                 <div className="flex justify-end">
                   <Link href="#" className="text-mint hover:text-mint/80 flex items-center gap-2 group">
-                    <span>Full Profile</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>
@@ -93,8 +89,6 @@ export default function AboutPage() {
                 </p>
                 <div className="flex justify-end">
                   <Link href="#" className="text-mint hover:text-mint/80 flex items-center gap-2 group">
-                    <span>Full Profile</span>
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>

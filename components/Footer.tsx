@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
               <img
-                src={`${basePath}/suubee-circle.png`}
+                src={`${basePath}/Asset 1.svg`}
                 alt="Suubee Portfolios Logo"
                 className="w-8 h-8 object-contain"
               />

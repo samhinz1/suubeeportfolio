@@ -47,23 +47,43 @@ export default function ContactPage() {
     setIsSubmitting(true);
     
     try {
-      // Simulate API call with setTimeout
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const formData = {
+        ...values,
+        access_key: "ac40aed4-7190-4d39-b1fe-4788e46a897e",
+        subject: "New contact form submission from Suubee",
+        from_name: "Suubee Contact Form"
+      };
       
-      // Show success toast
-      toast({
-        title: "Message sent!",
-        description: "Thanks for contacting us. We'll get back to you soon.",
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(formData)
       });
       
-      // Reset form
-      form.reset();
+      const result = await response.json();
+      
+      if (result.success) {
+        // Show success toast
+        toast({
+          title: "Message sent!",
+          description: "Thanks for contacting us. We'll get back to you soon.",
+        });
+        
+        // Reset form
+        form.reset();
+      } else {
+        throw new Error(result.message || "Something went wrong");
+      }
     } catch (error) {
       toast({
         title: "Error",
         description: "There was a problem sending your message. Please try again.",
         variant: "destructive",
       });
+      console.error(error);
     } finally {
       setIsSubmitting(false);
     }

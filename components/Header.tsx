@@ -12,7 +12,7 @@ export default function Header() {
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <img
-            src={`${basePath}/suubee-circle.png`}
+            src={`${basePath}/Asset 1.svg`}
             alt="Suubee Portfolios Logo"
             className="w-10 h-10 object-contain"
           />

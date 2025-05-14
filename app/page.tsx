@@ -164,6 +164,11 @@ export default function Home() {
                 <Button
                   variant="outline"
                   className="text-base px-6 py-6 bg-transparent border border-orange/50 text-white hover:bg-orange/10 rounded-full transition-all"
+                  onClick={() => {
+                    document.getElementById('portfolios')?.scrollIntoView({
+                      behavior: 'smooth'
+                    });
+                  }}
                 >
                   Explore Portfolios
                 </Button>

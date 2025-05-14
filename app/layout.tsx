@@ -5,8 +5,8 @@ export const metadata: Metadata = {
   title: 'Suubee Portfolios',
   description: 'Expertly managed portfolios',
   icons: {
-    icon: process.env.NODE_ENV === 'production' ? '/suubeeportfolio/suubee-circle.png' : '/suubee-circle.png',
-    apple: process.env.NODE_ENV === 'production' ? '/suubeeportfolio/suubee-circle.png' : '/suubee-circle.png'
+    icon: process.env.NODE_ENV === 'production' ? '/suubeeportfolio/Asset 1.svg' : '/Asset 1.svg',
+    apple: process.env.NODE_ENV === 'production' ? '/suubeeportfolio/Asset 1.svg' : '/Asset 1.svg'
   }
 }
 

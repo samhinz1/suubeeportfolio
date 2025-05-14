@@ -39,7 +39,7 @@ export default function StrategyPage() {
     <Layout>
       <div className="container mx-auto px-4 pt-32 pb-12">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold mb-8 bg-gradient-to-r from-mint to-mint/80 text-transparent bg-clip-text leading-[1.1] pb-2">
+          <h1 className="text-4xl md:text-5xl font-bold mb-8 text-white leading-[1.1] pb-2">
             Our Investment Strategy
           </h1>
           <p className="text-gray-400 mb-12 text-lg">
@@ -59,7 +59,7 @@ export default function StrategyPage() {
                 <h2 className="text-2xl md:text-3xl font-bold">Key Strategy Pillars</h2>
               </div>
 
-              <div className="space-y-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {[
                   {
                     title: "Targeting Market Leaders",
@@ -143,21 +143,21 @@ export default function StrategyPage() {
                       key={index}
                       ref={pillarRefs[index]}
                       className={cn(
-                        "relative flex flex-col lg:flex-row gap-6 lg:gap-10 bg-black/30 border border-mint/10 rounded-xl p-6 transition-all duration-300 hover:border-mint/30 group hover:shadow-[0_10px_20px_-15px_rgba(57,253,173,0.25)]",
+                        "relative flex flex-col gap-6 bg-black/30 border border-mint/10 rounded-xl p-6 transition-all duration-300 hover:border-mint/30 group hover:shadow-[0_10px_20px_-15px_rgba(57,253,173,0.25)]",
                         {
                           "translate-y-[-8px] shadow-[0_10px_20px_-15px_rgba(57,253,173,0.25)]": applyHoverEffect,
                           "hover:translate-y-[-8px]": !isMobile
                         }
                       )}
                     >
-                      <div className="flex">
+                      <div className="flex justify-start">
                         <div className="w-16 h-16 flex items-center justify-center bg-mint/10 rounded-full">
                           <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mint mx-auto my-auto">
                             {pillar.icon}
                           </svg>
                         </div>
                       </div>
-                      <div>
+                      <div className="text-left">
                         <h3 className="text-xl font-semibold mb-2">{pillar.title}</h3>
                         <p className="text-gray-300">
                           {pillar.description}
