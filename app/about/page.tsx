@@ -9,6 +9,9 @@ import Image from "next/image"
 import CTASection from "@/components/CTASection"
 
 export default function AboutPage() {
+  // Get base path for assets to work with GitHub Pages
+  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
+  
   return (
     <Layout>
 
@@ -29,7 +32,7 @@ export default function AboutPage() {
             <div className="bg-black/30 backdrop-blur-sm border border-mint/20 rounded-xl overflow-hidden transition-transform hover:scale-105">
               <div className="aspect-[4/3] relative">
                 <Image 
-                  src="/georgephoto.png" 
+                  src={`${basePath}/georgephoto.png`}
                   alt="George Rolleston" 
                   fill 
                   className="object-cover"
@@ -52,7 +55,7 @@ export default function AboutPage() {
             <div className="bg-black/30 backdrop-blur-sm border border-mint/20 rounded-xl overflow-hidden transition-transform hover:scale-105">
               <div className="aspect-[4/3] relative">
                 <Image 
-                  src="/samphoto.png" 
+                  src={`${basePath}/samphoto.png`}
                   alt="Sam Hinz" 
                   fill 
                   className="object-cover"
