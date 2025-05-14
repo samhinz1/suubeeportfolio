@@ -25,11 +25,12 @@ const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   phone: z.string().min(10, { message: "Please enter a valid phone number." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }),
+  message: z.string().optional(),
 });
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   // Initialize form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -45,10 +46,12 @@ export default function ContactPage() {
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
+    setIsSuccess(false);
     
     try {
       const formData = {
         ...values,
+        message: values.message || "No message provided",
         access_key: "ac40aed4-7190-4d39-b1fe-4788e46a897e",
         subject: "New contact form submission from Suubee",
         from_name: "Suubee Contact Form"
@@ -71,6 +74,9 @@ export default function ContactPage() {
           title: "Message sent!",
           description: "Thanks for contacting us. We'll get back to you soon.",
         });
+        
+        // Set success state
+        setIsSuccess(true);
         
         // Reset form
         form.reset();
@@ -173,6 +179,17 @@ export default function ContactPage() {
                   >
                     {isSubmitting ? "Sending..." : "Send Message"}
                   </Button>
+                  
+                  {isSuccess && (
+                    <div className="mt-4 p-4 bg-green-500/20 border border-green-500/50 rounded-md">
+                      <p className="text-green-400 flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                        </svg>
+                        Your message has been sent successfully! We'll be in touch soon.
+                      </p>
+                    </div>
+                  )}
                 </form>
               </Form>
             </div>
