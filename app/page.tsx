@@ -326,7 +326,7 @@ export default function Home() {
       </section>
 
       {/* Dashboard Preview Section */}
-      <section className="py-24 pb-36 relative z-10 overflow-hidden">
+      <section className="py-24 relative z-10 overflow-hidden">
         <div className="container mx-auto px-4">
           <motion.div 
             className="text-center mb-16"

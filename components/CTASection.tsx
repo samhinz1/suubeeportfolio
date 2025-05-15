@@ -21,7 +21,7 @@ export default function CTASection({
   secondaryLinkHref = "/contact",
 }: CTASectionProps) {
   return (
-    <section className="py-10 relative z-10">
+    <section className="py-24 relative z-10">
       <div className="container mx-auto px-4">
         <motion.div 
           className="max-w-4xl mx-auto bg-black/40 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-mint/20 group relative transition-all duration-300 hover:translate-y-[-8px] hover:border-mint/30"
