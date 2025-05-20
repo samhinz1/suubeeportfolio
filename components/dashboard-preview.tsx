@@ -285,7 +285,7 @@ export default function DashboardPreview({
               >
                 <Image 
                   src={`${basePath}/usflag.png`} 
-                  alt="US" 
+                  alt="United States Flag - US Leaders Portfolio" 
                   width={16} 
                   height={12}
                   className="rounded-sm"
@@ -324,7 +324,7 @@ export default function DashboardPreview({
         <div className="bg-[#0A0A0A] p-6">
           {/* Chart Area */}
           <div className="mb-6">
-            <div className="h-[200px] w-full bg-black/50 rounded-lg overflow-hidden relative">
+            <div className="h-[300px] w-full bg-black/50 rounded-lg overflow-hidden relative">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={portfolioData} margin={{ top: 20, right: 5, left: 5, bottom: 5 }}>
                   <defs>

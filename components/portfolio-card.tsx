@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils"
 import { ReactNode, useState, useEffect } from "react"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
+import { ProductJsonLd } from "./JsonLd"
 
 interface PortfolioCardProps {
   title: string
@@ -115,130 +116,119 @@ export default function PortfolioCard({
       }
     }
   };
+  
+  // Prepare image URL for structured data
+  const imageUrl = iconSrc.startsWith('http') 
+    ? iconSrc 
+    : `https://suubeeportfolios.com${basePath}${iconSrc}`;
 
   return (
-    <div
-      ref={cardRef}
-      className={cn(
-        "group relative rounded-3xl p-6 md:p-8 transition-all duration-300 flex flex-col h-full min-h-[700px]",
-        featured
-          ? `bg-gradient-to-b from-${color}/20 to-${color}/5 border border-${color}/30`
-          : `bg-gradient-to-b from-gray-900/50 to-black border border-gray-800/50 ${currentColor.hoverBorder}`,
-        {
-          "translate-y-[-8px]": applyHoverEffect,
-          "hover:translate-y-[-8px]": !isMobile
-        }
-      )}
-    >
-      {featured && (
-        <div
-          className={`absolute -top-3 left-1/2 transform -translate-x-1/2 ${currentColor.bg} text-black text-xs font-medium px-3 py-1 rounded-full`}
-        >
-          Popular Choice
-        </div>
-      )}
-
-      <div className="mb-6 flex justify-between items-start">
-        <div>
-          <p className={`text-sm ${currentColor.text} mb-2`}>{subtitle}</p>
-          <h3 className="text-2xl font-bold">{title}</h3>
-        </div>
-        {iconSrc && (
-          iconSrc.endsWith('.svg') || iconSrc.endsWith('.png') ? (
-            <div className="w-36 h-24">
-              <Image 
-                src={iconSrc} 
-                alt={title} 
-                width={120} 
-                height={90}
-                className={cn(
-                  "object-contain grayscale-[100%] brightness-[50%] transition-[filter] duration-1000 ease-in-out",
-                  {
-                    "grayscale-[20%] brightness-[100%]": applyHoverEffect,
-                    "group-hover:grayscale-[20%] group-hover:brightness-[100%]": !isMobile
-                  }
-                )}
-              />
-            </div>
-          ) : (
-            <div
-              className={cn(
-                "w-12 h-12 rounded-full flex items-center justify-center",
-                featured ? currentColor.iconBg : "bg-gray-800/50",
-              )}
-            >
-              <Image 
-                src={iconSrc || `${basePath}/placeholder.svg`} 
-                alt={title} 
-                width={24} 
-                height={24} 
-              />
-            </div>
-          )
-        )}
-      </div>
-
-      <p className="text-gray-400 mb-6">{description}</p>
-
-      <div className="flex-grow">
-        {children}
-      </div>
-
-      <div className="mt-8 pt-6">
-        <div className="flex gap-3">
-          <Button
-            asChild
-            variant={featured ? "default" : "outline"}
-            className={cn(
-              "flex-1 justify-between group/btn rounded-xl",
-              featured
-                ? `bg-gradient-to-r ${currentColor.gradient} text-black hover:from-${color}/90 hover:to-${color}/70`
-                : `bg-transparent border-gray-700 ${currentColor.hoverBg} ${currentColor.hoverBorder}`,
-            )}
-          >
-            <Link href="/strategy">
-              <span>Our Strategy</span>
-              <ArrowRight className={cn(
-                "w-4 h-4 transition-transform", 
-                {
-                  "translate-x-1": applyHoverEffect,
-                  "group-hover/btn:translate-x-1": !isMobile
-                }
-              )} />
-            </Link>
-          </Button>
-          
-          <Button
-            onClick={scrollToPerformance}
-            variant={featured ? "outline" : "outline"}
-            className={cn(
-              "flex-1 justify-between group/btn rounded-xl",
-              featured
-                ? `bg-transparent border border-${color}/70 text-white hover:bg-${color}/10`
-                : `bg-transparent border-gray-700 ${currentColor.hoverBg} ${currentColor.hoverBorder}`,
-            )}
-          >
-            <span>View Performance</span>
-            <ArrowRight className={cn(
-              "w-4 h-4 transition-transform", 
-              {
-                "translate-x-1": applyHoverEffect,
-                "group-hover/btn:translate-x-1": !isMobile
-              }
-            )} />
-          </Button>
-        </div>
-      </div>
-
+    <>
+      {/* Add product structured data */}
+      <ProductJsonLd
+        name={title}
+        description={description}
+        image={imageUrl}
+      />
+      
       <div
+        ref={cardRef}
         className={cn(
-          `absolute bottom-0 left-1/2 -translate-x-1/2 h-1 bg-gradient-to-r ${currentColor.gradient} transition-all duration-300 rounded-b-xl`,
+          "group relative rounded-3xl p-6 md:p-8 transition-all duration-300 flex flex-col h-full min-h-[700px]",
+          featured
+            ? `bg-gradient-to-b from-${color}/20 to-${color}/5 border border-${color}/30`
+            : `bg-gradient-to-b from-gray-900/50 to-black border border-gray-800/50 ${currentColor.hoverBorder}`,
           {
-            "w-full": applyHoverEffect,
-            "w-0 group-hover:w-full": !isMobile
+            "translate-y-[-8px]": applyHoverEffect,
+            "hover:translate-y-[-8px]": !isMobile
           }
         )}
-      ></div>
-    </div>
+      >
+        {featured && (
+          <div
+            className={`absolute -top-3 left-1/2 transform -translate-x-1/2 ${currentColor.bg} text-black text-xs font-medium px-3 py-1 rounded-full`}
+          >
+            Popular Choice
+          </div>
+        )}
+
+        <div className="mb-6 flex justify-between items-start">
+          <div>
+            <p className={`text-sm ${currentColor.text} mb-2`}>{subtitle}</p>
+            <h3 className="text-2xl font-bold">{title}</h3>
+          </div>
+          {iconSrc && (
+            iconSrc.endsWith('.svg') || iconSrc.endsWith('.png') ? (
+              <div className="w-36 h-24">
+                <Image 
+                  src={iconSrc} 
+                  alt={title} 
+                  width={120} 
+                  height={90}
+                  className={cn(
+                    "object-contain grayscale-[100%] brightness-[50%] transition-[filter] duration-1000 ease-in-out",
+                    {
+                      "grayscale-[20%] brightness-[100%]": applyHoverEffect,
+                      "group-hover:grayscale-[20%] group-hover:brightness-[100%]": !isMobile
+                    }
+                  )}
+                />
+              </div>
+            ) : (
+              <div
+                className={cn(
+                  "w-12 h-12 rounded-full flex items-center justify-center",
+                  featured ? currentColor.iconBg : "bg-gray-800/50",
+                )}
+              >
+                <Image 
+                  src={iconSrc || `${basePath}/placeholder.svg`} 
+                  alt={title} 
+                  width={24} 
+                  height={24} 
+                />
+              </div>
+            )
+          )}
+        </div>
+
+        <p className="text-gray-400 mb-6">{description}</p>
+
+        <div className="flex-grow">
+          {children}
+        </div>
+
+        <div className="mt-8 pt-6">
+          <div className="flex gap-3">
+            <Button
+              asChild
+              variant={featured ? "default" : "outline"}
+              className={cn(
+                "flex-1 justify-between group/btn rounded-xl",
+                featured
+                  ? `bg-gradient-to-r ${currentColor.gradient} text-black hover:from-${color}/90 hover:to-${color}/70`
+                  : `bg-transparent border-gray-700 ${currentColor.hoverBg} ${currentColor.hoverBorder}`,
+              )}
+            >
+              <Link href="/strategy">
+                <span>Our Strategy</span>
+                <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+              </Link>
+            </Button>
+            <Button
+              variant="outline"
+              className={cn(
+                "flex-1 justify-between group/btn rounded-xl",
+                `bg-transparent border-gray-700 ${currentColor.hoverBg} ${currentColor.hoverBorder}`,
+              )}
+              onClick={scrollToPerformance}
+            >
+              <span>Performance</span>
+              <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+            </Button>
+          </div>
+        </div>
+      </div>
+    </>
   )
 }
