@@ -52,8 +52,7 @@ export default function PortfolioOptions() {
                     "Curated portfolio of market-leading companies across sectors",
                     "Dedicated US portfolio manager with specialized expertise",
                     "Direct US equity exposure (no repackaged ETFs)",
-                    "Targeting 10%+ annual returns after fees",
-                    "Straightforward 2% management fee structure"
+                    "Straightforward 3.5% management fee structure"
                   ].map((feature, index) => (
                     <motion.div 
                       key={index}
@@ -101,8 +100,7 @@ export default function PortfolioOptions() {
                     "Get access to established and emerging emerging companies",
                     "Active portfolio management to ensure optimal asset allocations",
                     "Diverse portfolio across size, sector and geography",
-                    "Targeting 10%+ annual returns after fees",
-                    "Straightforward 2% management fee structure"
+                    "Straightforward 3.5% management fee structure"
                   ].map((feature, index) => (
                     <motion.div 
                       key={index}

@@ -30,7 +30,8 @@ export default function AboutPage() {
     {
       name: "Phil Hall",
       jobTitle: "General Manager",
-      description: "Phil Hall (B Bus, Economics & Finance) has over 15 years of experience in financial markets. Phil is responsible for the day-to-day operations of WAM including client services, marketing, and business development."
+      description: "Phil Hall (B Bus, Economics & Finance) has over 15 years of experience in financial markets. Phil is responsible for the day-to-day operations of WAM including client services, marketing, and business development.",
+      image: `https://suubeeportfolios.com${basePath}/phil.png`
     }
   ];
   
@@ -120,12 +121,13 @@ export default function AboutPage() {
               {/* Team Member 3 */}
               <article className="bg-black/30 backdrop-blur-sm border border-mint/20 rounded-xl overflow-hidden transition-transform hover:scale-105">
                 <div className="aspect-[4/3] relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-mint/20 to-orange/20 z-0" aria-hidden="true"></div>
-                  <div className="h-full flex items-center justify-center p-4">
-                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-mint/30 to-orange/30 flex items-center justify-center">
-                      <span className="text-3xl font-bold text-mint">PH</span>
-                    </div>
-                  </div>
+                  <Image 
+                    src={`${basePath}/phil.png`}
+                    alt="Phil Hall - General Manager at Suubee Portfolios" 
+                    fill 
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="object-cover"
+                  />
                 </div>
                 <div className="p-4">
                   <h2 className="text-xl font-bold mb-2">Phil Hall</h2>
