@@ -146,7 +146,7 @@ export default function Header() {
             <div className="border-t border-gray-200 mt-2 pt-4 flex flex-col gap-3">
               <Link
                 href="/login"
-                className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors flex items-center gap-2 border border-[#0c0c0c] rounded-full px-4 hover:bg-gray-100"
+                className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors flex items-center justify-center gap-2 border border-[#0c0c0c] rounded-full px-4 hover:bg-gray-100"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
