@@ -48,18 +48,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/strategy" className="text-gray-400 hover:text-mint text-sm">
+                <Link href="/" className="text-gray-400 hover:text-mint text-sm">
                   Our Strategy
                 </Link>
               </li>
               <li>
-                <Link href="about" className="text-gray-400 hover:text-mint text-sm">
+                <Link href="/" className="text-gray-400 hover:text-mint text-sm">
                   About Us
                 </Link>
               </li>
               
               <li>
-                <Link href="contact" className="text-gray-400 hover:text-mint text-sm">
+                <Link href="/" className="text-gray-400 hover:text-mint text-sm">
                   Contact Us
                 </Link>
               </li>
@@ -70,22 +70,22 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/fsg" className="text-gray-400 hover:text-mint text-sm">
+                <Link href="/" className="text-gray-400 hover:text-mint text-sm">
                   Financial Services Guide
                 </Link>
               </li>
               <li>
-                <Link href="/tos" className="text-gray-400 hover:text-mint text-sm">
+                <Link href="/" className="text-gray-400 hover:text-mint text-sm">
                   Terms of Service
                 </Link>
               </li>
               <li>
-                <Link href="/privacy" className="text-gray-400 hover:text-mint text-sm">
+                <Link href="/" className="text-gray-400 hover:text-mint text-sm">
                   Privacy Policy
                 </Link>
               </li>
               <li>
-                <Link href="/disclaimer" className="text-gray-400 hover:text-mint text-sm">
+                <Link href="/" className="text-gray-400 hover:text-mint text-sm">
                   Disclaimers
                 </Link>
               </li>

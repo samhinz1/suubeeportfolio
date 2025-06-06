@@ -53,7 +53,7 @@ export default function Header() {
         <div className="flex items-center gap-4">
           
           <Link
-            href="/login"
+            href="/"
             className="hidden md:flex text-sm font-medium px-4 py-2 border border-[#0c0c0c] rounded-full text-[#0c0c0c] hover:bg-gray-100 transition-all items-center gap-2"
           >
             <svg
@@ -73,7 +73,7 @@ export default function Header() {
             </svg>
             Login
           </Link>
-          <Link href="/register" className="hidden md:block">
+          <Link href="/" className="hidden md:block">
             <Button className="flex items-center gap-2 bg-gradient-to-r from-mint to-mint/80 text-black hover:from-mint/90 hover:to-mint/70 rounded-full">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -130,13 +130,13 @@ export default function Header() {
               Home
             </Link>
             <Link
-              href="/strategy"
+              href="/"
               className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
             >
               Our Strategy
             </Link>
             <Link
-              href="/contact"
+              href="/"
               className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
             >
               Contact
@@ -145,7 +145,7 @@ export default function Header() {
             {/* Added Auth Links to Mobile Menu */}
             <div className="border-t border-gray-200 mt-2 pt-4 flex flex-col gap-3">
               <Link
-                href="/login"
+                href="/"
                 className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors flex items-center justify-center gap-2 border border-[#0c0c0c] rounded-full px-4 hover:bg-gray-100"
               >
                 <svg
@@ -166,7 +166,7 @@ export default function Header() {
                 Login
               </Link>
               <Link
-                href="/register"
+                href="/"
                 className="text-sm font-medium py-2 bg-gradient-to-r from-mint to-mint/80 text-black hover:from-mint/90 hover:to-mint/70 rounded-full flex items-center justify-center gap-2"
               >
                 <svg

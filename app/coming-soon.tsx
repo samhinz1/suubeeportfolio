@@ -49,8 +49,23 @@ export default function ComingSoonPage() {
     setIsSuccess(false);
     
     try {
-      // Simulate API call (replace with actual API integration)
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Replace with your Google Apps Script Web App URL
+      const apiUrl = "https://script.google.com/macros/s/AKfycbxDWbzOD4zrlWgNasJYH6Gkyxc7s1obQlfU0XExyfGVHduuKXnLyyRESSsg7IuS5tH1EQ/exec";
+      
+      // Send the data to Google Sheets
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: values.email
+        }),
+        mode: "no-cors" // This is important for CORS issues
+      });
+      
+      // Since we're using no-cors, we don't get response details
+      // So we'll just assume success if no error is thrown
       
       // Show success toast
       toast({
