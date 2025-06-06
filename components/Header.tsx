@@ -8,7 +8,7 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-black/50 backdrop-blur-sm border-b border-mint/5">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#f5f5f5] border-b border-gray-200">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2">
           <img
@@ -16,32 +16,32 @@ export default function Header() {
             alt="Suubee Portfolios Logo"
             className="w-10 h-10 object-contain"
           />
-          <span className="font-bold text-xl tracking-tight">Suubee Portfolios</span>
+          <span className="font-bold text-xl tracking-tight text-[#0c0c0c]">Suubee Portfolios</span>
         </Link>
 
         {/* Main Navigation
         <nav className="hidden md:flex items-center gap-6">
           <Link
             href="/"
-            className="text-sm font-medium hover:text-mint transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
           >
             Home
           </Link>
           <Link
             href="/strategy"
-            className="text-sm font-medium hover:text-mint transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
           >
             Our Strategy
           </Link>
           <Link
             href="#portfolios"
-            className="text-sm font-medium hover:text-mint transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
           >
             Portfolios
           </Link>
           <Link
             href="/contact"
-            className="text-sm font-medium hover:text-mint transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
           >
             Contact
           </Link>
@@ -51,7 +51,7 @@ export default function Header() {
           
           <Link
             href="/login"
-            className="hidden md:flex text-sm font-medium px-4 py-2 border border-mint/30 rounded-full hover:bg-mint/10 transition-all items-center gap-2"
+            className="hidden md:flex text-sm font-medium px-4 py-2 border border-[#0c0c0c] rounded-full text-[#0c0c0c] hover:bg-gray-100 transition-all items-center gap-2"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -94,7 +94,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-white"
+            className="md:hidden text-[#0c0c0c]"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             <svg
@@ -117,33 +117,33 @@ export default function Header() {
       </div>
       
       {/* Mobile Navigation Menu - Hidden by default */}
-      <div className={`md:hidden ${mobileMenuOpen ? 'block' : 'hidden'} bg-black/80 border-t border-mint/10 backdrop-blur-md`}>
+      <div className={`md:hidden ${mobileMenuOpen ? 'block' : 'hidden'} bg-[#f5f5f5] border-t border-gray-200`}>
         <div className="container mx-auto px-4 py-4">
           <nav className="flex flex-col gap-4">
             <Link
               href="/"
-              className="text-sm font-medium py-2 hover:text-mint transition-colors"
+              className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
             >
               Home
             </Link>
             <Link
               href="/strategy"
-              className="text-sm font-medium py-2 hover:text-mint transition-colors"
+              className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
             >
               Our Strategy
             </Link>
             <Link
               href="/contact"
-              className="text-sm font-medium py-2 hover:text-mint transition-colors"
+              className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
             >
               Contact
             </Link>
             
             {/* Added Auth Links to Mobile Menu */}
-            <div className="border-t border-mint/10 mt-2 pt-4 flex flex-col gap-3">
+            <div className="border-t border-gray-200 mt-2 pt-4 flex flex-col gap-3">
               <Link
                 href="/login"
-                className="text-sm font-medium py-2 hover:text-mint transition-colors flex items-center gap-2"
+                className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors flex items-center gap-2 border border-[#0c0c0c] rounded-full px-4 hover:bg-gray-100"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

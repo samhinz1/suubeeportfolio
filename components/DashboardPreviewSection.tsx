@@ -8,7 +8,7 @@ interface DashboardPreviewSectionProps {
 
 export default function DashboardPreviewSection({ selectedPortfolio, onPortfolioChange }: DashboardPreviewSectionProps) {
   return (
-    <section className="py-24 relative z-10 overflow-hidden">
+    <section className="py-24 relative z-10 overflow-hidden bg-white text-[#0c0c0c]">
       <div className="container mx-auto px-4">
         <motion.div 
           className="text-center mb-16"
@@ -18,7 +18,7 @@ export default function DashboardPreviewSection({ selectedPortfolio, onPortfolio
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Performance</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto">
             See how our portfolios have performed over time.
           </p>
         </motion.div>

@@ -118,7 +118,7 @@ export default function DashboardPreview({
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-black/90 border border-mint/20 p-3 rounded-lg shadow-lg">
+        <div className="bg-[#0c0c0c]/90 border border-mint/20 p-3 rounded-lg shadow-lg">
           <p className="text-mint text-sm">{label}</p>
           <p className="text-white font-medium">${payload[0].value.toLocaleString()}</p>
         </div>
@@ -128,7 +128,7 @@ export default function DashboardPreview({
   }
 
   if (portfolioData.length === 0) {
-    return <div className="p-6 text-center text-white bg-[#0A0A0A] rounded-xl border border-mint/20">
+    return <div className="p-6 text-center text-white bg-[#0c0c0c] rounded-xl border border-gray-700">
       Error loading portfolio data. Please try again later.
     </div>
   }
@@ -266,20 +266,20 @@ export default function DashboardPreview({
   return (
     <div
       ref={containerRef}
-      className="group relative rounded-xl overflow-hidden border border-mint/20 shadow-lg transition-all duration-300 hover:translate-y-[-8px] hover:border-mint/30"
+      className="group relative rounded-xl overflow-hidden border border-gray-700 shadow-lg transition-all duration-300 hover:translate-y-[-8px] hover:border-mint/30"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div animate={controls} className="relative">
         {/* Toggle button portfolio selector */}
-        <div className="bg-[#0A0A0A] px-4 pt-4 pb-2">
+        <div className="bg-[#0c0c0c] px-4 pt-4 pb-2">
           <div className="flex justify-center">
-            <div className="inline-flex items-stretch bg-black/50 border border-mint/30 rounded-full overflow-hidden p-1.5">
+            <div className="inline-flex items-stretch bg-[#0c0c0c]/80 border border-mint/30 rounded-full overflow-hidden p-1.5">
               <button
                 className={`px-4 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
                   selectedPortfolio === "us" 
                     ? "bg-mint text-black font-medium" 
-                    : "text-gray-400 hover:bg-black/70"
+                    : "text-gray-400 hover:bg-[#0c0c0c]/90"
                 }`}
                 onClick={() => onPortfolioChange && onPortfolioChange("us")}
               >
@@ -296,7 +296,7 @@ export default function DashboardPreview({
                 className={`px-4 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
                   selectedPortfolio === "au" 
                     ? "bg-mint text-black font-medium" 
-                    : "text-gray-400 hover:bg-black/70"
+                    : "text-gray-400 hover:bg-[#0c0c0c]/90"
                 }`}
                 onClick={() => onPortfolioChange && onPortfolioChange("au")}
               >
@@ -314,17 +314,17 @@ export default function DashboardPreview({
         </div>
         
         {/* Dashboard UI */}
-        <div className="bg-[#0A0A0A] p-4 border-b border-mint/10">
+        <div className="bg-[#0c0c0c] p-4 border-b border-gray-700">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-3">
             </div>
           </div>
         </div>
 
-        <div className="bg-[#0A0A0A] p-6">
+        <div className="bg-[#0c0c0c] p-6">
           {/* Chart Area */}
           <div className="mb-6">
-            <div className="h-[300px] w-full bg-black/50 rounded-lg overflow-hidden relative">
+            <div className="h-[300px] w-full bg-[#161616] rounded-lg overflow-hidden relative border border-gray-800">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={portfolioData} margin={{ top: 20, right: 5, left: 5, bottom: 5 }}>
                   <defs>
@@ -357,7 +357,7 @@ export default function DashboardPreview({
                       return monthNames[parseInt(month) - 1];
                     }}
                     ticks={monthLabels.map(label => portfolioData[label.dataIndex].date)}
-                    tick={{ fontSize: 12 }}
+                    tick={{ fontSize: 12, fill: "#999" }}
                     minTickGap={5}
                     height={30}
                   />
@@ -365,6 +365,7 @@ export default function DashboardPreview({
                     stroke="#39FDAD" 
                     domain={[100000, 'auto']}
                     tickFormatter={(value) => `$${value.toLocaleString()}`}
+                    tick={{ fill: "#999" }}
                   />
                   <Tooltip content={<CustomTooltip />} />
                   <Line
@@ -382,27 +383,27 @@ export default function DashboardPreview({
 
           {/* Stats */}
           <div className="grid grid-cols-3 gap-4 mb-6">
-            <div className="bg-black/30 p-3 rounded-lg border border-mint/10">
+            <div className="bg-[#161616] p-3 rounded-lg border border-gray-700">
               <div className="text-xs text-gray-400 mb-1">Current YTD Performance</div>
-              <div className="text-lg font-bold">{ytdReturn >= 0 ? '+' : ''}{ytdReturn.toFixed(1)}%</div>
+              <div className="text-lg font-bold text-white">{ytdReturn >= 0 ? '+' : ''}{ytdReturn.toFixed(1)}%</div>
               <div className="text-xs text-mint">Since January 1st {currentYear}</div>
             </div>
-            <div className="bg-black/30 p-3 rounded-lg border border-mint/10">
+            <div className="bg-[#161616] p-3 rounded-lg border border-gray-700">
               <div className="text-xs text-gray-400 mb-1">Performance Since Inception</div>
-              <div className="text-lg font-bold">{isNaN(cumulativeReturn) ? '0.0' : (cumulativeReturn >= 0 ? '+' : '') + cumulativeReturn.toFixed(1)}%</div>
+              <div className="text-lg font-bold text-white">{isNaN(cumulativeReturn) ? '0.0' : (cumulativeReturn >= 0 ? '+' : '') + cumulativeReturn.toFixed(1)}%</div>
               <div className="text-xs text-mint">
                 Since {inceptionDateStr}
               </div>
             </div>
-            <div className="bg-black/30 p-3 rounded-lg border border-mint/10">
+            <div className="bg-[#161616] p-3 rounded-lg border border-gray-700">
               <div className="text-xs text-gray-400 mb-1">Risk Level</div>
-              <div className="text-lg font-bold">High</div>
+              <div className="text-lg font-bold text-white">High</div>
               <div className="text-xs text-orange">Growth Focused</div>
             </div>
           </div>
           
           {/* Disclaimer */}
-          <div className="text-xs text-gray-400 bg-black/30 border border-mint/10 rounded-lg p-3 mt-2">
+          <div className="text-xs text-gray-400 bg-[#161616] border border-gray-700 rounded-lg p-3 mt-2">
             <p className="font-medium text-xs mb-1"><strong>Disclaimer:</strong> Performance data shown is based on hypothetical model portfolios tracked and updated daily on Suubeepremium.com. 
             The results assume no fees of any kind (including management, performance, transaction, or other costs). The model portfolios are fully invested (100% long) at all times and rebalanced daily to reflect additions and removals. 
             Real-world portfolios may differ and typically hold only a subset of the model constituents to reduce turnover and transaction costs.
@@ -420,10 +421,10 @@ export default function DashboardPreview({
         <div className="absolute inset-0 bg-gradient-to-r from-mint/5 to-mint/5 opacity-30 pointer-events-none"></div>
       )}
       
-      {/* Bottom gradient bar - same as portfolio cards */}
+      {/* Bottom gradient bar */}
       <div
         className={cn(
-          "absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-gradient-to-r from-mint to-mint/80 transition-all duration-300 rounded-b-lg",
+          "absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-1 bg-mint transition-all duration-300 rounded-b-lg",
           "group-hover:w-full",
         )}
       ></div>

@@ -134,10 +134,10 @@ export default function PortfolioCard({
       <div
         ref={cardRef}
         className={cn(
-          "group relative rounded-3xl p-6 md:p-8 transition-all duration-300 flex flex-col h-full min-h-[700px]",
+          "group relative rounded-2xl p-6 md:p-8 transition-all duration-300 flex flex-col h-full min-h-[700px]",
           featured
-            ? `bg-gradient-to-b from-${color}/20 to-${color}/5 border border-${color}/30`
-            : `bg-gradient-to-b from-gray-900/50 to-black border border-gray-800/50 ${currentColor.hoverBorder}`,
+            ? `bg-[#0c0c0c] border border-${color}/30 shadow-lg`
+            : `bg-[#0c0c0c] border border-gray-800 shadow-md ${currentColor.hoverBorder}`,
           {
             "translate-y-[-8px]": applyHoverEffect,
             "hover:translate-y-[-8px]": !isMobile
@@ -155,7 +155,7 @@ export default function PortfolioCard({
         <div className="mb-6 flex justify-between items-start">
           <div>
             <p className={`text-sm ${currentColor.text} mb-2`}>{subtitle}</p>
-            <h3 className="text-2xl font-bold">{title}</h3>
+            <h3 className="text-2xl font-bold text-white">{title}</h3>
           </div>
           {iconSrc && (
             iconSrc.endsWith('.svg') || iconSrc.endsWith('.png') ? (
@@ -166,7 +166,7 @@ export default function PortfolioCard({
                   width={120} 
                   height={90}
                   className={cn(
-                    "object-contain grayscale-[100%] brightness-[50%] transition-[filter] duration-1000 ease-in-out",
+                    "object-contain grayscale-[60%] brightness-[50%] transition-[filter] duration-1000 ease-in-out",
                     {
                       "grayscale-[20%] brightness-[100%]": applyHoverEffect,
                       "group-hover:grayscale-[20%] group-hover:brightness-[100%]": !isMobile
@@ -178,7 +178,7 @@ export default function PortfolioCard({
               <div
                 className={cn(
                   "w-12 h-12 rounded-full flex items-center justify-center",
-                  featured ? currentColor.iconBg : "bg-gray-800/50",
+                  featured ? currentColor.iconBg : "bg-gray-800",
                 )}
               >
                 <Image 
@@ -192,7 +192,7 @@ export default function PortfolioCard({
           )}
         </div>
 
-        <p className="text-gray-400 mb-6">{description}</p>
+        <p className="text-gray-300 mb-6">{description}</p>
 
         <div className="flex-grow">
           {children}
@@ -204,10 +204,10 @@ export default function PortfolioCard({
               asChild
               variant={featured ? "default" : "outline"}
               className={cn(
-                "flex-1 justify-between group/btn rounded-xl",
+                "flex-1 justify-between group/btn rounded-md",
                 featured
-                  ? `bg-gradient-to-r ${currentColor.gradient} text-black hover:from-${color}/90 hover:to-${color}/70`
-                  : `bg-transparent border-gray-700 ${currentColor.hoverBg} ${currentColor.hoverBorder}`,
+                  ? `bg-mint text-black hover:bg-mint/90`
+                  : `bg-transparent border-gray-500 text-white hover:bg-gray-800`,
               )}
             >
               <Link href="/strategy">
@@ -218,8 +218,8 @@ export default function PortfolioCard({
             <Button
               variant="outline"
               className={cn(
-                "flex-1 justify-between group/btn rounded-xl",
-                `bg-transparent border-gray-700 ${currentColor.hoverBg} ${currentColor.hoverBorder}`,
+                "flex-1 justify-between group/btn rounded-md",
+                `bg-transparent border-gray-500 text-white hover:bg-gray-800`,
               )}
               onClick={scrollToPerformance}
             >

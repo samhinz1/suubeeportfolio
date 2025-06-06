@@ -7,7 +7,7 @@ export default function PortfolioOptions() {
   return (
     <section 
       id="portfolios" 
-      className="py-24 relative z-10"
+      className="py-24 relative z-10 bg-[#f5f5f5] text-[#0c0c0c]"
       aria-labelledby="portfolios-heading"
     >
       <div className="container mx-auto px-4">
@@ -19,7 +19,7 @@ export default function PortfolioOptions() {
           transition={{ duration: 0.6 }}
         >
           <h2 id="portfolios-heading" className="text-3xl md:text-5xl font-bold mb-4">Our Portfolios</h2>
-          <p className="text-gray-400 max-w-2xl mx-auto">
+          <p className="text-gray-600 max-w-2xl mx-auto">
             Geographically diversified portfolios, with a focus on either US, or Australian equities.
           </p>
         </motion.div>
