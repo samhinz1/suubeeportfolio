@@ -103,13 +103,13 @@ export default function ContactPage() {
   return (
     <Layout>
       <main>
-        <div className="container mx-auto px-4 pt-32 pb-24">
+        <div className="container mx-auto px-4 pt-32 pb-24 bg-[#f5f5f5]">
           <div className="max-w-4xl mx-auto">
             <header>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-mint to-mint/80 text-transparent bg-clip-text">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-[#0c0c0c]">
                 Contact Us
               </h1>
-              <p className="text-gray-400 mb-12 text-lg max-w-2xl">
+              <p className="text-gray-600 mb-12 text-lg max-w-2xl">
                 Have questions about our investment portfolios? We'd love to hear from you. 
                 Fill out the form below and our team will get back to you shortly.
               </p>
@@ -126,9 +126,9 @@ export default function ContactPage() {
                         name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel htmlFor="name">Full Name</FormLabel>
+                            <FormLabel htmlFor="name" className="text-gray-700">Full Name</FormLabel>
                             <FormControl>
-                              <Input id="name" placeholder="Enter your name" {...field} />
+                              <Input id="name" placeholder="Enter your name" {...field} className="bg-white border-gray-300" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -139,9 +139,9 @@ export default function ContactPage() {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel htmlFor="email">Email</FormLabel>
+                            <FormLabel htmlFor="email" className="text-gray-700">Email</FormLabel>
                             <FormControl>
-                              <Input id="email" type="email" placeholder="Enter your email" {...field} />
+                              <Input id="email" type="email" placeholder="Enter your email" {...field} className="bg-white border-gray-300" />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -154,9 +154,9 @@ export default function ContactPage() {
                       name="phone"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel htmlFor="phone">Phone Number</FormLabel>
+                          <FormLabel htmlFor="phone" className="text-gray-700">Phone Number</FormLabel>
                           <FormControl>
-                            <Input id="phone" type="tel" placeholder="Enter your phone number" {...field} />
+                            <Input id="phone" type="tel" placeholder="Enter your phone number" {...field} className="bg-white border-gray-300" />
                           </FormControl>
                           <FormMessage />
                         </FormItem>
@@ -168,12 +168,12 @@ export default function ContactPage() {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel htmlFor="message">Message</FormLabel>
+                          <FormLabel htmlFor="message" className="text-gray-700">Message</FormLabel>
                           <FormControl>
                             <Textarea 
                               id="message"
                               placeholder="Please let us know how we can help you..." 
-                              className="min-h-32" 
+                              className="min-h-32 bg-white border-gray-300" 
                               {...field} 
                             />
                           </FormControl>
@@ -189,7 +189,7 @@ export default function ContactPage() {
                           setRecaptchaValue(value);
                           form.setValue('recaptcha', value || '');
                         }}
-                        theme="dark"
+                        theme="light"
                         style={{ transform: 'scale(0.85)', transformOrigin: '0 0' }}
                       />
                       {form.formState.errors.recaptcha && (
@@ -212,7 +212,7 @@ export default function ContactPage() {
                         role="alert"
                         aria-live="polite"
                       >
-                        <p className="text-green-400 flex items-center">
+                        <p className="text-green-700 flex items-center">
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
@@ -226,7 +226,7 @@ export default function ContactPage() {
 
               <aside className="space-y-8">
                 <section aria-labelledby="contact-info-heading">
-                  <h2 id="contact-info-heading" className="text-xl font-semibold mb-4">Contact Information</h2>
+                  <h2 id="contact-info-heading" className="text-xl font-semibold mb-4 text-[#0c0c0c]">Contact Information</h2>
                   <div className="space-y-4">
                     <div className="flex items-start gap-3">
                       <div className="mt-1 bg-mint/10 p-2 rounded-full" aria-hidden="true">
@@ -235,8 +235,8 @@ export default function ContactPage() {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-medium text-white">Phone</h3>
-                        <p className="text-gray-400">
+                        <h3 className="font-medium text-[#0c0c0c]">Phone</h3>
+                        <p className="text-gray-600">
                           <a href="tel:0424639003" className="hover:text-mint transition-colors">0424 639 003</a>
                         </p>
                       </div>
@@ -250,8 +250,8 @@ export default function ContactPage() {
                         </svg>
                       </div>
                       <div>
-                        <h3 className="font-medium text-white">Email</h3>
-                        <p className="text-gray-400">
+                        <h3 className="font-medium text-[#0c0c0c]">Email</h3>
+                        <p className="text-gray-600">
                           <a href="mailto:info@suubee.com" className="hover:text-mint transition-colors">info@suubee.com</a>
                         </p>
                       </div>
@@ -260,12 +260,12 @@ export default function ContactPage() {
                 </section>
 
                 <section aria-labelledby="social-links-heading">
-                  <h2 id="social-links-heading" className="text-xl font-semibold mb-4">Connect With Us</h2>
+                  <h2 id="social-links-heading" className="text-xl font-semibold mb-4 text-[#0c0c0c]">Connect With Us</h2>
                   <nav aria-label="Social media links">
                     <div className="flex gap-4">
                       <a 
                         href="https://www.linkedin.com/company/waimak-asset-management" 
-                        className="text-gray-400 hover:text-mint bg-mint/10 p-3 rounded-full" 
+                        className="text-gray-600 hover:text-mint bg-mint/10 p-3 rounded-full" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         aria-label="Visit our LinkedIn profile"
@@ -278,7 +278,7 @@ export default function ContactPage() {
                       </a>
                       <a 
                         href="https://suubee.substack.com/" 
-                        className="text-gray-400 hover:text-mint bg-mint/10 p-3 rounded-full" 
+                        className="text-gray-600 hover:text-mint bg-mint/10 p-3 rounded-full" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         aria-label="Visit our Substack"

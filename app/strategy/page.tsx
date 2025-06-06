@@ -38,13 +38,13 @@ export default function StrategyPage() {
   return (
     <Layout>
       <main>
-        <div className="container mx-auto px-4 pt-32 pb-12">
+        <div className="container mx-auto px-4 pt-32 pb-12 bg-[#f5f5f5]">
           <div className="max-w-6xl mx-auto">
             <header>
-              <h1 className="text-4xl md:text-5xl font-bold mb-8 text-white leading-[1.1] pb-2">
+              <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#0c0c0c] leading-[1.1] pb-2">
                 Our Investment Strategy
               </h1>
-              <p className="text-gray-400 mb-12 text-lg">
+              <p className="text-gray-600 mb-12 text-lg">
                 At Suubee Portfolios, we utilize a quantitative, rules-based strategy to identify market-leading stocks and sectors. Our goal is to invest in these high-potential names, maintaining a diverse portfolio of market leaders. 
                 Unlike a "buy and hold" approach, we dynamically rotate the list as stocks gain or lose leadership status, ensuring we stay positioned for outsized gains while prioritizing risk control.
               </p>
@@ -55,7 +55,7 @@ export default function StrategyPage() {
               <section aria-labelledby="strategy-pillars-heading">
                 <div className="relative mb-10">
                   <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-3 h-12 bg-gradient-to-b from-mint to-mint/40 rounded-r-md" aria-hidden="true"></div>
-                  <h2 id="strategy-pillars-heading" className="text-2xl md:text-3xl font-bold">Key Strategy Pillars</h2>
+                  <h2 id="strategy-pillars-heading" className="text-2xl md:text-3xl font-bold text-[#0c0c0c]">Key Strategy Pillars</h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" role="list" aria-label="Strategy pillars">
@@ -142,7 +142,7 @@ export default function StrategyPage() {
                         key={index}
                         ref={pillarRefs[index]}
                         className={cn(
-                          "relative flex flex-col gap-6 bg-black/30 border border-mint/10 rounded-xl p-6 transition-all duration-300 hover:border-mint/30 group hover:shadow-[0_10px_20px_-15px_rgba(57,253,173,0.25)]",
+                          "relative flex flex-col gap-6 bg-white border border-gray-200 rounded-xl p-6 transition-all duration-300 hover:border-mint/30 group hover:shadow-[0_10px_20px_-15px_rgba(57,253,173,0.25)]",
                           {
                             "translate-y-[-8px] shadow-[0_10px_20px_-15px_rgba(57,253,173,0.25)]": applyHoverEffect,
                             "hover:translate-y-[-8px]": !isMobile
@@ -157,8 +157,8 @@ export default function StrategyPage() {
                           </div>
                         </div>
                         <div className="text-left">
-                          <h3 className="text-xl font-semibold mb-2">{pillar.title}</h3>
-                          <p className="text-gray-300">
+                          <h3 className="text-xl font-semibold mb-2 text-[#0c0c0c]">{pillar.title}</h3>
+                          <p className="text-gray-600">
                             {pillar.description}
                           </p>
                         </div>

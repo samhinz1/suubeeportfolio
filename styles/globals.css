@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom logo font */
+@font-face {
+  font-family: 'GT Haptik';
+  src: url('/fonts/GT Haptik/GTHaptikRegular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Custom classes */
+@layer components {
+  .logo-text {
+    font-family: 'GT Haptik', Arial, sans-serif;
+  }
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }

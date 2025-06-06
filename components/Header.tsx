@@ -10,13 +10,16 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#f5f5f5] border-b border-gray-200">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-3">
           <img
             src={`${basePath}/Asset 1.svg`}
             alt="Suubee Portfolios Logo"
-            className="w-10 h-10 object-contain"
+            className="w-6 h-6 object-contain"
           />
-          <span className="font-bold text-xl tracking-tight text-[#0c0c0c]">Suubee Portfolios</span>
+          <div className="logo-text text-2xl tracking-tight text-[#0c0c0c]">
+            <span className="font-bold">suubee</span>
+            <span className="font-regular"> portfolios</span>
+          </div>
         </Link>
 
         {/* Main Navigation

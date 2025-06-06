@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { ArrowRight, Plus } from "lucide-react"
+import { ArrowRight, Plus, UserPlus, Compass } from "lucide-react"
 import PortfolioCard from "@/components/portfolio-card"
 import { Button } from "@/components/ui/button"
 import DashboardPreview from "@/components/dashboard-preview"
@@ -54,12 +54,12 @@ export default function Home() {
   return (
     <Layout>
       <main>
-        {/* Hero Section with split design */}
+        {/* Hero Section with split design - stacked on mobile, side-by-side on larger screens */}
         <section 
-          className="flex flex-grow min-h-screen"
+          className="flex flex-col md:flex-row flex-grow min-h-screen"
           aria-label="Hero section"
         >
-          {/* Left side with colored background */}
+          {/* Content section - full width on mobile, half width on larger screens */}
           <div className="w-full md:w-1/2 bg-[#f5f5f5] text-[#0c0c0c] flex items-center">
             <div className="px-8 py-20 md:px-12 lg:px-20 max-w-2xl mx-auto">
               <motion.div 
@@ -68,7 +68,7 @@ export default function Home() {
                 animate="visible"
                 className="space-y-8"
               >
-                <motion.div className="flex items-center gap-3" variants={itemVariants}>
+                <motion.div className="hidden md:flex items-center gap-3" variants={itemVariants}>
                   <span className="text-xl md:text-2xl lg:text-3xl font-semibold">Suubee Portfolios</span>
                 </motion.div>
                 
@@ -82,14 +82,15 @@ export default function Home() {
                 
                 <motion.div className="flex flex-col sm:flex-row gap-4 items-start pt-6" variants={itemVariants}>
                   <Link href="/register" aria-label="Open an account">
-                    <Button className="group flex items-center gap-2 text-base px-6 py-6 bg-mint text-black hover:bg-mint/90 rounded-md transition-all">
+                    <Button className="group flex items-center gap-2 text-base px-6 py-6 bg-mint text-black hover:bg-mint/90 rounded-full transition-all">
+                      <UserPlus className="w-4 h-4" aria-hidden="true" />
                       Open an Account
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                     </Button>
                   </Link>
                   <Button
                     variant="outline"
-                    className="text-base px-6 py-6 bg-transparent border border-gray-400 text-[#0c0c0c] hover:bg-gray-100 rounded-md transition-all"
+                    className="group flex items-center gap-2 text-base px-6 py-6 bg-transparent border border-gray-400 text-[#0c0c0c] hover:text-mint hover:border-mint rounded-full transition-all"
                     onClick={() => {
                       document.getElementById('portfolios')?.scrollIntoView({
                         behavior: 'smooth'
@@ -97,7 +98,9 @@ export default function Home() {
                     }}
                     aria-label="Explore our portfolios"
                   >
+                    <Compass className="w-4 h-4" aria-hidden="true" />
                     Explore Portfolios
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </Button>
                 </motion.div>
                 
@@ -129,8 +132,8 @@ export default function Home() {
             </div>
           </div>
           
-          {/* Right side with full image */}
-          <div className="hidden md:block md:w-1/2 relative">
+          {/* Image section - shown below on mobile, to the side on larger screens */}
+          <div className="w-full h-80 md:h-auto md:w-1/2 relative">
             <Image
               src={`${basePath}/earth.avif`}
               alt="Earth visualization"

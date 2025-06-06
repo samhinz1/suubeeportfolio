@@ -53,13 +53,13 @@ export default function AboutPage() {
 
         {/* Team Section */}
         <section 
-          className="py-16 relative z-10 bg-black/40"
+          className="py-16 relative z-10 bg-[#f5f5f5]"
           aria-labelledby="team-heading"
         >
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mx-auto text-center mb-16">
-              <h1 id="team-heading" className="text-3xl font-bold mt-6 mb-6">Meet Our Team</h1>
-              <p className="text-gray-300">
+              <h1 id="team-heading" className="text-3xl font-bold mt-6 mb-6 text-[#0c0c0c]">Meet Our Team</h1>
+              <p className="text-gray-600">
                 With over 40+ years of combined experience in capital markets, the Suubee team has the experience to navigate all market environments.
                 Our goal is to build long-term wealth for our clients while developing relationships built off trust, integrity and transparency.
               </p>
@@ -71,7 +71,7 @@ export default function AboutPage() {
               aria-label="Team members"
             >
               {/* Team Member 1 */}
-              <article className="bg-black/30 backdrop-blur-sm border border-mint/20 rounded-xl overflow-hidden transition-transform hover:scale-105">
+              <article className="bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden transition-transform hover:scale-105">
                 <div className="aspect-[4/3] relative">
                   <Image 
                     src={`${basePath}/georgephoto.png`}
@@ -82,9 +82,9 @@ export default function AboutPage() {
                   />
                 </div>
                 <div className="p-4">
-                  <h2 className="text-xl font-bold mb-2">George Rolleston</h2>
+                  <h2 className="text-xl font-bold mb-2 text-[#0c0c0c]">George Rolleston</h2>
                   <p className="text-mint mb-2">Founder & Portfolio Manager</p>
-                  <p className="text-gray-300 mb-4">
+                  <p className="text-gray-600 mb-4">
                     Founded by George Rolleston (MAPPFIN) B Bus (Law), who has over 18 years of experience in financial markets. George sits on a number of boards in both the public and private markets and is the cornerstone investor in Suubee.
                   </p>
                   <div className="flex justify-end">
@@ -95,7 +95,7 @@ export default function AboutPage() {
               </article>
 
               {/* Team Member 2 */}
-              <article className="bg-black/30 backdrop-blur-sm border border-mint/20 rounded-xl overflow-hidden transition-transform hover:scale-105">
+              <article className="bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden transition-transform hover:scale-105">
                 <div className="aspect-[4/3] relative">
                   <Image 
                     src={`${basePath}/samphoto.png`}
@@ -106,9 +106,9 @@ export default function AboutPage() {
                   />
                 </div>
                 <div className="p-4">
-                  <h2 className="text-xl font-bold mb-2">Sam Hinz</h2>
+                  <h2 className="text-xl font-bold mb-2 text-[#0c0c0c]">Sam Hinz</h2>
                   <p className="text-mint mb-2">US Portfolio Manager</p>
-                  <p className="text-gray-300 mb-4">
+                  <p className="text-gray-600 mb-4">
                     Sam Hinz (B Bus, Economics & Finance) was a founding team member alongside George. Now based in London, Sam leads our US & European operations, enabling Suubee to provide comprehensive real-time service across global markets.
                   </p>
                   <div className="flex justify-end">
@@ -119,7 +119,7 @@ export default function AboutPage() {
               </article>
 
               {/* Team Member 3 */}
-              <article className="bg-black/30 backdrop-blur-sm border border-mint/20 rounded-xl overflow-hidden transition-transform hover:scale-105">
+              <article className="bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden transition-transform hover:scale-105">
                 <div className="aspect-[4/3] relative">
                   <Image 
                     src={`${basePath}/phil.png`}
@@ -130,9 +130,9 @@ export default function AboutPage() {
                   />
                 </div>
                 <div className="p-4">
-                  <h2 className="text-xl font-bold mb-2">Phil Hall</h2>
+                  <h2 className="text-xl font-bold mb-2 text-[#0c0c0c]">Phil Hall</h2>
                   <p className="text-mint mb-2">General Manager</p>
-                  <p className="text-gray-300 mb-4">
+                  <p className="text-gray-600 mb-4">
                     Phil Hall (B Bus, Economics & Finance) has over 15 years of experience in financial markets. Phil is responsible for the day-to-day operations of WAM including client services, marketing, and business development.
                   </p>
                   <div className="flex justify-end">

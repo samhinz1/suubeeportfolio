@@ -1,6 +1,13 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/JsonLd'
+import { Urbanist } from 'next/font/google'
+
+const urbanist = Urbanist({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-urbanist',
+})
 
 export const metadata: Metadata = {
   title: 'Suubee Portfolios',
@@ -48,12 +55,12 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={urbanist.variable}>
       <head>
         <OrganizationJsonLd />
         <WebSiteJsonLd />
       </head>
-      <body className="min-h-screen">
+      <body className="min-h-screen font-urbanist">
         <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-black">
           Skip to main content
         </a>
