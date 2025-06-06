@@ -17,7 +17,7 @@ export default function Header() {
             className="w-6 h-6 object-contain"
           />
           <div className="logo-text text-2xl tracking-tight text-[#0c0c0c]">
-            <span className="font-bold">suubee</span>
+            <span className="font-semibold">suubee</span>
             <span className="font-regular"> portfolios</span>
           </div>
         </Link>
