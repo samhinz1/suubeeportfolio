@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/JsonLd'
 import { PostHogProvider } from '@/components/PostHogProvider'
+import { PostHogTest } from '@/components/PostHogTest'
 import { Urbanist } from 'next/font/google'
 
 const urbanist = Urbanist({
@@ -69,6 +70,7 @@ export default function RootLayout({
           <div id="main-content" role="main">
             {children}
           </div>
+          <PostHogTest />
         </PostHogProvider>
       </body>
     </html>

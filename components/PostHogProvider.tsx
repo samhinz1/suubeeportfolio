@@ -5,18 +5,58 @@ import posthog from 'posthog-js'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, Suspense } from 'react'
 
-if (typeof window !== 'undefined') {
-  console.log('PostHog Key:', process.env.NEXT_PUBLIC_POSTHOG_KEY);
-  console.log('PostHog Host:', process.env.NEXT_PUBLIC_POSTHOG_HOST);
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
-    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
-    capture_pageview: false, // We'll handle this manually
-    capture_pageleave: true,
-    autocapture: true,
-    disable_session_recording: false,
-    enable_recording_console_log: true,
-  })
-  console.log('PostHog initialized:', posthog.__loaded);
+// Initialize PostHog only once
+let posthogInitialized = false
+
+if (typeof window !== 'undefined' && !posthogInitialized) {
+  const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY
+  const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com'
+  
+  // Log initialization attempt
+  console.log('Attempting PostHog initialization...');
+  console.log('Current domain:', window.location.origin);
+  
+  // Validate we're on an authorized domain
+  const authorizedDomains = [
+    'http://localhost:3000',
+    'https://suubeeportfolio.vercel.app',
+    'https://suubeeportfolios.com'
+  ]
+  
+  const isAuthorizedDomain = authorizedDomains.includes(window.location.origin)
+  console.log('Is authorized domain:', isAuthorizedDomain);
+  
+  if (posthogKey && isAuthorizedDomain) {
+    try {
+      posthog.init(posthogKey, {
+        api_host: posthogHost,
+        capture_pageview: false, // We'll handle this manually
+        capture_pageleave: true,
+        autocapture: true,
+        disable_session_recording: false,
+        enable_recording_console_log: true,
+        loaded: (posthog) => {
+          console.log('PostHog loaded successfully');
+          console.log('Distinct ID:', posthog.get_distinct_id());
+        },
+        bootstrap: {
+          distinctID: undefined,
+          isIdentifiedID: false,
+        }
+      })
+      posthogInitialized = true
+      console.log('PostHog initialization completed');
+    } catch (error) {
+      console.error('Failed to initialize PostHog:', error);
+    }
+  } else {
+    if (!posthogKey) {
+      console.warn('PostHog key not found in environment variables');
+    }
+    if (!isAuthorizedDomain) {
+      console.warn('Current domain is not authorized in PostHog settings');
+    }
+  }
 }
 
 function PostHogPageview() {
@@ -24,14 +64,22 @@ function PostHogPageview() {
   const searchParams = useSearchParams()
 
   useEffect(() => {
-    if (pathname) {
-      let url = window.origin + pathname
-      if (searchParams?.toString()) {
-        url = url + '?' + searchParams.toString()
+    if (pathname && typeof window !== 'undefined' && posthogInitialized) {
+      try {
+        let url = window.origin + pathname
+        if (searchParams?.toString()) {
+          url = url + '?' + searchParams.toString()
+        }
+        
+        console.log('Capturing pageview for:', url);
+        posthog.capture('$pageview', {
+          $current_url: url,
+          pathname: pathname,
+          search: searchParams?.toString() || '',
+        })
+      } catch (error) {
+        console.error('Failed to capture pageview:', error);
       }
-      posthog.capture('$pageview', {
-        $current_url: url,
-      })
     }
   }, [pathname, searchParams])
 
