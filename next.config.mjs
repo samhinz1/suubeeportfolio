@@ -7,12 +7,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    domains: ['suubeeportfolio.vercel.app'],
   },
-  output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '',
-  // Remove trailing slash for GitHub Pages
-  trailingSlash: false,
 }
 
 export default nextConfig
