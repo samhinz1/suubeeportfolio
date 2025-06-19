@@ -6,6 +6,8 @@ import { usePathname, useSearchParams } from 'next/navigation'
 import { useEffect, Suspense } from 'react'
 
 if (typeof window !== 'undefined') {
+  console.log('PostHog Key:', process.env.NEXT_PUBLIC_POSTHOG_KEY);
+  console.log('PostHog Host:', process.env.NEXT_PUBLIC_POSTHOG_HOST);
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
     api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://app.posthog.com',
     capture_pageview: false, // We'll handle this manually
@@ -14,6 +16,7 @@ if (typeof window !== 'undefined') {
     disable_session_recording: false,
     enable_recording_console_log: true,
   })
+  console.log('PostHog initialized:', posthog.__loaded);
 }
 
 function PostHogPageview() {
