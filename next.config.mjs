@@ -7,7 +7,16 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    domains: ['suubeeportfolio.vercel.app'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'suubeeportfolio.vercel.app',
+      },
+      {
+        protocol: 'https',
+        hostname: 'suubeeportfolios.com',
+      },
+    ],
   },
 }
 

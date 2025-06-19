@@ -28,9 +28,6 @@ const formSchema = z.object({
 });
 
 export default function ComingSoonPage() {
-  // Get base path for assets to work with GitHub Pages
-  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
-  
   // Form state
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -198,8 +195,8 @@ export default function ComingSoonPage() {
                   <p className="text-sm text-gray-500">Our app will be available soon on:</p>
                   <div className="flex flex-row gap-4" role="group" aria-label="Download our app">
                     <div className="w-32">
-                      <img 
-                        src={`${basePath}/appstore.svg`} 
+                      <Image 
+                        src="/appstore.svg" 
                         alt="Coming soon to App Store" 
                         width={128} 
                         height={42}
@@ -207,8 +204,8 @@ export default function ComingSoonPage() {
                       />
                     </div>
                     <div className="w-36">
-                      <img 
-                        src={`${basePath}/playstore.svg`} 
+                      <Image 
+                        src="/playstore.svg" 
                         alt="Coming soon to Google Play" 
                         width={144} 
                         height={42}
@@ -224,7 +221,7 @@ export default function ComingSoonPage() {
           {/* Right side with full image */}
           <div className="hidden md:block md:w-1/2 relative">
             <Image
-              src={`${basePath}/earth.avif`}
+              src="/earth.avif"
               alt="Earth visualization"
               fill
               className="object-cover"

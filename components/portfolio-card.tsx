@@ -29,9 +29,6 @@ export default function PortfolioCard({
   children,
   portfolioType = "us",
 }: PortfolioCardProps) {
-  // Get base path for assets to work with GitHub Pages
-  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
-  
   // Ref for intersection observer to detect when card is in view
   const cardRef = useRef(null);
   const isInView = useInView(cardRef, { once: false, amount: 0.3 });
@@ -120,7 +117,7 @@ export default function PortfolioCard({
   // Prepare image URL for structured data
   const imageUrl = iconSrc.startsWith('http') 
     ? iconSrc 
-    : `https://suubeeportfolios.com${basePath}${iconSrc}`;
+    : `https://suubeeportfolio.vercel.app${iconSrc}`;
 
   return (
     <>
@@ -182,7 +179,7 @@ export default function PortfolioCard({
                 )}
               >
                 <Image 
-                  src={iconSrc || `${basePath}/placeholder.svg`} 
+                  src={iconSrc || '/placeholder.svg'} 
                   alt={title} 
                   width={24} 
                   height={24} 
