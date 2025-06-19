@@ -22,7 +22,7 @@ export default function PortfolioOptions() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-8">
           <motion.div
             className="h-full"
             initial={{ opacity: 0, x: -30 }}

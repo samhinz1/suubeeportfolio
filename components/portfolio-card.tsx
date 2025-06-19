@@ -117,7 +117,7 @@ export default function PortfolioCard({
   // Prepare image URL for structured data
   const imageUrl = iconSrc.startsWith('http') 
     ? iconSrc 
-    : `https://suubeeportfolios.com${iconSrc}`;
+    : `https://suubeeportfolio.vercel.app${iconSrc}`;
 
   return (
     <>

@@ -67,7 +67,7 @@ export default function Home() {
                 className="space-y-8"
               >
                 <motion.div className="hidden md:flex items-center gap-3" variants={itemVariants}>
-                  <span className="text-xl md:text-2xl lg:text-3xl font-semibold">Suubee Portfolios HOME</span>
+                  <span className="text-xl md:text-2xl lg:text-3xl font-semibold">Suubee Portfolios</span>
                 </motion.div>
                 
                 <motion.h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight" variants={itemVariants}>
