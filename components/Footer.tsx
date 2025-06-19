@@ -1,19 +1,19 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
-  // Get base path for assets to work with GitHub Pages
-  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
-  
   return (
     <footer className="py-12 bg-black/95 border-t border-mint/10 relative z-10">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
             <Link href="/" className="flex items-center gap-2 mb-4">
-              <img
-                src={`${basePath}/Asset 1.svg`}
+              <Image
+                src="/Asset 1.svg"
                 alt="Suubee Portfolios Logo"
-                className="w-8 h-8 object-contain"
+                width={32}
+                height={32}
+                className="object-contain"
               />
               <span className="font-bold text-lg">Suubee Portfolios</span>
             </Link>

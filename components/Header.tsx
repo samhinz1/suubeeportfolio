@@ -1,20 +1,21 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import Image from "next/image";
 
 export default function Header() {
-  // Get base path for assets to work with GitHub Pages
-  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#f5f5f5] border-b border-gray-200">
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-3">
-          <img
-            src={`${basePath}/Asset 1.svg`}
+          <Image
+            src="/Asset 1.svg"
             alt="Suubee Portfolios Logo"
-            className="w-6 h-6 object-contain"
+            width={24}
+            height={24}
+            className="object-contain"
           />
           <div className="logo-text text-2xl tracking-tight text-[#0c0c0c]">
             <span className="font-semibold">suubee</span>
