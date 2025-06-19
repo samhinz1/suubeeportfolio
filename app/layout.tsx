@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     siteName: 'Suubee Portfolios',
     images: [
       {
-        url: process.env.NODE_ENV === 'production' ? '/suubeeportfolio/og-image.jpg' : '/og-image.jpg',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
         alt: 'Suubee Portfolios',
@@ -36,16 +36,16 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Suubee Portfolios | Invest in Leadership',
     description: 'Expertly managed investment portfolios designed to provide exposure to leading stocks and themes, locally and abroad.',
-    images: [process.env.NODE_ENV === 'production' ? '/suubeeportfolio/twitter-image.jpg' : '/twitter-image.jpg'],
+    images: ['/twitter-image.jpg'],
     creator: '@suubeeportfolios',
   },
   verification: {
     google: 'google-site-verification-code',
   },
   icons: {
-    icon: process.env.NODE_ENV === 'production' ? '/suubeeportfolio/Asset 1.svg' : '/Asset 1.svg',
-    apple: process.env.NODE_ENV === 'production' ? '/suubeeportfolio/Asset 1.svg' : '/Asset 1.svg',
-    shortcut: process.env.NODE_ENV === 'production' ? '/suubeeportfolio/Asset 1.svg' : '/Asset 1.svg',
+    icon: '/Asset 1.svg',
+    apple: '/Asset 1.svg',
+    shortcut: '/Asset 1.svg',
   }
 }
 

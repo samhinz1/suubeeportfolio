@@ -39,14 +39,11 @@ export default function DashboardPreview({
   const [isHovered, setIsHovered] = useState(false)
   const [portfolioData, setPortfolioData] = useState<PortfolioData[]>([])
   
-  // Get base path for assets to work with GitHub Pages
-  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
-
   useEffect(() => {
     // Load and parse CSV data based on selected portfolio
     const dataFile = selectedPortfolio === "us" 
-      ? `${basePath}/data/suubee performance data.csv`
-      : `${basePath}/data/AUleaders.csv` // Now using the AU leaders data file
+      ? "/data/suubee performance data.csv"
+      : "/data/AUleaders.csv" // Now using the AU leaders data file
     
     fetch(dataFile)
       .then(response => response.text())
@@ -83,7 +80,7 @@ export default function DashboardPreview({
         console.error("Error loading portfolio data:", error);
         setPortfolioData([]);
       })
-  }, [selectedPortfolio, basePath]) // Re-fetch when selected portfolio changes
+  }, [selectedPortfolio]) // Re-fetch when selected portfolio changes
 
   useEffect(() => {
     controls.start({
@@ -284,7 +281,7 @@ export default function DashboardPreview({
                 onClick={() => onPortfolioChange && onPortfolioChange("us")}
               >
                 <Image 
-                  src={`${basePath}/usflag.png`} 
+                  src="/usflag.png" 
                   alt="United States Flag - US Leaders Portfolio" 
                   width={16} 
                   height={12}
@@ -301,7 +298,7 @@ export default function DashboardPreview({
                 onClick={() => onPortfolioChange && onPortfolioChange("au")}
               >
                 <Image 
-                  src={`${basePath}/australiaflag.svg`} 
+                  src="/australiaflag.svg" 
                   alt="AU" 
                   width={16} 
                   height={12}

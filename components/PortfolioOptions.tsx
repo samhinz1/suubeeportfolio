@@ -2,8 +2,6 @@ import { motion } from "framer-motion"
 import PortfolioCard from "@/components/portfolio-card"
 
 export default function PortfolioOptions() {
-  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
-
   return (
     <section 
       id="portfolios" 
@@ -24,7 +22,7 @@ export default function PortfolioOptions() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-10 h-full" role="list" aria-label="Portfolio options">
+        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <motion.div
             className="h-full"
             initial={{ opacity: 0, x: -30 }}
@@ -36,7 +34,7 @@ export default function PortfolioOptions() {
               title="US Leaders Portfolio"
               subtitle="Portfolio One"
               description="A strategic portfolio focused on leading US companies, offering exposure to innovative and high-growth sectors of the American market."
-              iconSrc={`${basePath}/usflag.png`}
+              iconSrc="/usflag.png"
               color="orange"
               portfolioType="us"
             >
@@ -86,7 +84,7 @@ export default function PortfolioOptions() {
               title="AU Leaders Portfolio"
               subtitle="Portfolio Two"
               description="A carefully curated portfolio of top Australian companies, providing strong exposure to the local market with a focus on stability and growth."
-              iconSrc={`${basePath}/australiaflag.svg`}
+              iconSrc="/australiaflag.svg"
               color="orange"
               portfolioType="au"
             >

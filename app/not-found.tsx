@@ -7,9 +7,6 @@ import Layout from "@/components/Layout"
 import { motion } from "framer-motion"
 
 export default function NotFound() {
-  // Get base path for assets to work with GitHub Pages
-  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
-  
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },

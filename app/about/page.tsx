@@ -10,28 +10,25 @@ import CTASection from "@/components/CTASection"
 import { PersonJsonLd } from "@/components/JsonLd"
 
 export default function AboutPage() {
-  // Get base path for assets to work with GitHub Pages
-  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
-  
   // Team members data for structured data
   const teamMembers = [
     {
       name: "George Rolleston",
       jobTitle: "Founder & Portfolio Manager",
       description: "Founded by George Rolleston (MAPPFIN) B Bus (Law), who has over 18 years of experience in financial markets. George sits on a number of boards in both the public and private markets and is the cornerstone investor in Suubee.",
-      image: `https://suubeeportfolios.com${basePath}/georgephoto.png`
+      image: "https://suubeeportfolios.com/georgephoto.png"
     },
     {
       name: "Sam Hinz",
       jobTitle: "US Portfolio Manager",
       description: "Sam Hinz (B Bus, Economics & Finance) was a founding team member alongside George. Now based in London, Sam leads our US & European operations, enabling Suubee to provide comprehensive real-time service across global markets.",
-      image: `https://suubeeportfolios.com${basePath}/samphoto.png`
+      image: "https://suubeeportfolios.com/samphoto.png"
     },
     {
       name: "Phil Hall",
       jobTitle: "General Manager",
       description: "Phil Hall (B Bus, Economics & Finance) has over 15 years of experience in financial markets. Phil is responsible for the day-to-day operations of WAM including client services, marketing, and business development.",
-      image: `https://suubeeportfolios.com${basePath}/phil.png`
+      image: "https://suubeeportfolios.com/phil.png"
     }
   ];
   
@@ -74,7 +71,7 @@ export default function AboutPage() {
               <article className="bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden transition-transform hover:scale-105">
                 <div className="aspect-[4/3] relative">
                   <Image 
-                    src={`${basePath}/georgephoto.png`}
+                    src="/georgephoto.png"
                     alt="George Rolleston - Founder & Portfolio Manager at Suubee Portfolios" 
                     fill 
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -98,7 +95,7 @@ export default function AboutPage() {
               <article className="bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden transition-transform hover:scale-105">
                 <div className="aspect-[4/3] relative">
                   <Image 
-                    src={`${basePath}/samphoto.png`}
+                    src="/samphoto.png"
                     alt="Sam Hinz - US Portfolio Manager at Suubee Portfolios" 
                     fill 
                     sizes="(max-width: 768px) 100vw, 33vw"
@@ -122,7 +119,7 @@ export default function AboutPage() {
               <article className="bg-white shadow-md border border-gray-200 rounded-xl overflow-hidden transition-transform hover:scale-105">
                 <div className="aspect-[4/3] relative">
                   <Image 
-                    src={`${basePath}/phil.png`}
+                    src="/phil.png"
                     alt="Phil Hall - General Manager at Suubee Portfolios" 
                     fill 
                     sizes="(max-width: 768px) 100vw, 33vw"

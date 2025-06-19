@@ -23,8 +23,6 @@ const LoadingFallback = () => (
 )
 
 export default function Home() {
-  // Get base path for assets to work with GitHub Pages
-  const basePath = process.env.NODE_ENV === 'production' ? '/suubeeportfolio' : '';
   const [selectedPortfolio, setSelectedPortfolio] = useState<string>("us")
   
   // Animation variants
@@ -109,8 +107,8 @@ export default function Home() {
                   <p className="text-sm text-gray-500">Our app is available on:</p>
                   <div className="flex flex-row gap-4" role="group" aria-label="Download our app">
                     <a href="https://apps.apple.com/au/app/openwealth-investor-app/id1584958935" className="w-32 transition-opacity hover:opacity-80" aria-label="Download on the App Store">
-                      <img 
-                        src={`${basePath}/appstore.svg`} 
+                      <Image 
+                        src="/appstore.svg" 
                         alt="Download Suubee Portfolios on the App Store" 
                         width={128} 
                         height={42}
@@ -118,8 +116,8 @@ export default function Home() {
                       />
                     </a>
                     <a href="https://play.google.com/store/apps/details?id=com.openwealth.oi.app&hl=en_AU" className="w-36 transition-opacity hover:opacity-80" aria-label="Get it on Google Play">
-                      <img 
-                        src={`${basePath}/playstore.svg`} 
+                      <Image 
+                        src="/playstore.svg" 
                         alt="Get Suubee Portfolios on Google Play" 
                         width={144} 
                         height={42}
@@ -135,7 +133,7 @@ export default function Home() {
           {/* Image section - shown below on mobile, to the side on larger screens */}
           <div className="w-full h-80 md:h-auto md:w-1/2 relative">
             <Image
-              src={`${basePath}/earth.avif`}
+              src="/earth.avif"
               alt="Earth visualization"
               fill
               className="object-cover"
