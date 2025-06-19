@@ -33,7 +33,7 @@ export default function PortfolioOptions() {
             <PortfolioCard
               title="US Leaders Portfolio"
               subtitle="Portfolio One"
-              description="A strategic portfolio focused on leading US companies, offering exposure to innovative and high-growth sectors of the American market."
+              description="Unlock the potential of America's most dynamic stocks with Suubee's expertly curated portfolios, designed to capitalize on innovative, high-growth sectors. Suubee active management strategy blends technical and fundamental analysis to target leading US companies driving transformation in core growth sectors."
               iconSrc="/usflag.png"
               color="orange"
               portfolioType="us"

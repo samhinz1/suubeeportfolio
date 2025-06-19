@@ -46,7 +46,7 @@ export default function StrategyPage() {
               </h1>
               <p className="text-gray-600 mb-12 text-lg">
                 At Suubee Portfolios, we utilize a quantitative, rules-based strategy to identify market-leading stocks and sectors. Our goal is to invest in these high-potential names, maintaining a diverse portfolio of market leaders. 
-                Unlike a "buy and hold" approach, we dynamically rotate the list as stocks gain or lose leadership status, ensuring we stay positioned for outsized gains while prioritizing risk control.
+                Unlike a "buy and hold" approach, we dynamically rotate the list as stocks gain or lose leadership status, ensuring we stay positioned for outperformance while prioritizing risk control.
               </p>
             </header>
 
