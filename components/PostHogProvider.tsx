@@ -12,10 +12,6 @@ if (typeof window !== 'undefined' && !posthogInitialized) {
   const posthogKey = process.env.NEXT_PUBLIC_POSTHOG_KEY
   const posthogHost = process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com'
   
-  // Log initialization attempt
-  console.log('Attempting PostHog initialization...');
-  console.log('Current domain:', window.location.origin);
-  
   // Validate we're on an authorized domain
   const authorizedDomains = [
     'http://localhost:3000',
@@ -24,7 +20,6 @@ if (typeof window !== 'undefined' && !posthogInitialized) {
   ]
   
   const isAuthorizedDomain = authorizedDomains.includes(window.location.origin)
-  console.log('Is authorized domain:', isAuthorizedDomain);
   
   if (posthogKey && isAuthorizedDomain) {
     try {
@@ -36,8 +31,7 @@ if (typeof window !== 'undefined' && !posthogInitialized) {
         disable_session_recording: false,
         enable_recording_console_log: true,
         loaded: (posthog) => {
-          console.log('PostHog loaded successfully');
-          console.log('Distinct ID:', posthog.get_distinct_id());
+          // PostHog loaded successfully
         },
         bootstrap: {
           distinctID: undefined,
@@ -45,7 +39,6 @@ if (typeof window !== 'undefined' && !posthogInitialized) {
         }
       })
       posthogInitialized = true
-      console.log('PostHog initialization completed');
     } catch (error) {
       console.error('Failed to initialize PostHog:', error);
     }
@@ -71,7 +64,6 @@ function PostHogPageview() {
           url = url + '?' + searchParams.toString()
         }
         
-        console.log('Capturing pageview for:', url);
         posthog.capture('$pageview', {
           $current_url: url,
           pathname: pathname,
