@@ -16,7 +16,8 @@ if (typeof window !== 'undefined' && !posthogInitialized) {
   const authorizedDomains = [
     'http://localhost:3000',
     'https://suubeeportfolio.vercel.app',
-    'https://suubeeportfolios.com'
+    'https://suubeeportfolios.com',
+    'https://www.suubeeportfolios.com'
   ]
   
   const isAuthorizedDomain = authorizedDomains.includes(window.location.origin)
