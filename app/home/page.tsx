@@ -23,7 +23,7 @@ const LoadingFallback = () => (
 )
 
 export default function Home() {
-  const [selectedPortfolio, setSelectedPortfolio] = useState<string>("us")
+  const [selectedPortfolio, setSelectedPortfolio] = useState<string>("au")
   
   // Animation variants
   const containerVariants = {

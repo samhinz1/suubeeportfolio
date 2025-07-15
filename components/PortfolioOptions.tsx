@@ -22,7 +22,7 @@ export default function PortfolioOptions() {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           <motion.div
             className="h-full"
             initial={{ opacity: 0, x: -30 }}
@@ -31,12 +31,12 @@ export default function PortfolioOptions() {
             transition={{ duration: 0.6 }}
           >
             <PortfolioCard
-              title="US Leaders Portfolio"
+              title="AU Leaders Portfolio"
               subtitle="Portfolio One"
-              description="Unlock the potential of America's most dynamic stocks with Suubee's expertly curated portfolios, designed to capitalize on innovative, high-growth sectors. Suubee active management strategy blends technical and fundamental analysis to target leading US companies driving transformation in core growth sectors."
-              iconSrc="/usflag.png"
+              description="A carefully curated portfolio of top Australian companies, providing strong exposure to the local market with a focus on stability and growth."
+              iconSrc="/australiaflag.svg"
               color="orange"
-              portfolioType="us"
+              portfolioType="au"
             >
               <div className="space-y-3 my-4">
                 <motion.div 
@@ -45,11 +45,9 @@ export default function PortfolioOptions() {
                   transition={{ staggerChildren: 0.1, delayChildren: 0.3 }}
                 >
                   {[
-                    "Access to some of the world's largest, highest-quality companies",
-                    "Deep capital markets featuring diverse multinational corporations",
-                    "Curated portfolio of market-leading companies across sectors",
-                    "Dedicated US portfolio manager with specialized expertise",
-                    "Direct US equity exposure (no repackaged ETFs)",
+                    "Get access to established and emerging emerging companies",
+                    "Active portfolio management to ensure optimal asset allocations",
+                    "Diverse portfolio across size, sector and geography",
                     "Straightforward 3.5% management fee structure"
                   ].map((feature, index) => (
                     <motion.div 
@@ -81,12 +79,13 @@ export default function PortfolioOptions() {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <PortfolioCard
-              title="AU Leaders Portfolio"
+              title="US Leaders Portfolio"
               subtitle="Portfolio Two"
-              description="A carefully curated portfolio of top Australian companies, providing strong exposure to the local market with a focus on stability and growth."
-              iconSrc="/australiaflag.svg"
+              description="Unlock the potential of America's most dynamic stocks with Suubee's expertly curated portfolios, designed to capitalize on innovative, high-growth sectors. Suubee active management strategy blends technical and fundamental analysis to target leading US companies driving transformation in core growth sectors."
+              iconSrc="/usflag.png"
               color="orange"
-              portfolioType="au"
+              portfolioType="us"
+              comingSoon={true}
             >
               <div className="space-y-3 my-4">
                 <motion.div 
@@ -95,9 +94,11 @@ export default function PortfolioOptions() {
                   transition={{ staggerChildren: 0.1, delayChildren: 0.4 }}
                 >
                   {[
-                    "Get access to established and emerging emerging companies",
-                    "Active portfolio management to ensure optimal asset allocations",
-                    "Diverse portfolio across size, sector and geography",
+                    "Access to some of the world's largest, highest-quality companies",
+                    "Deep capital markets featuring diverse multinational corporations",
+                    "Curated portfolio of market-leading companies across sectors",
+                    "Dedicated US portfolio manager with specialized expertise",
+                    "Direct US equity exposure (no repackaged ETFs)",
                     "Straightforward 3.5% management fee structure"
                   ].map((feature, index) => (
                     <motion.div 

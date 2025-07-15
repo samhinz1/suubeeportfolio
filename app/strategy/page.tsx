@@ -149,15 +149,15 @@ export default function StrategyPage() {
                           }
                         )}
                       >
-                        <div className="flex justify-start">
-                          <div className="w-16 h-16 flex items-center justify-center bg-mint/10 rounded-full" aria-hidden="true">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-mint mx-auto my-auto">
-                              {pillar.icon}
-                            </svg>
-                          </div>
-                        </div>
                         <div className="text-left">
-                          <h3 className="text-xl font-semibold mb-2 text-[#0c0c0c]">{pillar.title}</h3>
+                          <div className="flex items-center gap-3 mb-2">
+                            <div className="w-8 h-8 flex items-center justify-center" aria-hidden="true">
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-black">
+                                {pillar.icon}
+                              </svg>
+                            </div>
+                            <h3 className="text-xl font-semibold text-[#0c0c0c]">{pillar.title}</h3>
+                          </div>
                           <p className="text-gray-600">
                             {pillar.description}
                           </p>

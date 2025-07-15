@@ -7,15 +7,18 @@ export default function Footer() {
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
+            <Link href="/" className="flex items-center gap-3 mb-4">
               <Image
                 src="/Asset 1.svg"
                 alt="Suubee Portfolios Logo"
-                width={32}
-                height={32}
+                width={28}
+                height={28}
                 className="object-contain"
               />
-              <span className="font-bold text-lg">Suubee Portfolios</span>
+              <div className="logo-text text-xl tracking-tight text-gray-400">
+                <span className="font-semibold">suubee</span>
+                <span className="font-regular"> portfolios</span>
+              </div>
             </Link>
             <p className="text-gray-400 text-sm mb-4 mr-12">
               Expertly managed investment portfolios designed to provide exposure to leading stocks and themes, locally and abroad.
@@ -69,11 +72,7 @@ export default function Footer() {
           <div>
             <h3 className="font-semibold mb-4">Legal</h3>
             <ul className="space-y-2">
-              <li>
-                <Link href="/" className="text-gray-400 hover:text-mint text-sm">
-                  Financial Services Guide
-                </Link>
-              </li>
+
               <li>
                 <Link href="/" className="text-gray-400 hover:text-mint text-sm">
                   Terms of Service

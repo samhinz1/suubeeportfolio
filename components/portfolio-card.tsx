@@ -17,6 +17,7 @@ interface PortfolioCardProps {
   color?: "mint" | "orange"
   children?: ReactNode
   portfolioType?: "us" | "au"
+  comingSoon?: boolean
 }
 
 export default function PortfolioCard({
@@ -28,6 +29,7 @@ export default function PortfolioCard({
   color = "mint",
   children,
   portfolioType = "us",
+  comingSoon = false,
 }: PortfolioCardProps) {
   // Ref for intersection observer to detect when card is in view
   const cardRef = useRef(null);
@@ -149,6 +151,19 @@ export default function PortfolioCard({
           </div>
         )}
 
+        {/* Coming Soon Badge */}
+        {comingSoon && (
+          <div
+            className={cn(
+              "absolute -top-3 -right-3 bg-mint text-black text-xs font-semibold px-3 py-1 rounded-full shadow-lg z-10",
+              "opacity-0 transition-opacity duration-300 transform scale-90",
+              "group-hover:opacity-100 group-hover:scale-100"
+            )}
+          >
+            Coming Soon
+          </div>
+        )}
+
         <div className="mb-6 flex justify-between items-start">
           <div>
             <p className={`text-sm ${currentColor.text} mb-2`}>{subtitle}</p>
@@ -201,7 +216,7 @@ export default function PortfolioCard({
               asChild
               variant={featured ? "default" : "outline"}
               className={cn(
-                "flex-1 justify-between group/btn rounded-md",
+                "flex-1 justify-between group/btn rounded-md relative z-20",
                 featured
                   ? `bg-mint text-black hover:bg-mint/90`
                   : `bg-transparent border-gray-500 text-white hover:bg-gray-800`,
@@ -215,7 +230,7 @@ export default function PortfolioCard({
             <Button
               variant="outline"
               className={cn(
-                "flex-1 justify-between group/btn rounded-md",
+                "flex-1 justify-between group/btn rounded-md relative z-20",
                 `bg-transparent border-gray-500 text-white hover:bg-gray-800`,
               )}
               onClick={scrollToPerformance}

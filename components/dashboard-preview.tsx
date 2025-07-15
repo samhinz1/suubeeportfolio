@@ -274,23 +274,6 @@ export default function DashboardPreview({
             <div className="inline-flex items-stretch bg-[#0c0c0c]/80 border border-mint/30 rounded-full overflow-hidden p-1.5">
               <button
                 className={`px-4 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
-                  selectedPortfolio === "us" 
-                    ? "bg-mint text-black font-medium" 
-                    : "text-gray-400 hover:bg-[#0c0c0c]/90"
-                }`}
-                onClick={() => onPortfolioChange && onPortfolioChange("us")}
-              >
-                <Image 
-                  src="/usflag.png" 
-                  alt="United States Flag - US Leaders Portfolio" 
-                  width={16} 
-                  height={12}
-                  className="rounded-sm"
-                />
-                <span>US Leaders</span>
-              </button>
-              <button
-                className={`px-4 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
                   selectedPortfolio === "au" 
                     ? "bg-mint text-black font-medium" 
                     : "text-gray-400 hover:bg-[#0c0c0c]/90"
@@ -305,6 +288,23 @@ export default function DashboardPreview({
                   className="rounded-sm"
                 />
                 <span>AU Leaders</span>
+              </button>
+              <button
+                className={`px-4 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
+                  selectedPortfolio === "us" 
+                    ? "bg-mint text-black font-medium" 
+                    : "text-gray-400 hover:bg-[#0c0c0c]/90"
+                }`}
+                onClick={() => onPortfolioChange && onPortfolioChange("us")}
+              >
+                <Image 
+                  src="/usflag.png" 
+                  alt="United States Flag - US Leaders Portfolio" 
+                  width={16} 
+                  height={12}
+                  className="rounded-sm"
+                />
+                <span>US Leaders</span>
               </button>
             </div>
           </div>

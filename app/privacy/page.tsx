@@ -9,7 +9,7 @@ export default function PrivacyPage() {
         <div className="container mx-auto px-4 pt-32 pb-24">
           <div className="max-w-4xl mx-auto">
             <header>
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-mint to-mint/80 text-transparent bg-clip-text">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">
                 Privacy Policy
               </h1>
               <p className="text-gray-400 mb-12 text-lg max-w-2xl">
@@ -209,15 +209,15 @@ export default function PrivacyPage() {
                 <address>
                   Data Protection Officer<br />
                   Suubee Pty Ltd<br />
-                  PO Box 278, Prahran 3181, Melbourne, Victoria<br />
-                  <a href="mailto:info@suubee.com" className="text-mint hover:text-mint/80">info@suubee.com</a>
+                  12 Craig Avon Lane, Merricks North, 3926, VIC Australia<br />
+                  <a href="mailto:info@suubee.com" >info@suubee.com</a>
                 </address>
                 <p>You may contact the Privacy Officer by email in the first instance.</p>
               </section>
               
               <section aria-labelledby="additions-heading">
                 <h2 id="additions-heading">ADDITIONS TO THIS POLICY</h2>
-                <p>If we decide to change this Privacy Policy, we will post the changes on our webpage at <a href="http://www.suubee.com/privacy" className="text-mint hover:text-mint/80">http://www.suubee.com/privacy</a>. Please refer back to this Privacy Policy to review any amendments.</p>
+                <p>If we decide to change this Privacy Policy, we will post the changes on our webpage at <a href="http://www.suubeeportfolios.com/privacy" >http://www.suubeeportfolios.com/privacy</a>. Please refer back to this Privacy Policy to review any amendments.</p>
                 <p>We may do things in addition to what is stated in this Privacy Policy to comply with the Australian Privacy Principles and the GDPR, and nothing in this Privacy Policy shall deem us to have not complied with the Australian Privacy Principles and the GDPR.</p>
               </section>
             </article>

@@ -80,7 +80,8 @@ export default function AboutPage() {
                 </div>
                 <div className="p-4">
                   <h2 className="text-xl font-bold mb-2 text-[#0c0c0c]">George Rolleston</h2>
-                  <p className="text-mint mb-2">Founder & Portfolio Manager</p>
+                  <p className="text-black mb-4">Founder & Portfolio Manager</p>
+                  <hr className="border-gray-200 mb-4" />
                   <p className="text-gray-600 mb-4">
                     Founded by George Rolleston (MAPPFIN) B Bus (Law), who has over 18 years of experience in financial markets. George sits on a number of boards in both the public and private markets and is the cornerstone investor in Suubee.
                   </p>
@@ -104,7 +105,8 @@ export default function AboutPage() {
                 </div>
                 <div className="p-4">
                   <h2 className="text-xl font-bold mb-2 text-[#0c0c0c]">Sam Hinz</h2>
-                  <p className="text-mint mb-2">US Portfolio Manager</p>
+                  <p className="text-black mb-4">US Portfolio Manager</p>
+                  <hr className="border-gray-200 mb-4" />
                   <p className="text-gray-600 mb-4">
                     Sam Hinz (B Bus, Economics & Finance) was a founding team member alongside George. Now based in London, Sam leads our US & European operations, enabling Suubee to provide comprehensive real-time service across global markets.
                   </p>
@@ -128,7 +130,8 @@ export default function AboutPage() {
                 </div>
                 <div className="p-4">
                   <h2 className="text-xl font-bold mb-2 text-[#0c0c0c]">Phil Hall</h2>
-                  <p className="text-mint mb-2">General Manager</p>
+                  <p className="text-black mb-4">General Manager</p>
+                  <hr className="border-gray-200 mb-4" />
                   <p className="text-gray-600 mb-4">
                     Phil Hall (B Bus, Economics & Finance) has over 15 years of experience in financial markets. Phil is responsible for the day-to-day operations of WAM including client services, marketing, and business development.
                   </p>
