@@ -85,7 +85,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/" className="text-gray-400 hover:text-mint text-sm">
-                  Disclaimers
+                  Disclaimer
                 </Link>
               </li>
             </ul>

@@ -9,6 +9,7 @@ import Image from "next/image"
 import { useState, Suspense, lazy } from "react"
 import Layout from "@/components/Layout"
 import { motion } from "framer-motion"
+import CallbackChatBubble from "@/components/CallbackChatBubble"
 
 // Lazy load below-the-fold components
 const PortfolioOptions = lazy(() => import("@/components/PortfolioOptions"))
@@ -157,6 +158,9 @@ export default function Home() {
           <CTASection />
         </Suspense>
       </main>
+      
+      {/* Callback Chat Bubble */}
+      <CallbackChatBubble />
     </Layout>
   )
 }
