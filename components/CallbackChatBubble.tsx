@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
+import { Toaster } from "@/components/ui/toaster"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
@@ -31,6 +32,7 @@ type FormData = z.infer<typeof formSchema>
 export default function CallbackChatBubble() {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [isSuccess, setIsSuccess] = useState(false)
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -70,8 +72,14 @@ export default function CallbackChatBubble() {
           description: "A portfolio manager will call you back within 24 hours.",
         })
         
+        setIsSuccess(true)
         form.reset()
-        setIsOpen(false)
+        
+        // Close the form after a short delay to show success message
+        setTimeout(() => {
+          setIsOpen(false)
+          setIsSuccess(false)
+        }, 2000)
       } else {
         throw new Error(result.message || "Something went wrong")
       }
@@ -147,7 +155,7 @@ export default function CallbackChatBubble() {
               </div>
 
               {/* Form */}
-              <div className="p-4">
+              <div className="p-4 bg-gray-50">
                 <p className="text-sm text-gray-600 mb-4">
                   Fill out the form below and a portfolio manager will call you back within 24 hours.
                 </p>
@@ -164,7 +172,7 @@ export default function CallbackChatBubble() {
                             <Input 
                               placeholder="Enter your name" 
                               {...field} 
-                              className="h-9 text-sm"
+                              className="h-9 text-sm bg-white border-gray-300"
                             />
                           </FormControl>
                           <FormMessage />
@@ -183,7 +191,7 @@ export default function CallbackChatBubble() {
                               type="email"
                               placeholder="your@email.com" 
                               {...field} 
-                              className="h-9 text-sm"
+                              className="h-9 text-sm bg-white border-gray-300"
                             />
                           </FormControl>
                           <FormMessage />
@@ -202,7 +210,7 @@ export default function CallbackChatBubble() {
                               type="tel"
                               placeholder="Enter your phone number" 
                               {...field} 
-                              className="h-9 text-sm"
+                              className="h-9 text-sm bg-white border-gray-300"
                             />
                           </FormControl>
                           <FormMessage />
@@ -227,6 +235,22 @@ export default function CallbackChatBubble() {
                         </div>
                       )}
                     </Button>
+                    
+                    {/* Success Message */}
+                    {isSuccess && (
+                      <div 
+                        className="mt-4 p-3 bg-green-500/20 border border-green-500/50 rounded-md"
+                        role="alert"
+                        aria-live="polite"
+                      >
+                        <p className="text-green-700 text-sm flex items-center">
+                          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                          </svg>
+                          Your callback request has been submitted successfully! A portfolio manager will call you within 24 hours.
+                        </p>
+                      </div>
+                    )}
                   </form>
                 </Form>
               </div>
@@ -234,6 +258,9 @@ export default function CallbackChatBubble() {
           )}
         </AnimatePresence>
       </div>
+      
+      {/* Toast Notifications */}
+      <Toaster />
     </>
   )
 } 
