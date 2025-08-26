@@ -3,11 +3,11 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="py-12 bg-black/95 border-t border-mint/10 relative z-10">
+    <footer className="py-8 md:py-12 bg-black/95 border-t border-mint/10 relative z-10">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-3 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="md:col-span-1 pb-6 md:pb-0 border-b md:border-b-0 border-gray-800/30">
+            <Link href="/" className="flex items-center gap-3 mb-3 md:mb-4">
               <Image
                 src="/Asset 1.svg"
                 alt="Suubee Portfolios Logo"
@@ -20,11 +20,11 @@ export default function Footer() {
                 <span className="font-regular"> portfolios</span>
               </div>
             </Link>
-            <p className="text-gray-400 text-sm mb-4 mr-12">
+            <p className="text-gray-400 text-sm mb-3 md:mb-4 mr-0 md:mr-12">
               Expertly managed investment portfolios designed to provide exposure to leading stocks and themes, locally and abroad.
             </p>
-            <p className="text-gray-400 text-sm mb-1 flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-4">
+            <p className="text-gray-400 text-sm mb-2 md:mb-1 flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 md:mr-4">
                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
               </svg>
               <Link href="tel:0424639003" className="hover:text-mint">
@@ -32,7 +32,7 @@ export default function Footer() {
               </Link>
             </p>
             <p className="text-gray-400 text-sm flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-4">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-2 md:mr-4">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
@@ -42,9 +42,9 @@ export default function Footer() {
             </p>
           </div>
 
-          <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+          <div className="pb-6 md:pb-0 border-b md:border-b-0 border-gray-800/30">
+            <h3 className="font-semibold mb-3 md:mb-4 text-gray-300">Quick Links</h3>
+            <ul className="space-y-1.5 md:space-y-2">
               <li>
                 <Link href="/" className="text-gray-400 hover:text-mint text-sm">
                   Home
@@ -69,9 +69,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div>
-            <h3 className="font-semibold mb-4">Legal</h3>
-            <ul className="space-y-2">
+          <div className="pb-6 md:pb-0 border-b md:border-b-0 border-gray-800/30">
+            <h3 className="font-semibold mb-3 md:mb-4 text-gray-300">Legal</h3>
+            <ul className="space-y-1.5 md:space-y-2">
 
               <li>
                 <Link href="/" className="text-gray-400 hover:text-mint text-sm">
@@ -92,8 +92,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Connect With Us</h3>
-            <div className="flex gap-4 mb-6">
+            <h3 className="font-semibold mb-3 md:mb-4 text-gray-300">Connect With Us</h3>
+            <div className="flex gap-4 mb-4 md:mb-6">
               <Link href="https://www.linkedin.com/company/waimak-asset-management" className="text-gray-400 hover:text-mint" target="_blank" rel="noopener noreferrer">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
@@ -107,7 +107,7 @@ export default function Footer() {
                 </svg>
               </Link>
             </div>
-            <p className="text-xs text-gray-500 mt-4 leading-relaxed">
+            <p className="text-xs text-gray-500 mt-3 md:mt-4 leading-relaxed">
               Authorised Representative No. 1262749 of Sanlam Private Wealth Pty Ltd which holds Australian Financial Services License number 337927
             </p>
           </div>
