@@ -156,8 +156,7 @@ export default function PortfolioCard({
           <div
             className={cn(
               "absolute -top-3 -right-3 bg-mint text-black text-xs font-semibold px-3 py-1 rounded-full shadow-lg z-10",
-              "opacity-0 transition-opacity duration-300 transform scale-90",
-              "group-hover:opacity-100 group-hover:scale-100"
+              "opacity-100 transition-opacity duration-300 transform scale-100"
             )}
           >
             Coming Soon
