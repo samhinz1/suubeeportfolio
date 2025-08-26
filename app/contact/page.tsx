@@ -231,7 +231,7 @@ export default function ContactPage() {
                     <div className="flex gap-4">
                       <a 
                         href="mailto:info@suubee.com" 
-                        className="text-gray-600 hover:text-mint bg-mint/10 p-3 rounded-full" 
+                        className="text-gray-600 hover:text-black hover:bg-mint bg-mint/10 p-3 rounded-full transition-all duration-200 ease-in-out" 
                         aria-label="Send us an email"
                       >
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
@@ -241,7 +241,7 @@ export default function ContactPage() {
                       </a>
                       <a 
                         href="https://www.linkedin.com/company/waimak-asset-management" 
-                        className="text-gray-600 hover:text-mint bg-mint/10 p-3 rounded-full" 
+                        className="text-gray-600 hover:text-black hover:bg-mint bg-mint/10 p-3 rounded-full transition-all duration-200 ease-in-out" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         aria-label="Visit our LinkedIn profile"
@@ -254,7 +254,7 @@ export default function ContactPage() {
                       </a>
                       <a 
                         href="https://suubee.substack.com/" 
-                        className="text-gray-600 hover:text-mint bg-mint/10 p-3 rounded-full" 
+                        className="text-gray-600 hover:text-black hover:bg-mint bg-mint/10 p-3 rounded-full transition-all duration-200 ease-in-out" 
                         target="_blank" 
                         rel="noopener noreferrer"
                         aria-label="Visit our Substack"
