@@ -4,8 +4,11 @@ import React from "react"
 import Layout from "@/components/Layout"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useEmailModal } from "@/components/EmailModalProvider"
 
 export default function RegisterPage() {
+  const { openEmailModal } = useEmailModal()
+  
   return (
     <Layout>
       <main>
@@ -111,7 +114,8 @@ export default function RegisterPage() {
               </div>
 
               <Button 
-                type="submit"
+                type="button"
+                onClick={openEmailModal}
                 className="w-full bg-mint hover:bg-mint/90 text-black py-3 rounded-md transition-colors"
                 aria-label="Create your account"
               >
@@ -154,13 +158,13 @@ export default function RegisterPage() {
             <footer className="mt-8 text-center text-sm text-gray-500">
               <p>
                 Already have an account?{" "}
-                <Link 
-                  href="/login" 
+                <button 
+                  onClick={openEmailModal}
                   className="text-mint hover:text-mint/80"
                   aria-label="Sign in to your existing account"
                 >
                   Sign in
-                </Link>
+                </button>
               </p>
             </footer>
           </div>

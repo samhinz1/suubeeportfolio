@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import './globals.css'
 import { OrganizationJsonLd, WebSiteJsonLd } from '@/components/JsonLd'
 import { PostHogProvider } from '@/components/PostHogProvider'
+import { EmailModalProvider } from '@/components/EmailModalProvider'
+import { Toaster } from '@/components/ui/toaster'
 import { Urbanist } from 'next/font/google'
 
 const urbanist = Urbanist({
@@ -63,12 +65,15 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen font-urbanist">
         <PostHogProvider>
-          <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-black">
-            Skip to main content
-          </a>
-          <div id="main-content" role="main">
-            {children}
-          </div>
+          <EmailModalProvider>
+            <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-black">
+              Skip to main content
+            </a>
+            <div id="main-content" role="main">
+              {children}
+            </div>
+            <Toaster />
+          </EmailModalProvider>
         </PostHogProvider>
       </body>
     </html>

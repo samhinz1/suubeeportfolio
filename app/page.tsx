@@ -10,6 +10,7 @@ import { useState, Suspense, lazy } from "react"
 import Layout from "@/components/Layout"
 import { motion } from "framer-motion"
 import CallbackChatBubble from "@/components/CallbackChatBubble"
+import { useEmailModal } from "@/components/EmailModalProvider"
 
 // Lazy load below-the-fold components
 const PortfolioOptions = lazy(() => import("@/components/PortfolioOptions"))
@@ -25,6 +26,7 @@ const LoadingFallback = () => (
 
 export default function Home() {
   const [selectedPortfolio, setSelectedPortfolio] = useState<string>("au")
+  const { openEmailModal } = useEmailModal()
   
   // Animation variants
   const containerVariants = {
@@ -80,13 +82,15 @@ export default function Home() {
                 </motion.p>
                 
                 <motion.div className="flex flex-col sm:flex-row gap-4 items-start pt-6" variants={itemVariants}>
-                  <Link href="/register" aria-label="Open an account">
-                    <Button className="group flex items-center gap-2 text-base px-6 py-6 bg-mint text-black hover:bg-mint/90 rounded-full transition-all">
-                      <UserPlus className="w-4 h-4" aria-hidden="true" />
-                      Open an Account
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
-                    </Button>
-                  </Link>
+                  <Button 
+                    onClick={openEmailModal}
+                    className="group flex items-center gap-2 text-base px-6 py-6 bg-mint text-black hover:bg-mint/90 rounded-full transition-all"
+                    aria-label="Open an account"
+                  >
+                    <UserPlus className="w-4 h-4" aria-hidden="true" />
+                    Open an Account
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                  </Button>
                   <Button
                     variant="outline"
                     className="group flex items-center gap-2 text-base px-6 py-6 bg-transparent border border-gray-400 text-[#0c0c0c] hover:text-mint hover:border-mint rounded-full transition-all"

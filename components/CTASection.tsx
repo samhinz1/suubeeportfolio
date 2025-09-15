@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight, CreditCard, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
+import { useEmailModal } from "./EmailModalProvider"
 
 interface CTASectionProps {
   title?: string;
@@ -20,6 +21,7 @@ export default function CTASection({
   secondaryLinkText = "Chat With a Portfolio Manager",
   secondaryLinkHref = "/contact",
 }: CTASectionProps) {
+  const { openEmailModal } = useEmailModal()
   return (
     <section className="py-24 relative z-10 bg-[#f5f5f5]">
       <div className="container mx-auto px-4">
@@ -50,15 +52,14 @@ export default function CTASection({
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Link href={buttonLink}>
-              <Button 
-                className="group flex items-center gap-3 text-base px-8 py-6 bg-mint text-black rounded-full transition-all duration-300 hover:bg-mint/90 hover:translate-y-[-4px]"
-              >
-                <CreditCard className="w-5 h-5" />
-                {buttonText}
-                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-              </Button>
-            </Link>
+            <Button 
+              onClick={openEmailModal}
+              className="group flex items-center gap-3 text-base px-8 py-6 bg-mint text-black rounded-full transition-all duration-300 hover:bg-mint/90 hover:translate-y-[-4px]"
+            >
+              <CreditCard className="w-5 h-5" />
+              {buttonText}
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Button>
             
             {secondaryLinkText && (
               <Link href={secondaryLinkHref}>
