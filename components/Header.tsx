@@ -130,18 +130,28 @@ export default function Header() {
             <Link
               href="/"
               className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
-              href="/"
+              href="/strategy"
               className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
             >
               Our Strategy
             </Link>
             <Link
-              href="/"
+              href="#portfolios"
               className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Portfolios
+            </Link>
+            <Link
+              href="/contact"
+              className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
             >
               Contact
             </Link>
@@ -149,7 +159,10 @@ export default function Header() {
             {/* Added Auth Links to Mobile Menu */}
             <div className="border-t border-gray-200 mt-2 pt-4 flex flex-col gap-3">
               <button
-                onClick={openEmailModal}
+                onClick={() => {
+                  openEmailModal();
+                  setMobileMenuOpen(false);
+                }}
                 className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors flex items-center justify-center gap-2 border border-[#0c0c0c] rounded-full px-4 hover:bg-gray-100"
               >
                 <svg
@@ -170,7 +183,10 @@ export default function Header() {
                 Login
               </button>
               <button
-                onClick={openEmailModal}
+                onClick={() => {
+                  openEmailModal();
+                  setMobileMenuOpen(false);
+                }}
                 className="text-sm font-medium py-2 bg-gradient-to-r from-mint to-mint/80 text-black hover:from-mint/90 hover:to-mint/70 rounded-full flex items-center justify-center gap-2"
               >
                 <svg
