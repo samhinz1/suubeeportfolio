@@ -175,90 +175,93 @@ export default function DashboardPreview({
   const ytdReturn = firstDataPointOfYear.value !== 0 ? 
     ((lastDataPoint.value - firstDataPointOfYear.value) / firstDataPointOfYear.value) * 100 : 0
   
-  // Generate an array of unique month labels, filling in any gaps
-  const getUniqueMonthLabels = () => {
-    // Create a map to store one entry per month/year combination
-    const uniqueMonthsMap = new Map()
+  // Create a complete timeline with all months represented
+  const createCompleteTimeline = () => {
+    if (portfolioData.length === 0) return []
     
-    // Track all year-month combinations in data
+    const firstPoint = portfolioData[0]
+    const lastPoint = portfolioData[portfolioData.length - 1]
+    
+    // Create a map of existing data points by month-year
+    const dataByMonth = new Map()
     portfolioData.forEach(point => {
-      const monthKey = `${point.dateParts.year}-${String(point.dateParts.month).padStart(2, '0')}`
-      if (!uniqueMonthsMap.has(monthKey)) {
-        uniqueMonthsMap.set(monthKey, {
-          monthIndex: point.dateParts.month - 1,
-          year: point.dateParts.year,
-          dataIndex: portfolioData.indexOf(point),
-          monthKey
-        })
+      const monthKey = `${point.dateParts.year}-${point.dateParts.month.toString().padStart(2, '0')}`
+      if (!dataByMonth.has(monthKey)) {
+        dataByMonth.set(monthKey, point)
       }
     })
     
-    // Convert to array and sort chronologically
-    const labels = Array.from(uniqueMonthsMap.values())
-      .sort((a, b) => {
-        if (a.year !== b.year) return a.year - b.year
-        return a.monthIndex - b.monthIndex
-      })
+    const timeline = []
+    let currentYear = firstPoint.dateParts.year
+    let currentMonth = firstPoint.dateParts.month
+    const endYear = lastPoint.dateParts.year
+    const endMonth = lastPoint.dateParts.month
     
-    // If we have at least two data points, fill in any missing months
-    if (labels.length >= 2) {
-      const filledLabels = []
-      const startLabel = labels[0]
-      const endLabel = labels[labels.length - 1]
+    while (currentYear < endYear || (currentYear === endYear && currentMonth <= endMonth)) {
+      const monthKey = `${currentYear}-${currentMonth.toString().padStart(2, '0')}`
       
-      // Starting from the first month in the data to the last
-      let currentYear = startLabel.year
-      let currentMonth = startLabel.monthIndex
-      
-      while (currentYear < endLabel.year || 
-            (currentYear === endLabel.year && currentMonth <= endLabel.monthIndex)) {
-        // Create the key for this month to see if we have data
-        const monthKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`
-        
-        // If we have an existing data point for this month, use it
-        if (uniqueMonthsMap.has(monthKey)) {
-          filledLabels.push(uniqueMonthsMap.get(monthKey))
-        } else {
-          // Otherwise create a placeholder using the nearest data point
-          // Find the nearest data point before this date
-          let nearestIndex = 0
-          for (let i = 0; i < portfolioData.length; i++) {
-            if (
-              portfolioData[i].dateParts.year < currentYear || 
-              (portfolioData[i].dateParts.year === currentYear && 
-               portfolioData[i].dateParts.month - 1 <= currentMonth)
-            ) {
-              nearestIndex = i
-            } else {
-              break
-            }
+      if (dataByMonth.has(monthKey)) {
+        // Use actual data point
+        timeline.push(dataByMonth.get(monthKey))
+      } else {
+        // Create synthetic data point for missing month
+        // Find the closest previous data point for value
+        let closestValue = 100
+        for (let i = portfolioData.length - 1; i >= 0; i--) {
+          const point = portfolioData[i]
+          if (point.dateParts.year < currentYear || 
+              (point.dateParts.year === currentYear && point.dateParts.month < currentMonth)) {
+            closestValue = point.value
+            break
           }
-          
-          filledLabels.push({
-            monthIndex: currentMonth,
-            year: currentYear,
-            dataIndex: nearestIndex,
-            monthKey,
-            isFilledGap: true
-          })
         }
         
-        // Move to the next month
-        currentMonth++
-        if (currentMonth > 11) {
-          currentMonth = 0
-          currentYear++
-        }
+        timeline.push({
+          date: `1/${currentMonth.toString().padStart(2, '0')}/${currentYear}`,
+          value: closestValue,
+          return: 0,
+          dateParts: {
+            day: 1,
+            month: currentMonth,
+            year: currentYear
+          },
+          isSynthetic: true
+        })
       }
       
-      return filledLabels
+      // Move to next month
+      currentMonth++
+      if (currentMonth > 12) {
+        currentMonth = 1
+        currentYear++
+      }
     }
     
-    return labels
+    return timeline
   }
   
-  // Get array of month labels
-  const monthLabels = getUniqueMonthLabels()
+  // Get complete timeline and generate ticks with consistent spacing
+  const completeTimeline = createCompleteTimeline()
+  const getMonthTicks = () => {
+    if (completeTimeline.length === 0) return []
+    
+    const ticks = []
+    const totalMonths = completeTimeline.length
+    
+    // Determine spacing based on total timeline length
+    let tickInterval = 1
+    if (totalMonths > 24) tickInterval = 3  // Show every 3 months for 2+ years
+    else if (totalMonths > 12) tickInterval = 2  // Show every 2 months for 1+ year
+    
+    // Generate ticks with consistent spacing, starting from the first month
+    for (let i = 0; i < completeTimeline.length; i += tickInterval) {
+      ticks.push(completeTimeline[i].date)
+    }
+    
+    return ticks
+  }
+  
+  const monthTicks = getMonthTicks()
 
   return (
     <div
@@ -334,26 +337,19 @@ export default function DashboardPreview({
                   <XAxis 
                     dataKey="date" 
                     stroke="#666"
-                    tickFormatter={(dateStr, i) => {
-                      // Look up the month data from our sorted array using the index
-                      if (typeof i === 'number' && monthLabels[i]) {
-                        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                        const monthName = monthNames[monthLabels[i].monthIndex];
-                        
-                        // Add year for January or first month in dataset
-                        if (monthLabels[i].monthIndex === 0 || i === 0 || 
-                            (i > 0 && monthLabels[i].year !== monthLabels[i-1].year)) {
-                          return `${monthName} '${monthLabels[i].year.toString().slice(-2)}`;
-                        }
-                        return monthName;
-                      }
-                      
-                      // Fallback to original formatting if i is not provided
-                      const [day, month, year] = dateStr.split('/');
+                    tickFormatter={(dateStr) => {
+                      // Always derive label from the actual tick value to avoid index mismatches
+                      const [_, month, year] = String(dateStr).split('/');
                       const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-                      return monthNames[parseInt(month) - 1];
+                      const monthIndex = Math.max(1, Math.min(12, parseInt(month)));
+                      const monthName = monthNames[monthIndex - 1];
+                      // Include year for January ticks
+                      if (monthIndex === 1) {
+                        return `${monthName} '${String(year).slice(-2)}`;
+                      }
+                      return monthName;
                     }}
-                    ticks={monthLabels.map(label => portfolioData[label.dataIndex].date)}
+                    ticks={monthTicks}
                     tick={{ fontSize: 12, fill: "#999" }}
                     minTickGap={5}
                     height={30}
