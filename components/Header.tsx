@@ -46,7 +46,7 @@ export default function Header() {
             Invest with us
           </Link>
           <Link
-            href="#portfolios"
+            href="/#portfolios"
             className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
           >
             Portfolios
@@ -155,7 +155,7 @@ export default function Header() {
               Invest with us
             </Link>
             <Link
-              href="#portfolios"
+              href="/#portfolios"
               className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
