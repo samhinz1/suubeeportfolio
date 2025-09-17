@@ -51,19 +51,19 @@ export default function DashboardPreview({
     let dataFile = ""
     switch (selectedPortfolio) {
       case "us":
-        dataFile = "/data/suubee%20performance%20data.csv"
+        dataFile = "/data/suubee performance data.csv"
         break
       case "au":
-        dataFile = "/data/AULeaders.csv"
+        dataFile = "/data/AUleaders.csv"
         break
       case "au-resources":
-        dataFile = "/data/AU%20Resources%20Performance.csv"
+        dataFile = "/data/AU Resources Performance.csv"
         break
       case "us-resources":
-        dataFile = "/data/US%20Resources%20Performance.csv"
+        dataFile = "/data/US Resources Performance.csv"
         break
       default:
-        dataFile = "/data/suubee%20performance%20data.csv"
+        dataFile = "/data/suubee performance data.csv"
     }
     
     fetch(dataFile)
