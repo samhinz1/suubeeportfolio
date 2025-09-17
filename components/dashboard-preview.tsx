@@ -51,23 +51,28 @@ export default function DashboardPreview({
     let dataFile = ""
     switch (selectedPortfolio) {
       case "us":
-        dataFile = "/data/suubee performance data.csv"
+        dataFile = "/data/suubee%20performance%20data.csv"
         break
       case "au":
         dataFile = "/data/AULeaders.csv"
         break
       case "au-resources":
-        dataFile = "/data/AU Resources Performance.csv"
+        dataFile = "/data/AU%20Resources%20Performance.csv"
         break
       case "us-resources":
-        dataFile = "/data/US Resources Performance.csv"
+        dataFile = "/data/US%20Resources%20Performance.csv"
         break
       default:
-        dataFile = "/data/suubee performance data.csv"
+        dataFile = "/data/suubee%20performance%20data.csv"
     }
     
     fetch(dataFile)
-      .then(response => response.text())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.text();
+      })
       .then(csvData => {
         // Split the CSV into lines and remove the header
         const lines = csvData.split('\n').slice(1)
@@ -102,6 +107,7 @@ export default function DashboardPreview({
       })
       .catch(error => {
         console.error("Error loading portfolio data:", error);
+        console.error("Attempted to fetch:", dataFile);
         setPortfolioData([]);
       })
   }, [selectedPortfolio]) // Re-fetch when selected portfolio changes
