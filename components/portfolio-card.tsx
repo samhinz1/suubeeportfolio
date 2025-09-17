@@ -106,9 +106,15 @@ export default function PortfolioCard({
       if (typeof window !== 'undefined') {
         // We need to wait a bit for the scroll to complete
         setTimeout(() => {
+          // Map portfolio types to the correct identifiers
+          let portfolioId = portfolioType
+          if (title.includes('Resources')) {
+            portfolioId = portfolioType === 'au' ? 'au-resources' : 'us-resources'
+          }
+          
           // Dispatch a custom event that DashboardPreview can listen for
           const event = new CustomEvent('setPortfolio', { 
-            detail: { portfolio: portfolioType } 
+            detail: { portfolio: portfolioId } 
           });
           window.dispatchEvent(event);
         }, 800);
@@ -215,7 +221,8 @@ export default function PortfolioCard({
               asChild
               variant={featured ? "default" : "outline"}
               className={cn(
-                "flex-1 justify-between group/btn rounded-md relative z-20",
+                title.includes("Global ETF") ? "w-full" : "flex-1",
+                "justify-between group/btn rounded-md relative z-20",
                 featured
                   ? `bg-mint text-black hover:bg-mint/90`
                   : `bg-transparent border-gray-500 text-white hover:bg-gray-800`,
@@ -226,17 +233,19 @@ export default function PortfolioCard({
                 <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
               </Link>
             </Button>
-            <Button
-              variant="outline"
-              className={cn(
-                "flex-1 justify-between group/btn rounded-md relative z-20",
-                `bg-transparent border-gray-500 text-white hover:bg-gray-800`,
-              )}
-              onClick={scrollToPerformance}
-            >
-              <span>Performance</span>
-              <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
-            </Button>
+            {!title.includes("Global ETF") && (
+              <Button
+                variant="outline"
+                className={cn(
+                  "flex-1 justify-between group/btn rounded-md relative z-20",
+                  `bg-transparent border-gray-500 text-white hover:bg-gray-800`,
+                )}
+                onClick={scrollToPerformance}
+              >
+                <span>Performance</span>
+                <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+              </Button>
+            )}
           </div>
         </div>
       </div>

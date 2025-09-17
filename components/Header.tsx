@@ -25,7 +25,7 @@ export default function Header() {
           </div>
         </Link>
 
-        {/* Main Navigation
+        {/* Main Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           <Link
             href="/"
@@ -40,6 +40,12 @@ export default function Header() {
             Our Strategy
           </Link>
           <Link
+            href="/invest"
+            className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
+          >
+            Invest with us
+          </Link>
+          <Link
             href="#portfolios"
             className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
           >
@@ -51,7 +57,7 @@ export default function Header() {
           >
             Contact
           </Link>
-        </nav> */}
+        </nav>
 
         <div className="flex items-center gap-4">
           
@@ -140,6 +146,13 @@ export default function Header() {
               onClick={() => setMobileMenuOpen(false)}
             >
               Our Strategy
+            </Link>
+            <Link
+              href="/invest"
+              className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Invest with us
             </Link>
             <Link
               href="#portfolios"

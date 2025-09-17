@@ -45,8 +45,7 @@ export default function StrategyPage() {
                 Our Investment Strategy
               </h1>
               <p className="text-gray-600 mb-12 text-lg">
-                At Suubee Portfolios, we utilize a quantitative, rules-based strategy to identify market-leading stocks and sectors. Our goal is to invest in these high-potential names, maintaining a diverse portfolio of market leaders. 
-                Unlike a "buy and hold" approach, we dynamically rotate the list as stocks gain or lose leadership status, ensuring we stay positioned for outperformance while prioritizing risk control.
+              At Suubee Portfolios, we utilize a rules-based investment strategy to identify market-leading stocks and sectors. Our goal is to invest in these high-potential names, maintaining a diverse portfolio of market leaders. Unlike a "buy and hold" approach, we dynamically rotate stocks as they gain or lose leadership status, ensuring we stay positioned for outperformance while prioritizing risk control.
               </p>
             </header>
 
@@ -110,7 +109,7 @@ export default function StrategyPage() {
                     },
                     {
                       title: "Risk Management and Portfolio Discipline",
-                      description: "Our leadership-driven approach enforces a \"survival of the fittest\" philosophy. Stocks are regularly evaluated, with underperformers rotated out to maintain optimal portfolio allocation. Position sizes are distributed roughly equally across 20-50 equities, ensuring diversification across sectors and industries while mitigating concentration risk.",
+                      description: "Our leadership-driven approach enforces a \"survival of the fittest\" philosophy. Stocks are regularly evaluated, with underperformers rotated out to maintain optimal portfolio allocation. Position sizes are distributed roughly equally across 15-30 equities, ensuring diversification across sectors and industries while mitigating concentration risk.",
                       icon: (
                         <>
                           <path d="M14 3v4a1 1 0 0 0 1 1h4"/>

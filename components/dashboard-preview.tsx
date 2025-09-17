@@ -13,6 +13,7 @@ import {
 } from "recharts"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
 interface PortfolioData {
   date: string
@@ -39,11 +40,31 @@ export default function DashboardPreview({
   const [isHovered, setIsHovered] = useState(false)
   const [portfolioData, setPortfolioData] = useState<PortfolioData[]>([])
   
+  const portfolioOptions = [
+    { value: "au", label: "AU Leaders", flag: "/australiaflag.svg" },
+    { value: "au-resources", label: "AU Resources", flag: "/australiaflag.svg" },
+    { value: "us", label: "US Leaders", flag: "/usflag.png" },
+    { value: "us-resources", label: "US Resources", flag: "/usflag.png" }
+  ]
   useEffect(() => {
     // Load and parse CSV data based on selected portfolio
-    const dataFile = selectedPortfolio === "us" 
-      ? "/data/suubee performance data.csv"
-      : "/data/AUleaders.csv" // Now using the AU leaders data file
+    let dataFile = ""
+    switch (selectedPortfolio) {
+      case "us":
+        dataFile = "/data/suubee performance data.csv"
+        break
+      case "au":
+        dataFile = "/data/AULeaders.csv"
+        break
+      case "au-resources":
+        dataFile = "/data/AU Resources Performance.csv"
+        break
+      case "us-resources":
+        dataFile = "/data/US Resources Performance.csv"
+        break
+      default:
+        dataFile = "/data/suubee performance data.csv"
+    }
     
     fetch(dataFile)
       .then(response => response.text())
@@ -57,9 +78,12 @@ export default function DashboardPreview({
           .map(line => {
             const [date, dailyChange, cumulativeChange] = line.split(',')
             // Handle cases where cumulativeChange might be empty or not a valid number
-            const parsedCumulativeChange = cumulativeChange && !isNaN(parseFloat(cumulativeChange)) 
-              ? parseFloat(cumulativeChange) 
-              : 0
+            // Remove percentage sign if present and parse as float
+            let parsedCumulativeChange = 0
+            if (cumulativeChange && cumulativeChange.trim() !== '') {
+              const cleanValue = cumulativeChange.replace('%', '')
+              parsedCumulativeChange = !isNaN(parseFloat(cleanValue)) ? parseFloat(cleanValue) : 0
+            }
             
             return {
               date: date,
@@ -271,12 +295,49 @@ export default function DashboardPreview({
       onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div animate={controls} className="relative">
-        {/* Toggle button portfolio selector */}
+        {/* Portfolio selector */}
         <div className="bg-[#0c0c0c] px-4 pt-4 pb-2">
-          <div className="flex justify-center">
-            <div className="inline-flex items-stretch bg-[#0c0c0c]/80 border border-mint/30 rounded-full overflow-hidden p-1.5">
+          {/* Mobile Dropdown */}
+          <div className="flex justify-center md:hidden">
+            <Select value={selectedPortfolio} onValueChange={(value) => onPortfolioChange && onPortfolioChange(value)}>
+              <SelectTrigger className="w-64 bg-[#161616] border-mint/30 text-white">
+                <SelectValue>
+                  <div className="flex items-center gap-2">
+                    <Image 
+                      src={portfolioOptions.find(opt => opt.value === selectedPortfolio)?.flag || "/usflag.png"} 
+                      alt="Flag" 
+                      width={16} 
+                      height={12}
+                      className="rounded-sm"
+                    />
+                    <span>{portfolioOptions.find(opt => opt.value === selectedPortfolio)?.label || "Select Portfolio"}</span>
+                  </div>
+                </SelectValue>
+              </SelectTrigger>
+              <SelectContent className="bg-[#161616] border-mint/30">
+                {portfolioOptions.map((option) => (
+                  <SelectItem key={option.value} value={option.value} className="text-white hover:bg-[#0c0c0c]/90">
+                    <div className="flex items-center gap-2">
+                      <Image 
+                        src={option.flag} 
+                        alt="Flag" 
+                        width={16} 
+                        height={12}
+                        className="rounded-sm"
+                      />
+                      <span>{option.label}</span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Desktop Toggle Buttons */}
+          <div className="hidden md:flex justify-center">
+            <div className="inline-flex flex-wrap items-stretch bg-[#0c0c0c]/80 border border-mint/30 rounded-full overflow-hidden p-1.5 gap-1">
               <button
-                className={`px-4 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
+                className={`px-3 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
                   selectedPortfolio === "au" 
                     ? "bg-mint text-black font-medium" 
                     : "text-gray-400 hover:bg-[#0c0c0c]/90"
@@ -293,7 +354,24 @@ export default function DashboardPreview({
                 <span>AU Leaders</span>
               </button>
               <button
-                className={`px-4 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
+                className={`px-3 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
+                  selectedPortfolio === "au-resources" 
+                    ? "bg-mint text-black font-medium" 
+                    : "text-gray-400 hover:bg-[#0c0c0c]/90"
+                }`}
+                onClick={() => onPortfolioChange && onPortfolioChange("au-resources")}
+              >
+                <Image 
+                  src="/australiaflag.svg" 
+                  alt="AU" 
+                  width={16} 
+                  height={12}
+                  className="rounded-sm"
+                />
+                <span>AU Resources</span>
+              </button>
+              <button
+                className={`px-3 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
                   selectedPortfolio === "us" 
                     ? "bg-mint text-black font-medium" 
                     : "text-gray-400 hover:bg-[#0c0c0c]/90"
@@ -308,6 +386,23 @@ export default function DashboardPreview({
                   className="rounded-sm"
                 />
                 <span>US Leaders</span>
+              </button>
+              <button
+                className={`px-3 py-1.5 text-xs flex items-center gap-1.5 rounded-full transition-all ${
+                  selectedPortfolio === "us-resources" 
+                    ? "bg-mint text-black font-medium" 
+                    : "text-gray-400 hover:bg-[#0c0c0c]/90"
+                }`}
+                onClick={() => onPortfolioChange && onPortfolioChange("us-resources")}
+              >
+                <Image 
+                  src="/usflag.png" 
+                  alt="United States Flag - US Resources Portfolio" 
+                  width={16} 
+                  height={12}
+                  className="rounded-sm"
+                />
+                <span>US Resources</span>
               </button>
             </div>
           </div>
@@ -356,7 +451,7 @@ export default function DashboardPreview({
                   />
                   <YAxis 
                     stroke="#39FDAD" 
-                    domain={[100000, 'auto']}
+                    domain={['dataMin - 5', 'dataMax + 5']}
                     tickFormatter={(value) => `$${value.toLocaleString()}`}
                     tick={{ fill: "#999" }}
                   />
