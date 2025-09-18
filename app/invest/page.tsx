@@ -120,41 +120,42 @@ export default function InvestPage() {
 
               <div className="space-y-3">
                 {/* Row: Management Fee */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="rounded-full bg-blue-50 border border-blue-100 px-5 py-4 text-[#0c0c0c] font-medium">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-full bg-blue-50 border border-blue-100 px-4 md:px-5 h-12 md:h-14 flex items-center text-[#0c0c0c] font-medium text-xs sm:text-sm md:text-base whitespace-nowrap">
                     Management Fee
                   </div>
-                  <div className="rounded-2xl md:rounded-full bg-blue-900 text-white px-5 py-4">
+                  <div className="rounded-2xl md:rounded-full bg-[#121c26] text-white px-4 md:px-5 h-12 md:h-14 flex items-center text-sm md:text-base">
                     <div className="font-semibold">3.00% p.a.<sup>*</sup></div>
                   </div>
                 </div>
 
                 {/* Row: Recommended Minimum Investment */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="rounded-full bg-blue-50 border border-blue-100 px-5 py-4 text-[#0c0c0c] font-medium">
-                    Recommended Minimum Investment
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-full bg-blue-50 border border-blue-100 px-4 md:px-5 h-12 md:h-14 flex items-center text-[#0c0c0c] font-medium text-xs sm:text-sm md:text-base whitespace-nowrap">
+                    <span className="md:hidden">Minimum investment</span>
+                    <span className="hidden md:inline">Recommended Minimum Investment</span>
                   </div>
-                  <div className="rounded-full bg-blue-900 text-white px-5 py-4 font-semibold">
+                  <div className="rounded-full bg-[#121c26] text-white px-4 md:px-5 h-12 md:h-14 flex items-center font-semibold text-sm md:text-base">
                     $50,000 AUD
                   </div>
                 </div>
 
                 {/* Row: Suggested Timeframe */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="rounded-full bg-blue-50 border border-blue-100 px-5 py-4 text-[#0c0c0c] font-medium">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-full bg-blue-50 border border-blue-100 px-4 md:px-5 h-12 md:h-14 flex items-center text-[#0c0c0c] font-medium text-xs sm:text-sm md:text-base whitespace-nowrap">
                     Suggested Timeframe
                   </div>
-                  <div className="rounded-full bg-blue-900 text-white px-5 py-4 font-semibold">
+                  <div className="rounded-full bg-[#121c26] text-white px-4 md:px-5 h-12 md:h-14 flex items-center font-semibold text-sm md:text-base">
                     3–5 years+
                   </div>
                 </div>
 
                 {/* Row: Holdings */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="rounded-full bg-blue-50 border border-blue-100 px-5 py-4 text-[#0c0c0c] font-medium">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="rounded-full bg-blue-50 border border-blue-100 px-4 md:px-5 h-12 md:h-14 flex items-center text-[#0c0c0c] font-medium text-xs sm:text-sm md:text-base whitespace-nowrap">
                     Holdings
                   </div>
-                  <div className="rounded-2xl md:rounded-full bg-blue-900 text-white px-5 py-4">
+                  <div className="rounded-2xl md:rounded-full bg-[#121c26] text-white px-4 md:px-5 h-12 md:h-14 flex items-center text-sm md:text-base">
                     <div className="font-semibold">15–30 stocks<sup>*</sup></div>
                   </div>
                 </div>

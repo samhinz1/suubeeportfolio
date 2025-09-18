@@ -457,7 +457,49 @@ export default function DashboardPreview({
                   />
                   <YAxis 
                     stroke="#39FDAD" 
-                    domain={['dataMin - 5', 'dataMax + 5']}
+                    interval={0}
+                    domain={[
+                      (dataMin: number) => {
+                        const minValue = Math.min(...portfolioData.map(d => d.value))
+                        // Always include 100 in the domain, even if data doesn't reach it
+                        return Math.min(100, Math.floor(minValue / 10) * 10)
+                      },
+                      (dataMax: number) => {
+                        const maxValue = Math.max(...portfolioData.map(d => d.value))
+                        // Always include 100 in the domain, even if data doesn't reach it
+                        return Math.max(100, Math.ceil(maxValue / 10) * 10)
+                      }
+                    ]}
+                    ticks={(() => {
+                      if (portfolioData.length === 0) return []
+                      const minDataValue = Math.min(...portfolioData.map(d => d.value))
+                      const maxDataValue = Math.max(...portfolioData.map(d => d.value))
+                      
+                      // Calculate range that always includes 100
+                      const yMin = Math.min(100, Math.floor(minDataValue / 10) * 10)
+                      const yMax = Math.max(100, Math.ceil(maxDataValue / 10) * 10)
+                      const range = yMax - yMin
+                      
+                      // Choose step: 10s by default; 20s if too many ticks
+                      const maxDesiredTicks = 12
+                      const step = (range / 10) > maxDesiredTicks ? 20 : 10
+                      
+                      // Start from the first tick >= yMin aligned to the chosen step
+                      let start = Math.ceil(yMin / step) * step
+                      
+                      const ticks: number[] = []
+                      for (let value = start; value <= yMax; value += step) {
+                        ticks.push(value)
+                      }
+                      
+                      // Ensure $100 is always present as a tick
+                      if (!ticks.includes(100)) {
+                        ticks.push(100)
+                        ticks.sort((a, b) => a - b)
+                      }
+                      
+                      return ticks
+                    })()}
                     tickFormatter={(value) => `$${value.toLocaleString()}`}
                     tick={{ fill: "#999" }}
                   />

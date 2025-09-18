@@ -232,6 +232,7 @@ export default function PortfolioOptions() {
                   iconSrc="/usflag.png"
                   color="orange"
                   portfolioType="us"
+                  comingSoon={true}
                 >
                   <div className="space-y-3 my-4">
                     <motion.div 
@@ -284,6 +285,7 @@ export default function PortfolioOptions() {
                   iconSrc="/usflag.png"
                   color="orange"
                   portfolioType="us"
+                  comingSoon={true}
                 >
                   <div className="space-y-3 my-4">
                     <motion.div 
