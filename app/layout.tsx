@@ -13,7 +13,7 @@ const urbanist = Urbanist({
 })
 
 export const metadata: Metadata = {
-  title: 'Suubee Portfolios',
+  title: 'Suubee Portfolios | Invest in leadership',
   description: 'Expertly managed portfolios designed to provide exposure to market leaders',
   keywords: 'portfolio management, investments, financial services, wealth management, diversified portfolios, invest in leadership, invest in US stocks',
   authors: [{ name: 'Suubee' }],
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_AU',
-    title: 'Suubee Portfolios | Invest in Leadership',
+    title: 'Suubee Portfolios | Invest in leadership',
     description: 'Expertly managed investment portfolios designed to provide exposure to leading stocks and themes, locally and abroad.',
     siteName: 'Suubee Portfolios',
     images: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Suubee Portfolios | Invest in Leadership',
+    title: 'Suubee Portfolios | Invest in leadership',
     description: 'Expertly managed investment portfolios designed to provide exposure to leading stocks and themes, locally and abroad.',
     images: ['/twitter-image.jpg'],
     creator: '@suubeeportfolios',
