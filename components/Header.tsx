@@ -29,31 +29,31 @@ export default function Header() {
         <nav className="hidden md:flex items-center gap-6">
           <Link
             href="/"
-            className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-black hover:font-semibold hover:scale-105 transition-all"
           >
             Home
           </Link>
           <Link
             href="/strategy"
-            className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-black hover:font-semibold hover:scale-105 transition-all"
           >
             Our Strategy
           </Link>
           <Link
             href="/invest"
-            className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-black hover:font-semibold hover:scale-105 transition-all"
           >
             Invest with us
           </Link>
           <Link
             href="/#portfolios"
-            className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-black hover:font-semibold hover:scale-105 transition-all"
           >
             Portfolios
           </Link>
           <Link
             href="/contact"
-            className="text-sm font-medium text-gray-700 hover:text-mint transition-colors"
+            className="text-sm font-medium text-gray-700 hover:text-black hover:font-semibold hover:scale-105 transition-all"
           >
             Contact
           </Link>
@@ -135,35 +135,35 @@ export default function Header() {
           <nav className="flex flex-col gap-4">
             <Link
               href="/"
-              className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
+              className="text-sm font-medium py-2 text-[#0c0c0c] hover:font-semibold hover:scale-105 transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/strategy"
-              className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
+              className="text-sm font-medium py-2 text-[#0c0c0c] hover:font-semibold hover:scale-105 transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
               Our Strategy
             </Link>
             <Link
               href="/invest"
-              className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
+              className="text-sm font-medium py-2 text-[#0c0c0c] hover:font-semibold hover:scale-105 transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
               Invest with us
             </Link>
             <Link
               href="/#portfolios"
-              className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
+              className="text-sm font-medium py-2 text-[#0c0c0c] hover:font-semibold hover:scale-105 transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
               Portfolios
             </Link>
             <Link
               href="/contact"
-              className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors"
+              className="text-sm font-medium py-2 text-[#0c0c0c] hover:font-semibold hover:scale-105 transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
               Contact
