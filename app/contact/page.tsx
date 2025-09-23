@@ -240,7 +240,7 @@ export default function ContactPage() {
                         </svg>
                       </a>
                       <a 
-                        href="https://www.linkedin.com/company/waimak-asset-management" 
+                        href="https://www.linkedin.com/company/suubee" 
                         className="text-gray-600 hover:text-black hover:bg-mint bg-mint/10 p-3 rounded-full transition-all duration-200 ease-in-out" 
                         target="_blank" 
                         rel="noopener noreferrer"
