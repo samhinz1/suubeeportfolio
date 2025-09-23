@@ -88,11 +88,11 @@ export default function InvestPage() {
                 <div className="bg-white border border-gray-200 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-gray-300">
                   <h3 className="text-lg font-semibold mb-4 flex items-center gap-2 text-[#0c0c0c]"><CheckCircle2 className="w-5 h-5 text-mint" /> The Suubee Portfolio is tailored for investors who:</h3>
                   <ul className="space-y-3 text-gray-700">
-                    <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-mint mt-0.5" /> Appreciate Suubee’s disciplined, quantitative, rules-based investment strategy focused on market leaders</li>
-                    <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-mint mt-0.5" /> Seek transparent exposure to high-potential stocks and sectors with clear allocation insights</li>
-                    <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-mint mt-0.5" /> Are comfortable with moderate to high risk/return profiles, balancing growth with strategic risk management</li>
-                    <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-mint mt-0.5" /> Prefer a professionally managed model portfolio–based solution, avoiding the complexities of direct stock trading</li>
-                    <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-mint mt-0.5" /> Aim for long-term capital growth while mitigating downside risk during market volatility</li>
+                    <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-mint mt-0.5" /> Appreciate Suubee’s disciplined, quantitative, rules-based investment strategy</li>
+                    <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-mint mt-0.5" /> Seek transparent exposure to high-potential stocks and sectors</li>
+                    <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-mint mt-0.5" /> Are comfortable with moderate to high risk/return profiles</li>
+                    <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-mint mt-0.5" /> Prefer a professionally managed model portfolio–based solution</li>
+                    <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-mint mt-0.5" /> Aim for long-term capital growth while mitigating downside risk</li>
                   </ul>
                 </div>
                 <div className="bg-white border border-gray-200 rounded-xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-md hover:border-gray-300">
