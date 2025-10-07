@@ -125,7 +125,7 @@ export default function InvestPage() {
                     Management Fee
                   </div>
                   <div className="rounded-2xl md:rounded-full bg-[#121c26] text-white px-4 md:px-5 h-12 md:h-14 flex items-center text-sm md:text-base">
-                    <div className="font-semibold">3.00% p.a.<sup>*</sup></div>
+                    <div className="font-semibold">Up to3.00% p.a.<sup>*</sup></div>
                   </div>
                 </div>
 
@@ -146,7 +146,7 @@ export default function InvestPage() {
                     Suggested Timeframe
                   </div>
                   <div className="rounded-full bg-[#121c26] text-white px-4 md:px-5 h-12 md:h-14 flex items-center font-semibold text-sm md:text-base">
-                    3–5 years+
+                    5 years+
                   </div>
                 </div>
 
