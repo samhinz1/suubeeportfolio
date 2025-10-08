@@ -125,7 +125,7 @@ export default function InvestPage() {
                     Management Fee
                   </div>
                   <div className="rounded-2xl md:rounded-full bg-[#121c26] text-white px-4 md:px-5 h-12 md:h-14 flex items-center text-sm md:text-base">
-                    <div className="font-semibold">Up to3.00% p.a.<sup>*</sup></div>
+                    <div className="font-semibold">Up to 3% p.a.<sup>*</sup></div>
                   </div>
                 </div>
 
@@ -161,7 +161,7 @@ export default function InvestPage() {
                 </div>
               </div>
 
-              <p className="text-xs text-gray-600 mt-3">* ETF portfolio: management fee 1.5% p.a.; typically 5–10 ETFs.</p>
+              <p className="text-xs text-gray-600 mt-3">* Suubee fees vary based on the portfolio structure (ETF only vs. stocks), and total investment amount (Discounts available for larger investment amounts).</p>
               <p className="text-sm text-gray-500 mt-3">Important: Investing involves risk. Returns are not guaranteed. Read the full Product Disclosure Statement (PDS) before making any investment decision. See our Terms and Disclaimers.</p>
             </section>
 

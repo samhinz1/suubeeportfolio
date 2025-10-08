@@ -28,22 +28,22 @@ export default function Header() {
         {/* Main Navigation */}
         <nav className="hidden md:flex items-center gap-6">
           <Link
-            href="/"
+            href="/about"
             className="text-sm font-medium text-gray-700 hover:text-black hover:font-semibold hover:scale-105 transition-all"
           >
-            Home
+            Our Team
           </Link>
           <Link
             href="/strategy"
             className="text-sm font-medium text-gray-700 hover:text-black hover:font-semibold hover:scale-105 transition-all"
           >
-            Our Strategy
+            Strategy
           </Link>
           <Link
             href="/invest"
             className="text-sm font-medium text-gray-700 hover:text-black hover:font-semibold hover:scale-105 transition-all"
           >
-            Invest with us
+            Invest
           </Link>
           <Link
             href="/#portfolios"
@@ -134,25 +134,25 @@ export default function Header() {
         <div className="container mx-auto px-4 py-4">
           <nav className="flex flex-col gap-4">
             <Link
-              href="/"
+              href="/about"
               className="text-sm font-medium py-2 text-[#0c0c0c] hover:font-semibold hover:scale-105 transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Home
+              Our Team
             </Link>
             <Link
               href="/strategy"
               className="text-sm font-medium py-2 text-[#0c0c0c] hover:font-semibold hover:scale-105 transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Our Strategy
+              Strategy
             </Link>
             <Link
               href="/invest"
               className="text-sm font-medium py-2 text-[#0c0c0c] hover:font-semibold hover:scale-105 transition-all"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Invest with us
+              Invest
             </Link>
             <Link
               href="/#portfolios"
