@@ -10,10 +10,12 @@ export default function AboutPage() {
         <section className="container mx-auto px-4 pt-32 pb-16 bg-[#f5f5f5]">
           <div className="max-w-6xl mx-auto">
             <header>
-              <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#0c0c0c] leading-[1.1] tracking-tight">About Us</h1>
-              <p className="text-gray-700 text-lg md:text-xl">
-              With over 40+ years of combined experience in capital markets, the Suubee Portfolios team has the experience to navigate all market environments.
-              Our goal is to build long-term wealth for our clients while developing relationships built off trust, integrity and transparency.
+              <h1 className="text-1xl md:text-5xl font-bold mb-8 text-[#0c0c0c] leading-[1.1] tracking-tight">About Us</h1>
+              <p className="text-gray-600 text-lg">
+              Suubee Portfolios empowers everyday investors with professionally managed, momentum-driven model portfolios that capture market leadership across equities in Australia and the U.S (Coming Soon). <br /><br />
+              Our proprietary system identifies emerging leaders based on price momentum and thematic strength. Our goal is to provide dynamic portfolios built for outperformance during uptrends, and to preserve capital through defensive positioning during unfavourable markets.  <br /><br />
+              Unlike passive ETFs that merely track benchmarks, Suubee is engineered for alpha generation; we aim to own and identify leaders during bull markets, using rotation to constantly reposition ourselves into the best opportunities, and then deploy defensive cash allocations during unfavourable periods, prioritising capital preservation without market timing guesswork. <br /><br />
+              Backed by over six years of live performance through Suubee Premium and four decades of combined team expertise, our strategies have consistently performed, while minimising drawdowns through our leadership-based system.
               </p>
             </header>
           </div>
