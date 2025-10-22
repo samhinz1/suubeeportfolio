@@ -10,7 +10,7 @@ export default function AboutPage() {
         <section className="container mx-auto px-4 pt-32 pb-16 bg-[#f5f5f5]">
           <div className="max-w-6xl mx-auto">
             <header>
-              <h1 className="text-1xl md:text-5xl font-bold mb-8 text-[#0c0c0c] leading-[1.1] tracking-tight">About Us</h1>
+              <h1 className="text-4xl md:text-5xl font-bold mb-8 text-[#0c0c0c] leading-[1.1] tracking-tight">About Us</h1>
               <p className="text-gray-600 text-lg">
               Suubee Portfolios empowers everyday investors with professionally managed, momentum-driven model portfolios that capture market leadership across equities in Australia and the U.S (Coming Soon). <br /><br />
               Our proprietary system identifies emerging leaders based on price momentum and thematic strength. Our goal is to provide dynamic portfolios built for outperformance during uptrends, and to preserve capital through defensive positioning during unfavourable markets.  <br /><br />
