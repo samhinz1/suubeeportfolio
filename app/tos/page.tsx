@@ -43,6 +43,9 @@ export default function TOSPage() {
                 
                 <p className="mb-4">Your investment decisions are made solely at your own discretion, free will, and based on your own independent research. Suubee Portfolios does not provide personalized investment advice or portfolio management services.</p>
                 
+                <h3 className="text-xl font-semibold mb-2">Termination and Discretionary Rights</h3>
+                <p className="mb-4">Suubee Pty Ltd reserves the right, at its sole discretion, to suspend or terminate your access to Suubee Portfolios and/or any related services at any time and for any reason, including but not limited to suspected misuse, breach of these Terms of Service, or any other conduct deemed inappropriate or inconsistent with Suubee’s policies or objectives.</p>
+
                 <p className="mb-4">By using Suubee Portfolios, you confirm that you have read, understood, and agree to be bound by these Terms of Service, as well as Suubee's Privacy Policy and the OpenInvest Client Agreement.</p>
               </section>
             </article>
