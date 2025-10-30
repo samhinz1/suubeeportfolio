@@ -82,14 +82,20 @@ export default function Home() {
                 </motion.p>
                 
                 <motion.div className="flex flex-col sm:flex-row gap-4 items-start pt-6" variants={itemVariants}>
-                  <Button 
-                    onClick={openEmailModal}
+                  <Button
+                    asChild
                     className="group flex items-center gap-2 text-base px-6 py-6 bg-mint text-black hover:bg-mint/90 rounded-full transition-all"
                     aria-label="Open an account"
                   >
-                    <UserPlus className="w-4 h-4" aria-hidden="true" />
-                    Open an Account
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                    <a
+                      href="https://inv.suubee.openwealth.net.au/register"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <UserPlus className="w-4 h-4" aria-hidden="true" />
+                      Open an Account
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
+                    </a>
                   </Button>
                   <Button
                     variant="outline"

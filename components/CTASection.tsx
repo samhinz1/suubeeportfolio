@@ -52,13 +52,18 @@ export default function CTASection({
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <Button 
-              onClick={openEmailModal}
+            <Button
+              asChild
               className="group flex items-center gap-3 text-base px-8 py-6 bg-mint text-black rounded-full transition-all duration-300 hover:bg-mint/90 hover:translate-y-[-4px]"
             >
-              <CreditCard className="w-5 h-5" />
-              {buttonText}
-              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              <a
+                href="https://inv.suubee.openwealth.net.au/register"
+                target="_blank" rel="noopener noreferrer"
+              >
+                <CreditCard className="w-5 h-5" />
+                {buttonText}
+                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+              </a>
             </Button>
             
             {secondaryLinkText && (

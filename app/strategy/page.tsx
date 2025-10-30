@@ -181,7 +181,7 @@ export default function StrategyPage() {
               <CTASection 
                 title="Ready to Invest With Us?"
                 description="Experience the difference our strategic approach can make for your investment portfolio."
-                buttonText="Contact Our Team"
+                buttonText="Open an account"
                 buttonLink="/contact"
               />
             </div>

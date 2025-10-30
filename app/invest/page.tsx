@@ -213,7 +213,7 @@ export default function InvestPage() {
               title="Ready to invest with us or still have questions?"
               description="Create your account in minutes and explore the Investor Portal—no initial deposit required."
               buttonText="Get Started"
-              buttonLink="/register"
+              buttonLink="https://inv.suubee.openwealth.net.au/register"
               secondaryLinkText="Speak with our team"
               secondaryLinkHref="/contact"
             />
