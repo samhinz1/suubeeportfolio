@@ -128,7 +128,15 @@ export default function Header() {
       </div>
       
       {/* Mobile Navigation Menu - Hidden by default */}
-      <div className={`md:hidden ${mobileMenuOpen ? 'block' : 'hidden'} bg-[#f5f5f5] border-t border-gray-200`}>
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 md:hidden" aria-hidden="true">
+          <div
+            className="absolute inset-0" // no background color at all
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        </div>
+      )}
+      <div className={`md:hidden ${mobileMenuOpen ? 'block' : 'hidden'} bg-[#f5f5f5] border-t border-gray-200 z-50 relative`}>
         <div className="container mx-auto px-4 py-4">
           <nav className="flex flex-col gap-4">
             <Link
@@ -169,7 +177,7 @@ export default function Header() {
             
             {/* Added Auth Links to Mobile Menu */}
             <div className="border-t border-gray-200 mt-2 pt-4 flex flex-col gap-3">
-              <Button asChild className="text-sm font-medium py-2 text-[#0c0c0c] hover:text-mint transition-colors flex items-center justify-center gap-2 border border-[#0c0c0c] rounded-full px-4 hover:bg-gray-100">
+              <Button asChild className="text-sm font-medium px-4 py-2 border border-[#0c0c0c] rounded-full text-[#0c0c0c] bg-transparent hover:bg-gray-100 transition-all items-center gap-2">
                 <a href="https://inv.suubee.openwealth.net.au/login" target="_blank" rel="noopener noreferrer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -189,7 +197,7 @@ export default function Header() {
                   Login
                 </a>
               </Button>
-              <Button asChild className="text-sm font-medium py-2 bg-gradient-to-r from-mint to-mint/80 text-black hover:from-mint/90 hover:to-mint/70 rounded-full flex items-center justify-center gap-2">
+              <Button asChild className="items-center gap-2 bg-gradient-to-r from-mint to-mint/80 text-black hover:from-mint/90 hover:to-mint/70 rounded-full px-4 py-2 text-sm font-medium transition-all">
                 <a href="https://inv.suubee.openwealth.net.au/register" target="_blank" rel="noopener noreferrer">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
