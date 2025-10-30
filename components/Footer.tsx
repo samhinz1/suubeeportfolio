@@ -58,6 +58,12 @@ export default function Footer() {
                   Contact Us
                 </Link>
               </li>
+              
+              <li>
+                <Link href="/invest#faq" className="text-gray-400 hover:text-mint text-sm">
+                  FAQ
+                </Link>
+              </li>
             </ul>
           </div>
 

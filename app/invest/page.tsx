@@ -197,7 +197,7 @@ export default function InvestPage() {
             </section>
 
             {/* FAQ */}
-            <section aria-labelledby="faq-heading" className="bg-white rounded-2xl p-6 md:p-10 ring-1 ring-gray-100">
+            <section id="faq" aria-labelledby="faq-heading" className="bg-white rounded-2xl p-6 md:p-10 ring-1 ring-gray-100 scroll-mt-32">
               <div className="relative mb-8">
                 <div className="absolute -left-6 top-1/2 -translate-y-1/2 w-3 h-12 bg-gradient-to-b from-mint to-mint/40 rounded-r-md" aria-hidden="true"></div>
                 <h2 id="faq-heading" className="text-2xl md:text-3xl font-bold tracking-tight text-[#0c0c0c]">Frequently asked questions</h2>
