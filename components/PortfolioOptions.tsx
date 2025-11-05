@@ -244,7 +244,6 @@ export default function PortfolioOptions() {
                         "Access to some of the world's largest, highest-quality companies",
                         "Deep capital markets featuring diverse multinational corporations",
                         "Curated portfolio of market-leading companies across sectors",
-                        "Dedicated US portfolio manager with specialized expertise",
                         "Direct US equity exposure (no repackaged ETFs)",
                         "Straightforward 3% management fee structure"
                       ].map((feature, index) => (
