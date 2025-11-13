@@ -78,7 +78,7 @@ export default function Home() {
                 </motion.h1>
                 
                 <motion.p className="text-lg md:text-xl text-gray-600" variants={itemVariants}>
-                  Expertly managed investment portfolios designed to provide exposure to leading stocks and themes, locally and abroad.
+                  Expertly managed investment portfolios designed to provide exposure to leading stocks and themes, locally and abroad. 
                 </motion.p>
                 
                 <motion.div className="flex flex-col sm:flex-row gap-4 items-start pt-6" variants={itemVariants}>
