@@ -58,6 +58,7 @@ export default function CallbackChatBubble() {
   
   const turnstileRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
+  const isRenderingRef = useRef(false); // Prevent concurrent renders
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -69,81 +70,134 @@ export default function CallbackChatBubble() {
     },
   })
 
-  // === Turnstile useEffect Hook (With rendering delay for pop-up) ===
+  // === FIXED Turnstile useEffect Hook ===
   useEffect(() => {
     // 1. Cleanup logic (runs when modal closes)
     if (!isOpen) {
       if (window.turnstile && widgetIdRef.current) {
-        window.turnstile.remove(widgetIdRef.current);
+        try {
+          window.turnstile.remove(widgetIdRef.current);
+        } catch (e) {
+          console.log('Turnstile widget already removed');
+        }
         widgetIdRef.current = null;
-        form.setValue('turnstile', '');
+        isRenderingRef.current = false;
       }
+      form.setValue('turnstile', '');
       return;
     }
 
-    // Prevents re-rendering if already open and widget exists
-    if (widgetIdRef.current) {
+    // 2. Prevent re-rendering if already open and widget exists
+    if (widgetIdRef.current || isRenderingRef.current) {
       return;
     }
 
     let renderTimer: NodeJS.Timeout | null = null;
-    let widgetId: string | null = null;
     
     const loadTurnstile = () => {
-      // Use a brief delay to ensure the modal's animation has finished 
+      // Clear the container first to prevent "already rendered" error
+      if (turnstileRef.current) {
+        turnstileRef.current.innerHTML = '';
+      }
+      
       renderTimer = setTimeout(() => { 
-        if (widgetIdRef.current || !turnstileRef.current) {
+        if (widgetIdRef.current || isRenderingRef.current || !turnstileRef.current) {
           return;
         }
 
         if (typeof window !== "undefined" && window.turnstile) {
-          widgetId = window.turnstile.render(turnstileRef.current, {
-            sitekey: TURNSTILE_SITE_KEY,
-            callback: (token: string) => {
-              form.setValue('turnstile', token);
-            },
-            "error-callback": () => {
-              form.setValue('turnstile', '');
-            },
-            "expired-callback": () => {
-              form.setValue('turnstile', '');
-              if (window.turnstile && widgetIdRef.current) {
-                  window.turnstile.reset(widgetIdRef.current);
-              }
-            },
-          });
-          widgetIdRef.current = widgetId;
+          isRenderingRef.current = true;
+          
+          try {
+            const widgetId = window.turnstile.render(turnstileRef.current, {
+              sitekey: TURNSTILE_SITE_KEY, // Make sure this is a string
+              callback: (token: string) => {
+                form.setValue('turnstile', token);
+              },
+              "error-callback": () => {
+                form.setValue('turnstile', '');
+              },
+              "expired-callback": () => {
+                form.setValue('turnstile', '');
+                if (window.turnstile && widgetIdRef.current) {
+                  try {
+                    window.turnstile.reset(widgetIdRef.current);
+                  } catch (e) {
+                    console.log('Error resetting Turnstile');
+                  }
+                }
+              },
+            });
+            widgetIdRef.current = widgetId;
+            isRenderingRef.current = false;
+          } catch (error) {
+            console.error('Error rendering Turnstile:', error);
+            isRenderingRef.current = false;
+          }
         }
-      }, 300); // 300ms delay for animation
+      }, 500); // Increased delay to 500ms to ensure modal is fully rendered
     };
 
-    // Load Turnstile script if not already loaded, then call loadTurnstile
-    const existingScript = document.querySelector('script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]');
-    if (existingScript) {
+    // Check if Turnstile script exists and is ready
+    const checkTurnstileReady = () => {
+      if (window.turnstile) {
         loadTurnstile();
+        return true;
+      }
+      return false;
+    };
+
+    // If Turnstile is already loaded, render immediately
+    if (checkTurnstileReady()) {
+      return;
+    }
+
+    // Otherwise, wait for it to load
+    const existingScript = document.querySelector('script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]');
+    
+    if (existingScript) {
+      // Script exists but Turnstile not ready yet, poll for it
+      const checkInterval = setInterval(() => {
+        if (checkTurnstileReady()) {
+          clearInterval(checkInterval);
+        }
+      }, 100);
+      
+      // Cleanup interval
+      return () => {
+        clearInterval(checkInterval);
+        if (renderTimer) clearTimeout(renderTimer);
+      };
     } else {
-        const script = document.createElement("script");
-        script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-        script.async = true;
-        script.defer = true;
-        script.onload = loadTurnstile;
-        document.body.appendChild(script);
+      // Load the script for the first time
+      const script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      script.async = true;
+      script.defer = true;
+      script.onload = loadTurnstile;
+      document.body.appendChild(script);
     }
     
-    // Cleanup function: remove widget AND clear timer
+    // Cleanup function
     return () => {
       if (renderTimer) {
         clearTimeout(renderTimer);
       }
       if (window.turnstile && widgetIdRef.current) {
-        window.turnstile.remove(widgetIdRef.current);
+        try {
+          window.turnstile.remove(widgetIdRef.current);
+        } catch (e) {
+          console.log('Cleanup: Turnstile widget already removed');
+        }
         widgetIdRef.current = null;
+        isRenderingRef.current = false;
       }
     };
   }, [isOpen, form]); 
   
-  // === onSubmit Function - FIXED VERSION (matches working contact page) ===
+  // === onSubmit Function ===
   const onSubmit = async (values: FormData) => {
+    console.log('🚀 Form submitted with values:', values)
     setIsSubmitting(true)
     
     try {
@@ -157,13 +211,34 @@ export default function CallbackChatBubble() {
       formData.append("_subject", "New callback request from Suubee Portfolios")
       formData.append("_captcha", "false")
       
-      // ✅ FIXED: Removed headers object to match working contact page
+      // Debug: Log all form data
+      console.log('📤 Sending FormData:');
+      for (let [key, value] of formData.entries()) {
+        console.log(`  ${key}: ${value}`);
+      }
+      
+      console.log('📡 Making request to FormSubmit.co...')
       const response = await fetch("https://formsubmit.co/ajax/info@suubee.com", {
         method: "POST",
         body: formData
       })
       
-      const result = await response.json()
+      console.log('📥 Response status:', response.status)
+      console.log('📥 Response ok:', response.ok)
+      console.log('📥 Response headers:', Object.fromEntries(response.headers.entries()))
+      
+      const responseText = await response.text()
+      console.log('📄 Raw response text:', responseText)
+      
+      let result;
+      try {
+        result = JSON.parse(responseText)
+        console.log('✅ Parsed JSON result:', result)
+      } catch (e) {
+        console.error('❌ Failed to parse JSON:', e)
+        console.error('Raw response was:', responseText)
+        throw new Error('Invalid JSON response from server')
+      }
       
       if (result.success) {
         toast({
@@ -176,7 +251,11 @@ export default function CallbackChatBubble() {
         
         // Reset Turnstile widget
         if (window.turnstile && widgetIdRef.current) {
+          try {
             window.turnstile.reset(widgetIdRef.current);
+          } catch (e) {
+            console.log('Error resetting Turnstile after submit');
+          }
         }
 
         setTimeout(() => {
