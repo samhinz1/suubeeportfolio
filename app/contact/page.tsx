@@ -19,7 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "@/components/ui/use-toast";
-import ReCAPTCHA from "react-google-recaptcha";
+import { useEffect, useRef } from "react";
 
 // Define the form validation schema
 const formSchema = z.object({
@@ -27,13 +27,15 @@ const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
   phone: z.string().min(10, { message: "Please enter a valid phone number." }),
   message: z.string().optional(),
-  recaptcha: z.string().min(1, { message: "Please complete the reCAPTCHA verification." })
+  turnstile: z.string().min(1, { message: "Please complete the verification." })
 });
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [recaptchaValue, setRecaptchaValue] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
 
   // Initialize form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -43,9 +45,71 @@ export default function ContactPage() {
       email: "",
       phone: "",
       message: "",
-      recaptcha: ""
+      turnstile: ""
     },
   });
+
+  // Load Cloudflare Turnstile script and initialize widget
+  useEffect(() => {
+    let widgetId: string | null = null;
+    
+    const loadTurnstile = () => {
+      if (typeof window !== "undefined" && window.turnstile && turnstileRef.current) {
+        widgetId = window.turnstile.render(turnstileRef.current, {
+          // Get your free site key from: https://dash.cloudflare.com/?to=/:account/turnstile
+          sitekey: "0x4AAAAAACFHSYWFl5BfNm3B", // Cloudflare Turnstile test site key - replace with your production key
+          callback: (token: string) => {
+            setTurnstileToken(token);
+            form.setValue('turnstile', token);
+          },
+          "error-callback": () => {
+            setTurnstileToken(null);
+            form.setValue('turnstile', '');
+          },
+          "expired-callback": () => {
+            setTurnstileToken(null);
+            form.setValue('turnstile', '');
+          },
+        });
+        widgetIdRef.current = widgetId;
+      }
+    };
+
+    // Check if script already exists
+    const existingScript = document.querySelector('script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]');
+    
+    if (existingScript) {
+      // Script already loaded, initialize immediately
+      if (window.turnstile) {
+        loadTurnstile();
+      } else {
+        // Wait for turnstile to be available
+        const checkInterval = setInterval(() => {
+          if (window.turnstile) {
+            loadTurnstile();
+            clearInterval(checkInterval);
+          }
+        }, 100);
+        return () => clearInterval(checkInterval);
+      }
+    } else {
+      // Load the script
+      const script = document.createElement("script");
+      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+      script.async = true;
+      script.defer = true;
+      script.onload = () => {
+        loadTurnstile();
+      };
+      document.body.appendChild(script);
+    }
+
+    return () => {
+      if (window.turnstile && widgetId) {
+        window.turnstile.remove(widgetId);
+      }
+    };
+  }, [form]);
 
   // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -59,7 +123,7 @@ export default function ContactPage() {
         access_key: "ac40aed4-7190-4d39-b1fe-4788e46a897e",
         subject: "New contact form submission from Suubee",
         from_name: "Suubee Contact Form",
-        "g-recaptcha-response": recaptchaValue
+        "cf-turnstile-response": turnstileToken
       };
       
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -83,8 +147,13 @@ export default function ContactPage() {
         // Set success state
         setIsSuccess(true);
         
-        // Reset form
+        // Reset form and Turnstile
         form.reset();
+        setTurnstileToken(null);
+        // Reset Turnstile widget
+        if (window.turnstile && widgetIdRef.current) {
+          window.turnstile.reset(widgetIdRef.current);
+        }
       } else {
         throw new Error(result.message || "Something went wrong");
       }
@@ -183,17 +252,13 @@ export default function ContactPage() {
                     />
 
                     <div className="mb-6">
-                      <ReCAPTCHA
-                        sitekey="6LcYs0ArAAAAALpVU_XqSVu3z3S8DVOzw556aLZh"
-                        onChange={(value: string | null) => {
-                          setRecaptchaValue(value);
-                          form.setValue('recaptcha', value || '');
-                        }}
-                        theme="light"
+                      <div 
+                        ref={turnstileRef}
+                        className="cf-turnstile"
                         style={{ transform: 'scale(0.85)', transformOrigin: '0 0' }}
                       />
-                      {form.formState.errors.recaptcha && (
-                        <p className="text-sm text-red-500 mt-1">{form.formState.errors.recaptcha.message}</p>
+                      {form.formState.errors.turnstile && (
+                        <p className="text-sm text-red-500 mt-1">{form.formState.errors.turnstile.message}</p>
                       )}
                     </div>
 
