@@ -30,6 +30,25 @@ const formSchema = z.object({
   turnstile: z.string().min(1, { message: "Please complete the verification." })
 });
 
+// TypeScript declaration for Turnstile
+declare global {
+  interface Window {
+    turnstile?: {
+      render: (
+        container: HTMLElement,
+        options: {
+          sitekey: string;
+          callback?: (token: string) => void;
+          "error-callback"?: () => void;
+          "expired-callback"?: () => void;
+        }
+      ) => string;
+      remove: (widgetId: string) => void;
+      reset: (widgetId: string) => void;
+    };
+  }
+}
+
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -45,7 +64,7 @@ export default function ContactPage() {
       email: "",
       phone: "",
       message: "",
-      turnstile: ""
+      turnstile: "",
     },
   });
 
@@ -111,28 +130,25 @@ export default function ContactPage() {
     };
   }, [form]);
 
-  // Handle form submission
+  // Handle form submission using FormSubmit.co (free, no reCAPTCHA required)
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
     setIsSuccess(false);
     
     try {
-      const formData = {
-        ...values,
-        message: values.message || "No message provided",
-        access_key: "ac40aed4-7190-4d39-b1fe-4788e46a897e",
-        subject: "New contact form submission from Suubee",
-        from_name: "Suubee Contact Form",
-        "cf-turnstile-response": turnstileToken
-      };
+      // FormSubmit.co is completely free and has built-in spam protection
+      // Replace info@suubee.com with your actual email address
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("email", values.email);
+      formData.append("phone", values.phone);
+      formData.append("message", values.message || "No message provided");
+      formData.append("_subject", "New contact form submission from Suubee");
+      formData.append("_captcha", "false"); // Disable their captcha since we don't need it
       
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://formsubmit.co/ajax/info@suubee.com", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify(formData)
+        body: formData
       });
       
       const result = await response.json();

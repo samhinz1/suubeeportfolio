@@ -47,21 +47,19 @@ export default function CallbackChatBubble() {
     setIsSubmitting(true)
     
     try {
-      const formData = {
-        ...values,
-        message: `Callback request from ${values.name}. Phone: ${values.phone}, Email: ${values.email}`,
-        access_key: "ac40aed4-7190-4d39-b1fe-4788e46a897e",
-        subject: "New callback request from Suubee Portfolios",
-        from_name: "Suubee Callback Request",
-      }
+      // FormSubmit.co is completely free and has built-in spam protection
+      // Replace info@suubee.com with your actual email address
+      const formData = new FormData()
+      formData.append("name", values.name)
+      formData.append("email", values.email)
+      formData.append("phone", values.phone)
+      formData.append("message", `Callback request from ${values.name}. Phone: ${values.phone}, Email: ${values.email}`)
+      formData.append("_subject", "New callback request from Suubee Portfolios")
+      formData.append("_captcha", "false") // Disable their captcha since we don't need it
       
-      const response = await fetch("https://api.web3forms.com/submit", {
+      const response = await fetch("https://formsubmit.co/ajax/info@suubee.com", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        },
-        body: JSON.stringify(formData)
+        body: formData
       })
       
       const result = await response.json()
