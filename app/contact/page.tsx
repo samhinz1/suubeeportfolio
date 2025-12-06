@@ -70,13 +70,32 @@ export default function ContactPage() {
 
   // Load Cloudflare Turnstile script and initialize widget
   useEffect(() => {
+    // Prevent multiple renders
+    if (widgetIdRef.current) {
+      return;
+    }
+
     let widgetId: string | null = null;
     
     const loadTurnstile = () => {
+      // Double check we haven't already rendered
+      if (widgetIdRef.current) {
+        return;
+      }
+
       if (typeof window !== "undefined" && window.turnstile && turnstileRef.current) {
+        // Check if container already has a widget
+        if (turnstileRef.current.querySelector('.cf-turnstile')) {
+          return;
+        }
+
+        // Debug: Log the current hostname
+        console.log('Current hostname:', window.location.hostname);
+        console.log('Add this exact hostname to Cloudflare Turnstile:', window.location.hostname);
+
         widgetId = window.turnstile.render(turnstileRef.current, {
           // Get your free site key from: https://dash.cloudflare.com/?to=/:account/turnstile
-          sitekey: "0x4AAAAAACFHSYWFl5BfNm3B", // Cloudflare Turnstile test site key - replace with your production key
+          sitekey: "0x4AAAAAACFHSYWFl5BfNm3B", // Cloudflare Turnstile site key
           callback: (token: string) => {
             setTurnstileToken(token);
             form.setValue('turnstile', token);
@@ -124,11 +143,12 @@ export default function ContactPage() {
     }
 
     return () => {
-      if (window.turnstile && widgetId) {
-        window.turnstile.remove(widgetId);
+      if (window.turnstile && widgetIdRef.current) {
+        window.turnstile.remove(widgetIdRef.current);
+        widgetIdRef.current = null;
       }
     };
-  }, [form]);
+  }, []); // Empty dependency array - only run once
 
   // Handle form submission using FormSubmit.co (free, no reCAPTCHA required)
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
