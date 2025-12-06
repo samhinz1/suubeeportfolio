@@ -170,7 +170,6 @@ export default function Home() {
       </main>
       
       {/* Callback Chat Bubble */}
-      <CallbackChatBubble />
     </Layout>
   )
 }
