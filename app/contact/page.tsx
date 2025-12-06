@@ -19,7 +19,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { toast } from "@/components/ui/use-toast";
-import { useEffect, useRef } from "react";
 
 // Define the form validation schema
 const formSchema = z.object({
@@ -27,34 +26,11 @@ const formSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
   phone: z.string().min(10, { message: "Please enter a valid phone number." }),
   message: z.string().optional(),
-  turnstile: z.string().min(1, { message: "Please complete the verification." })
 });
-
-// TypeScript declaration for Turnstile
-declare global {
-  interface Window {
-    turnstile?: {
-      render: (
-        container: HTMLElement,
-        options: {
-          sitekey: string;
-          callback?: (token: string) => void;
-          "error-callback"?: () => void;
-          "expired-callback"?: () => void;
-        }
-      ) => string;
-      remove: (widgetId: string) => void;
-      reset: (widgetId: string) => void;
-    };
-  }
-}
 
 export default function ContactPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const turnstileRef = useRef<HTMLDivElement>(null);
-  const widgetIdRef = useRef<string | null>(null);
 
   // Initialize form
   const form = useForm<z.infer<typeof formSchema>>({
@@ -64,111 +40,30 @@ export default function ContactPage() {
       email: "",
       phone: "",
       message: "",
-      turnstile: "",
     },
   });
 
-  // Load Cloudflare Turnstile script and initialize widget
-  useEffect(() => {
-    // Prevent multiple renders
-    if (widgetIdRef.current) {
-      return;
-    }
-
-    let widgetId: string | null = null;
-    
-    const loadTurnstile = () => {
-      // Double check we haven't already rendered
-      if (widgetIdRef.current) {
-        return;
-      }
-
-      if (typeof window !== "undefined" && window.turnstile && turnstileRef.current) {
-        // Check if container already has a widget
-        if (turnstileRef.current.querySelector('.cf-turnstile')) {
-          return;
-        }
-
-        // Debug: Log the current hostname
-        console.log('Current hostname:', window.location.hostname);
-        console.log('Add this exact hostname to Cloudflare Turnstile:', window.location.hostname);
-
-        widgetId = window.turnstile.render(turnstileRef.current, {
-          // Get your free site key from: https://dash.cloudflare.com/?to=/:account/turnstile
-          sitekey: "0x4AAAAAACFHSYWFl5BfNm3B", // Cloudflare Turnstile site key
-          callback: (token: string) => {
-            setTurnstileToken(token);
-            form.setValue('turnstile', token);
-          },
-          "error-callback": () => {
-            setTurnstileToken(null);
-            form.setValue('turnstile', '');
-          },
-          "expired-callback": () => {
-            setTurnstileToken(null);
-            form.setValue('turnstile', '');
-          },
-        });
-        widgetIdRef.current = widgetId;
-      }
-    };
-
-    // Check if script already exists
-    const existingScript = document.querySelector('script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]');
-    
-    if (existingScript) {
-      // Script already loaded, initialize immediately
-      if (window.turnstile) {
-        loadTurnstile();
-      } else {
-        // Wait for turnstile to be available
-        const checkInterval = setInterval(() => {
-          if (window.turnstile) {
-            loadTurnstile();
-            clearInterval(checkInterval);
-          }
-        }, 100);
-        return () => clearInterval(checkInterval);
-      }
-    } else {
-      // Load the script
-      const script = document.createElement("script");
-      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-      script.async = true;
-      script.defer = true;
-      script.onload = () => {
-        loadTurnstile();
-      };
-      document.body.appendChild(script);
-    }
-
-    return () => {
-      if (window.turnstile && widgetIdRef.current) {
-        window.turnstile.remove(widgetIdRef.current);
-        widgetIdRef.current = null;
-      }
-    };
-  }, []); // Empty dependency array - only run once
-
-  // Handle form submission using FormSubmit.co (free, no reCAPTCHA required)
+  // Handle form submission
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
     setIsSuccess(false);
     
     try {
-      // FormSubmit.co is completely free and has built-in spam protection
-      // Replace info@suubee.com with your actual email address
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("email", values.email);
-      formData.append("phone", values.phone);
-      formData.append("message", values.message || "No message provided");
-      formData.append("_subject", "New contact form submission from Suubee");
-      formData.append("_captcha", "false"); // Disable their captcha since we don't need it
+      const formData = {
+        ...values,
+        message: values.message || "No message provided",
+        access_key: "ac40aed4-7190-4d39-b1fe-4788e46a897e",
+        subject: "New contact form submission from Suubee",
+        from_name: "Suubee Contact Form",
+      };
       
-      const response = await fetch("https://formsubmit.co/ajax/info@suubee.com", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(formData)
       });
       
       const result = await response.json();
@@ -183,13 +78,8 @@ export default function ContactPage() {
         // Set success state
         setIsSuccess(true);
         
-        // Reset form and Turnstile
+        // Reset form
         form.reset();
-        setTurnstileToken(null);
-        // Reset Turnstile widget
-        if (window.turnstile && widgetIdRef.current) {
-          window.turnstile.reset(widgetIdRef.current);
-        }
       } else {
         throw new Error(result.message || "Something went wrong");
       }
@@ -287,17 +177,6 @@ export default function ContactPage() {
                       )}
                     />
 
-                    <div className="mb-6">
-                      <div 
-                        ref={turnstileRef}
-                        className="cf-turnstile"
-                        style={{ transform: 'scale(0.85)', transformOrigin: '0 0' }}
-                      />
-                      {form.formState.errors.turnstile && (
-                        <p className="text-sm text-red-500 mt-1">{form.formState.errors.turnstile.message}</p>
-                      )}
-                    </div>
-
                     <Button 
                       type="submit"
                       className="bg-gradient-to-r from-mint to-mint/80 text-black hover:from-mint/90 hover:to-mint/70 rounded-full w-full md:w-auto px-8"
@@ -375,4 +254,4 @@ export default function ContactPage() {
       </main>
     </Layout>
   );
-} 
+}

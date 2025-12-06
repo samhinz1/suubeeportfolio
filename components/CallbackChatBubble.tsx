@@ -1,10 +1,11 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Phone, X, MessageCircle, Send } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { toast } from "@/components/ui/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { useForm } from "react-hook-form"
@@ -19,46 +20,19 @@ import {
   FormMessage
 } from "@/components/ui/form"
 
-// === CONSTANT: Use your actual production site key here ===
-const TURNSTILE_SITE_KEY = "0x4AAAAAACFHSYWFl5BfNm3B"; 
-
 // Define the form validation schema
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   phone: z.string().min(10, { message: "Please enter a valid phone number." }),
-  turnstile: z.string().min(1, { message: "Please complete verification." })
 })
 
 type FormData = z.infer<typeof formSchema>
-
-// TypeScript declaration for Turnstile
-declare global {
-  interface Window {
-    turnstile?: {
-      render: (
-        container: HTMLElement,
-        options: {
-          sitekey: string;
-          callback?: (token: string) => void;
-          "error-callback"?: () => void;
-          "expired-callback"?: () => void;
-        }
-      ) => string;
-      remove: (widgetId: string) => void;
-      reset: (widgetId: string) => void;
-    };
-  }
-}
 
 export default function CallbackChatBubble() {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  
-  const turnstileRef = useRef<HTMLDivElement>(null);
-  const widgetIdRef = useRef<string | null>(null);
-  const isRenderingRef = useRef(false); // Prevent concurrent renders
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -66,198 +40,44 @@ export default function CallbackChatBubble() {
       name: "",
       email: "",
       phone: "",
-      turnstile: "", 
     },
   })
 
-  // === FIXED Turnstile useEffect Hook ===
-  useEffect(() => {
-    // 1. Cleanup logic (runs when modal closes)
-    if (!isOpen) {
-      if (window.turnstile && widgetIdRef.current) {
-        try {
-          window.turnstile.remove(widgetIdRef.current);
-        } catch (e) {
-          console.log('Turnstile widget already removed');
-        }
-        widgetIdRef.current = null;
-        isRenderingRef.current = false;
-      }
-      form.setValue('turnstile', '');
-      return;
-    }
-
-    // 2. Prevent re-rendering if already open and widget exists
-    if (widgetIdRef.current || isRenderingRef.current) {
-      return;
-    }
-
-    let renderTimer: NodeJS.Timeout | null = null;
-    
-    const loadTurnstile = () => {
-      // Clear the container first to prevent "already rendered" error
-      if (turnstileRef.current) {
-        turnstileRef.current.innerHTML = '';
-      }
-      
-      renderTimer = setTimeout(() => { 
-        if (widgetIdRef.current || isRenderingRef.current || !turnstileRef.current) {
-          return;
-        }
-
-        if (typeof window !== "undefined" && window.turnstile) {
-          isRenderingRef.current = true;
-          
-          try {
-            const widgetId = window.turnstile.render(turnstileRef.current, {
-              sitekey: TURNSTILE_SITE_KEY, // Make sure this is a string
-              callback: (token: string) => {
-                form.setValue('turnstile', token);
-              },
-              "error-callback": () => {
-                form.setValue('turnstile', '');
-              },
-              "expired-callback": () => {
-                form.setValue('turnstile', '');
-                if (window.turnstile && widgetIdRef.current) {
-                  try {
-                    window.turnstile.reset(widgetIdRef.current);
-                  } catch (e) {
-                    console.log('Error resetting Turnstile');
-                  }
-                }
-              },
-            });
-            widgetIdRef.current = widgetId;
-            isRenderingRef.current = false;
-          } catch (error) {
-            console.error('Error rendering Turnstile:', error);
-            isRenderingRef.current = false;
-          }
-        }
-      }, 500); // Increased delay to 500ms to ensure modal is fully rendered
-    };
-
-    // Check if Turnstile script exists and is ready
-    const checkTurnstileReady = () => {
-      if (window.turnstile) {
-        loadTurnstile();
-        return true;
-      }
-      return false;
-    };
-
-    // If Turnstile is already loaded, render immediately
-    if (checkTurnstileReady()) {
-      return;
-    }
-
-    // Otherwise, wait for it to load
-    const existingScript = document.querySelector('script[src="https://challenges.cloudflare.com/turnstile/v0/api.js"]');
-    
-    if (existingScript) {
-      // Script exists but Turnstile not ready yet, poll for it
-      const checkInterval = setInterval(() => {
-        if (checkTurnstileReady()) {
-          clearInterval(checkInterval);
-        }
-      }, 100);
-      
-      // Cleanup interval
-      return () => {
-        clearInterval(checkInterval);
-        if (renderTimer) clearTimeout(renderTimer);
-      };
-    } else {
-      // Load the script for the first time
-      const script = document.createElement("script");
-      script.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
-      script.async = true;
-      script.defer = true;
-      script.onload = loadTurnstile;
-      document.body.appendChild(script);
-    }
-    
-    // Cleanup function
-    return () => {
-      if (renderTimer) {
-        clearTimeout(renderTimer);
-      }
-      if (window.turnstile && widgetIdRef.current) {
-        try {
-          window.turnstile.remove(widgetIdRef.current);
-        } catch (e) {
-          console.log('Cleanup: Turnstile widget already removed');
-        }
-        widgetIdRef.current = null;
-        isRenderingRef.current = false;
-      }
-    };
-  }, [isOpen, form]); 
-  
-  // === onSubmit Function ===
   const onSubmit = async (values: FormData) => {
-    console.log('🚀 Form submitted with values:', values)
     setIsSubmitting(true)
     
     try {
-      const formData = new FormData()
-      formData.append("name", values.name)
-      formData.append("email", values.email)
-      formData.append("phone", values.phone)
-      formData.append("message", `CALLBACK REQUEST: Please call back on ${values.phone}. Email: ${values.email}`);
-      formData.append("cf-turnstile-response", values.turnstile); 
-      formData.append("g-recaptcha-response", values.turnstile); 
-      formData.append("_subject", "New callback request from Suubee Portfolios")
-      formData.append("_captcha", "false")
-      
-      // Debug: Log all form data
-      console.log('📤 Sending FormData:');
-      for (let [key, value] of formData.entries()) {
-        console.log(`  ${key}: ${value}`);
+      const formData = {
+        name: values.name,
+        email: values.email,
+        phone: values.phone,
+        message: `Callback request from ${values.name}. Phone: ${values.phone}, Email: ${values.email}`,
+        access_key: "ac40aed4-7190-4d39-b1fe-4788e46a897e",
+        subject: "New callback request from Suubee",
+        from_name: "Suubee Callback Form",
       }
       
-      console.log('📡 Making request to FormSubmit.co...')
-      const response = await fetch("https://formsubmit.co/ajax/info@suubee.com", {
+      const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(formData)
       })
       
-      console.log('📥 Response status:', response.status)
-      console.log('📥 Response ok:', response.ok)
-      console.log('📥 Response headers:', Object.fromEntries(response.headers.entries()))
-      
-      const responseText = await response.text()
-      console.log('📄 Raw response text:', responseText)
-      
-      let result;
-      try {
-        result = JSON.parse(responseText)
-        console.log('✅ Parsed JSON result:', result)
-      } catch (e) {
-        console.error('❌ Failed to parse JSON:', e)
-        console.error('Raw response was:', responseText)
-        throw new Error('Invalid JSON response from server')
-      }
+      const result = await response.json()
       
       if (result.success) {
         toast({
-          title: "Request Submitted! 📞",
+          title: "Request Submitted!",
           description: "A portfolio manager will call you back within 24 hours.",
         })
         
         setIsSuccess(true)
-        form.reset({ turnstile: '' });
+        form.reset()
         
-        // Reset Turnstile widget
-        if (window.turnstile && widgetIdRef.current) {
-          try {
-            window.turnstile.reset(widgetIdRef.current);
-          } catch (e) {
-            console.log('Error resetting Turnstile after submit');
-          }
-        }
-
+        // Close the form after a short delay to show success message
         setTimeout(() => {
           setIsOpen(false)
           setIsSuccess(false)
@@ -267,11 +87,11 @@ export default function CallbackChatBubble() {
       }
     } catch (error) {
       toast({
-        title: "Error ⚠️",
+        title: "Error",
         description: "There was a problem submitting your request. Please try again.",
         variant: "destructive",
       })
-      console.error("Submission Error:", error)
+      console.error(error)
     } finally {
       setIsSubmitting(false)
     }
@@ -344,7 +164,6 @@ export default function CallbackChatBubble() {
 
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-                    {/* Name Field */}
                     <FormField
                       control={form.control}
                       name="name"
@@ -363,7 +182,6 @@ export default function CallbackChatBubble() {
                       )}
                     />
 
-                    {/* Email Field */}
                     <FormField
                       control={form.control}
                       name="email"
@@ -383,7 +201,6 @@ export default function CallbackChatBubble() {
                       )}
                     />
 
-                    {/* Phone Field */}
                     <FormField
                       control={form.control}
                       name="phone"
@@ -402,18 +219,6 @@ export default function CallbackChatBubble() {
                         </FormItem>
                       )}
                     />
-                    
-                    {/* Turnstile Widget */}
-                    <div className="pt-2">
-                        <div 
-                          ref={turnstileRef}
-                          className="cf-turnstile"
-                          style={{ transform: 'scale(0.8)', transformOrigin: '0 0' }} 
-                        />
-                        {form.formState.errors.turnstile && (
-                          <p className="text-xs text-red-500 mt-1">{form.formState.errors.turnstile.message}</p>
-                        )}
-                    </div>
 
                     <Button
                       type="submit"
@@ -444,7 +249,7 @@ export default function CallbackChatBubble() {
                           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                           </svg>
-                          Your callback request has been submitted successfully!
+                          Your callback request has been submitted successfully! A portfolio manager will call you within 24 hours.
                         </p>
                       </div>
                     )}
