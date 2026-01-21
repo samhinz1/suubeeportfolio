@@ -184,26 +184,29 @@ export default function DashboardPreview({
   // Calculate cumulative return as a percentage
   const cumulativeReturn = ((lastDataPoint.value - firstDataPoint.value) / firstDataPoint.value) * 100
   
-  // Calculate YTD return - find first data point from current year
-  const currentYear = new Date().getFullYear().toString()
-  let firstDataPointOfYear = portfolioData[0]
+  // Calculate YTD return - find first data point from current year (if it exists)
+  const currentYearNumber = new Date().getFullYear()
+  const currentYear = currentYearNumber.toString()
+  let firstDataPointOfYear: PortfolioData | null = null
   
   for (let i = 0; i < portfolioData.length; i++) {
     const [pointDay, pointMonth, pointYear] = portfolioData[i].date.split('/')
-    if (pointYear === currentYear && pointMonth === '01' && pointDay === '01') {
-      firstDataPointOfYear = portfolioData[i]
-      break
-    }
-    // If we can't find exact Jan 1st, use the first entry of current year
     if (pointYear === currentYear) {
+      // If we find Jan 1st of the current year use that, otherwise use
+      // the first entry we encounter for the current year
       firstDataPointOfYear = portfolioData[i]
-      break
+      if (pointMonth === '01' && pointDay === '01') {
+        break
+      }
     }
   }
   
-  // Ensure we have valid values to calculate YTD return
-  const ytdReturn = firstDataPointOfYear.value !== 0 ? 
-    ((lastDataPoint.value - firstDataPointOfYear.value) / firstDataPointOfYear.value) * 100 : 0
+  const hasCurrentYearData = firstDataPointOfYear !== null
+  
+  // Only calculate YTD return when we actually have data for the current year
+  const ytdReturn = hasCurrentYearData && firstDataPointOfYear!.value !== 0
+    ? ((lastDataPoint.value - firstDataPointOfYear!.value) / firstDataPointOfYear!.value) * 100
+    : null
   
   // Create a complete timeline with all months represented
   const createCompleteTimeline = () => {
@@ -521,8 +524,12 @@ export default function DashboardPreview({
           <div className="grid grid-cols-3 gap-4 mb-6">
             <div className="bg-[#161616] p-3 rounded-lg border border-gray-700">
               <div className="text-xs text-gray-400 mb-1">Current YTD Performance</div>
-              <div className="text-lg font-bold text-white">{ytdReturn >= 0 ? '+' : ''}{ytdReturn.toFixed(1)}%</div>
-              <div className="text-xs text-mint">Since January 1st {currentYear}</div>
+              <div className="text-lg font-bold text-white">
+                {ytdReturn === null ? 'Not available' : `${ytdReturn >= 0 ? '+' : ''}${ytdReturn.toFixed(1)}%`}
+              </div>
+              <div className="text-xs text-mint">
+                {hasCurrentYearData ? `Since January 1st ${currentYearNumber}` : 'Performance data not available for the current year'}
+              </div>
             </div>
             <div className="bg-[#161616] p-3 rounded-lg border border-gray-700">
               <div className="text-xs text-gray-400 mb-1">Performance Since Inception</div>
